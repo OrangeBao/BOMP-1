@@ -1,0 +1,53 @@
+1、collapse动画机制  
+2、按钮行为  特别是保存
+
+
+ 日期格式表单校验
+ 按钮的messageType
+
+
+ AUTOCOMPLETE
+ CASCADER      ok
+ CHECKBOX      ok
+ DATEPICKER    ok
+ FORM  
+ INPUT         ok
+ INPUTNUMBER   ok
+ RADIO         ok
+ RATE
+ SELECT        ok
+ SWITCH        ok
+ TIMEPICKER    ok
+ TRANSFER
+ TREESELECT
+ UPLOAD
+
+ label 形式显示
+   checkboxgrou和radiogroup
+   modalInput 格式
+   modal 重叠
+   detail
+
+
+   modalInput =>  定制模板
+   displayType ?
+
+
+   按钮刷新本页面
+   离开页面前判断
+
+   // initValueSource  有value 直接取
+
+   1、word在线查看  http://oi2d9c91y.bkt.clouddn.com/   已找到方案 但没有集成
+      pageOffice  纯前端实现不了
+   2、七牛 静态文件自动上传脚本  
+   AK: 6F2iozCYi1kmkLP-It4fTWeuex0ITQrwrcdyXDUW
+   SK: F1rpqlze_W0Pv23CROC_QAwQybgtEvbVUfPiJKo9
+                             
+   3、type script
+   
+   4、内嵌静态规则  static   
+   5、summary        
+   6、 "isSubmitForm", true, ok
+
+ 

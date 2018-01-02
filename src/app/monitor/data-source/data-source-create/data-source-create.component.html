@@ -1,0 +1,96 @@
+<app-goback></app-goback>
+<div class="tips">
+  创建监控源
+</div>
+<div class="line">
+  <div class="r-w">
+    <label class="radio-inline">
+      <input type="radio" name="method" value="independent" checked="true" [(ngModel)]="method"> 独立创建
+    </label>
+    <label class="radio-inline p-d-l">
+      <input type="radio" name="method" value="batch" [(ngModel)]="method"> 批量创建
+    </label>
+  </div>
+
+  <div *ngIf="'batch' === method">
+    <app-upload (change)="fileChange($event)"></app-upload>
+    <div class="format-tips">
+      格式：名称 | 标识 | URL | 领域 | 间隔 | 间隔单位
+    </div>
+    <div class="btn simple" (click)="fileCheck()" [class.disable]="!files || files.length ===0">测试链接</div>
+
+  </div>
+
+  <div *ngIf="'independent' === method">
+    <div class="m-form-control">
+      <div class="l-w">
+        <span class="dot">*</span>
+        <span class="lab">名称</span>
+        <img src="assets/question.png"/>
+      </div>
+      <div class="i-w {{isError.lang1 && 'has-error'}}">
+        <input [(ngModel)]="dataSource.lang1" placeholder="请输入..."/>
+      </div>
+    </div>
+
+    <div class="m-form-control">
+      <div class="l-w">
+        <span class="dot">*</span>
+        <span class="lab">标识</span>
+        <img src="assets/question.png"/>
+      </div>
+      <div class="i-w {{isError.name && 'has-error'}}">
+        <textarea rows="3" [(ngModel)]="dataSource.name" ></textarea>
+      </div>
+    </div>
+
+    <div class="m-form-control">
+      <div class="l-w">
+        <span class="dot">*</span>
+        <span class="lab">URL</span>
+        <img src="assets/question.png"/>
+      </div>
+      <div class="i-w {{isError.url && 'has-error'}}">
+        <input type="text" [(ngModel)]="dataSource.url" placeholder="请输入..." (change)="isTestUrl=false" />
+      </div>
+      <div class="btn simple" (click)="testUri()" [class.disable]="!dataSource.url">测试链接</div>
+    </div>
+
+    <div class="m-form-control">
+      <div class="l-w">
+        <span class="dot">*</span>
+        <span class="lab">领域</span>
+        <img src="assets/question.png"/>
+      </div>
+      <app-select [options]="region" (change)="changeRegion($event)"></app-select>
+    </div>
+
+    <div class="m-form-control space">
+      <div class="l-w">
+        <span class="dot">*</span>
+        <span class="lab">间隔</span>
+        <img src="assets/question.png"/>
+      </div>
+      <div class="i-w" [class.has-error]="isError.scrapeInterval">
+        <input placeholder="请输入..." [(ngModel)]="scrapeInterval" type="number"/>
+      </div>
+      <app-select [options]="unit" (change)="changeUnit($event)"></app-select>
+    </div>
+    <div class="m-form-control">
+      <div class="l-w">
+        <span class="dot">*</span>
+        <span class="lab">备注</span>
+        <img src="assets/question.png"/>
+      </div>
+      <div class="i-w {{isError.desc && 'has-error'}}">
+        <textarea rows="3" [(ngModel)]="dataSource.desc" ></textarea>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="btn-w">
+  <div class="btn primary" [class.disable]="!isTestUrl" on-click="publish()">发布</div>
+  <div class="btn default" routerLink="/monitor/data-source/list">取消</div>
+</div>

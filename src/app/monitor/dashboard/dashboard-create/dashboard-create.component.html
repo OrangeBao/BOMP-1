@@ -1,0 +1,203 @@
+<app-step-bar [current]="current"></app-step-bar>
+<div class="f-w">
+    <div [class.hidden]="current!=1">
+        <div class="tips">
+            <span>选择模板</span>
+        </div>
+        <div class="line">
+            <label class="radio-inline">
+                <input type="radio" name="method" value="quote" checked="true" [(ngModel)]="templateType" (click)="slug=''"> 引用模板
+            </label>
+            <label class="radio-inline p-d-l">
+                <input type="radio" name="method" value="custom" [(ngModel)]="templateType"> 自定义
+            </label>
+        </div>
+        <div class="use-template" *ngIf="templateType === 'quote'">
+            <div class="line">
+                <app-search-bar (search)="tempKeyword=$event" placeholder="按模板名称搜索"></app-search-bar>
+            </div>
+            <div class="line">
+                <div class="list-select">
+                    <div class="l-t">引用模板</div>
+                    <div class="l-w">
+                        <div class="scroll-w">
+                            <div *ngFor="let temp of displayTemplate;let i = index ">
+                                <label class="radio-inline">
+                                    <input type="radio" name="template-select-radio" [checked]='i === 0' [value]="temp.id" on-click="selectedTempIdChange(temp.id)">
+                                    <span>{{temp.title}}</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="summary">
+                            <div *ngIf="selectedTemp">
+                                <div class="t">{{selectedTemp.title}}</div>
+                                <div class="d">{{selectedTemp.desc}}</div>
+                                <div class="img-w">
+                                    <img src="assets/ds_down.png" />
+                                    <img src="assets/ds_up.png" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="custom-template" *ngIf="templateType === 'custom'">
+            <app-iframe-container [src]="grafanaHostDashboardUrl"></app-iframe-container>
+        </div>
+    </div>
+    <div [class.hidden]="current!=2">
+        <div class="tips">
+            <span>选择监控源</span>
+        </div>
+        <div class="line">
+            <label class="radio-inline">
+                <input type="radio" name="monitor-data-source" value="quote" checked="true" [(ngModel)]="dataSourceType"> 引用监控源
+            </label>
+            <label class="radio-inline p-d-l">
+                <input type="radio" name="monitor-data-source" value="custom" [(ngModel)]="dataSourceType"> 自定义
+            </label>
+        </div>
+        <div class="quote-data-source" *ngIf="dataSourceType === 'quote'">
+            <div class="line">
+                <app-search-bar (search)="dataKeyword=$event" placeholder="按监控源搜索"></app-search-bar>
+            </div>
+            <div class="line">
+                <div class="list-select">
+                    <div class="l-t">引用监控源</div>
+                    <div class="l-w">
+                        <div class="scroll-w">
+                            <div *ngFor="let data of displayDataSource">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="data-source-select-checkbox" [value]="data.id" on-click="selectedDataIdChange(data)">
+                                    <span>{{data.lang1}}</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="summary">
+                            <div *ngIf="selectedData.length > 0">
+                                <div class="t">{{selectedData[selectedData.length - 1].lang1}}</div>
+                                <div class="d">{{selectedData[selectedData.length - 1].desc}}</div>
+                                <div class="img-w">
+                                    <img src="assets/ds_down.png" />
+                                    <img src="assets/ds_up.png" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="custom-data-source" *ngIf="dataSourceType === 'custom'">
+            <div class="line">
+                <label class="radio-inline">
+                    <input type="radio" name="method" value="independent" checked="true" [(ngModel)]="method"> 独立创建
+                </label>
+                <label class="radio-inline p-d-l">
+                    <input type="radio" name="method" value="batch" [(ngModel)]="method"> 批量创建
+                </label>
+
+                <div *ngIf="'batch' === method">
+                    <app-upload (change)="fileChange($event)"></app-upload>
+                    <div class="format-tips">
+                        格式：名称 | 标识 | URL | 领域 | 间隔 | 间隔单位
+                    </div>
+
+                    <div class="btn simple" (click)="fileCheck()" [class.disable]="!files || files.length ===0" (change)="isTestUrl=false">测试链接</div>
+                </div>
+
+                <div *ngIf="'independent' === method">
+                    <div class="m-form-control">
+                        <div class="l-w">
+                            <span class="dot">*</span>
+                            <span class="lab">名称</span>
+                            <img src="assets/question.png"/>
+                        </div>
+                        <div class="i-w {{isError.lang1 && 'has-error'}}">
+                            <input [(ngModel)]="dataSourceDemo.lang1" placeholder="请输入..."/>
+                        </div>
+                    </div>
+
+                    <div class="m-form-control">
+                        <div class="l-w">
+                            <span class="dot">*</span>
+                            <span class="lab">标识</span>
+                            <img src="assets/question.png"/>
+                        </div>
+                        <div class="i-w {{isError.name && 'has-error'}}">
+                            <textarea rows="3" [(ngModel)]="dataSourceDemo.name" ></textarea>
+                        </div>
+                    </div>
+
+                    <div class="m-form-control">
+                        <div class="l-w">
+                            <span class="dot">*</span>
+                            <span class="lab">URL</span>
+                            <img src="assets/question.png"/>
+                        </div>
+                        <div class="i-w {{isError.url && 'has-error'}}">
+                            <input type="text" [(ngModel)]="dataSourceDemo.url" placeholder="请输入..." />
+                        </div>
+                        <div class="btn simple" (click)="testUri()" [class.disable]="!dataSourceDemo.url">测试链接</div>
+                    </div>
+
+                    <div class="m-form-control">
+                        <div class="l-w">
+                            <span class="dot">*</span>
+                            <span class="lab">领域</span>
+                            <img src="assets/question.png"/>
+                        </div>
+                        <app-select [options]="region" (change)="changeRegion($event)"></app-select>
+                    </div>
+
+                    <div class="m-form-control space">
+                        <div class="l-w">
+                            <span class="dot">*</span>
+                            <span class="lab">间隔</span>
+                            <img src="assets/question.png"/>
+                        </div>
+                        <div class="i-w" [class.has-error]="isError.scrapeInterval">
+                            <input placeholder="请输入..." [(ngModel)]="scrapeInterval" type="number"/>
+                        </div>
+                        <app-select [options]="unit" (change)="changeUnit($event)"></app-select>
+                    </div>
+                    <div class="m-form-control">
+                        <div class="l-w">
+                            <span class="dot">*</span>
+                            <span class="lab">备注</span>
+                            <img src="assets/question.png"/>
+                        </div>
+                        <div class="i-w {{isError.desc && 'has-error'}}">
+                            <textarea rows="3" [(ngModel)]="dataSourceDemo.desc" ></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div [class.hidden]="current!=3">
+        <div class="success-wrap">
+            <div>点击'完成'按钮确定创建仪表盘。</div>
+        </div>
+        <!--<div class="tips">-->
+            <!--<span>授权</span>-->
+        <!--</div>-->
+        <!--<div class="line">-->
+            <!--<div class="lab">-->
+                <!--<span class="red-pointer">*</span>-->
+                <!--<span>授权给</span>-->
+            <!--</div>-->
+            <!--<div class="cho">组织</div>-->
+        <!--</div>-->
+    </div>
+    <div [class.hidden]="current!=4">
+        step 4
+    </div>
+    <div class="btn-w">
+        <div *ngIf="current !== 3" class="btn primary" [class.disable]="noNext" (click)="next()">下一步</div>
+        <div *ngIf="current > 1 && current !== 3" class="btn default" (click)="last()">上一步</div>
+        <div *ngIf="current === 1" class="btn default" routerLink="/monitor/dashboard/list">取消</div>
+        <div class="btn primary" *ngIf="current === 3" (click)="finish()">完成</div>
+    </div>
+</div>

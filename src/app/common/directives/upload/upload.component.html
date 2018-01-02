@@ -1,0 +1,16 @@
+<div class="upload-bar" [class.is-active]="showActive" (drop)="dropFile($event)" (dragleave)="dragleave($event)" (dragover)="dragover($event)" >
+    <div class="upload-tool">
+        <img src="assets/upload.png"/>
+        <span class="t">拖拽文件到此处 或者 </span>
+        <span (click)="uploadFile($event)" class="u-span">
+              上传文件<input type="file" accept style="display: none;" (change)="uploadTrigger($event)"/>
+        </span>
+    </div>
+    <div class="file-list">
+        <div *ngFor="let f of fileList" class="l">
+            <img src="assets/book-marker.png"/>
+            <span>{{f.name}}</span>
+            <img src="assets/close.png" (click)="removeFile(f)"/>
+        </div>
+    </div>
+</div>
