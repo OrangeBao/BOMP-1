@@ -11,13 +11,18 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 export class HomeComponent implements OnInit {
 
   constructor( private sanitizer: DomSanitizer, private userService: UserService) { }
-
+  hasHomePage: boolean;
   homePage: SafeUrl;
   ngOnInit() {
-    this.homePage = this.sanitizer
-            .bypassSecurityTrustResourceUrl(
-                environment.grafanaHost + 'dashboard/' +
-                this.userService.getHomePage() + '?orgId='
-                + this.userService.getDashboardId());
+      if (this.userService.getHomePage()) {
+          this.hasHomePage = true;
+          this.homePage = this.sanitizer
+                  .bypassSecurityTrustResourceUrl(
+                      environment.grafanaHost + 'dashboard/' +
+                      this.userService.getHomePage() + '?orgId='
+                      + this.userService.getDashboardId() + '&from=now-24h&to=now&refresh=5');
+      } else {
+          this.hasHomePage = false;
+      }
   }
 }

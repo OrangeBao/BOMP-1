@@ -43,4 +43,7 @@ export class DataSourceService {
     return this.http.post(`api/datasources/files`, fileIds);
   }
 
+  deleteDataSource(id): Promise<any> {
+    return this.http.delete(`api/datasources/${id}`).toPromise().catch(this.handleError);
+  }
 }

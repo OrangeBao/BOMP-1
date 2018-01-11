@@ -13,7 +13,7 @@
   </div>
 
   <div *ngIf="'batch' === method">
-    <app-upload (change)="fileChange($event)"></app-upload>
+    <app-upload (end)="fileEnd($event)" (change)="fileChange($event)" (error)="fileUploadError($event)" (start)="fileStartUpload($event)"></app-upload>
     <div class="format-tips">
       格式：名称 | 标识 | URL | 领域 | 间隔 | 间隔单位
     </div>
@@ -51,7 +51,7 @@
         <img src="assets/question.png"/>
       </div>
       <div class="i-w {{isError.url && 'has-error'}}">
-        <input type="text" [(ngModel)]="dataSource.url" placeholder="请输入..." (change)="isTestUrl=false" />
+        <input type="text" [(ngModel)]="dataSource.url" placeholder="http://localhost:9090" (change)="isTestUrl=false" />
       </div>
       <div class="btn simple" (click)="testUri()" [class.disable]="!dataSource.url">测试链接</div>
     </div>

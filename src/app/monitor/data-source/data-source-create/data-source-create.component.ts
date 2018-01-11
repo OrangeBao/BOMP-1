@@ -82,6 +82,10 @@ export class DataSourceCreateComponent implements OnInit {
           this.spinnerService.hide();
           this.notificationsService.addInfo('创建成功！');
           this.router.navigate(['/monitor/data-source/list']);
+        }).catch(err => {
+          this.spinnerService.hide();
+          this.notificationsService.addError('系统异常，请联系管理员！');
+          console.error(err);
         });
       } else if (this.method === 'batch') {
         this.spinnerService.show();
@@ -125,6 +129,10 @@ export class DataSourceCreateComponent implements OnInit {
       } else  {
         this.notificationsService.addError('url不符合要求！');
       }
+    }).catch(err => {
+      this.spinnerService.hide();
+      this.notificationsService.addError('系统异常，请联系管理员！');
+      console.error(err);
     });
   }
 
@@ -160,5 +168,18 @@ export class DataSourceCreateComponent implements OnInit {
           this.notificationsService.addError('url不符合要求！');
         }
     );
+  }
+
+  fileUploadError(err) {
+    this.spinnerService.hide();
+    this.notificationsService.addError('系统异常，请联系管理员！');
+    console.error(err);
+  }
+
+  fileStartUpload() {
+    this.spinnerService.show();
+  }
+  fileEnd() {
+    this.spinnerService.hide();
   }
 }

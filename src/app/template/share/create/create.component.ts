@@ -40,7 +40,7 @@ export class CreateComponent implements OnInit {
     this.grafanaHostDashboardUrl = this.sanitizer
         .bypassSecurityTrustResourceUrl(
             environment.grafanaHost + 'dashboard/new?editview=settings&orgId='
-            + this.userService.getUserInfo().graOrg.template);
+            + this.userService.getUserInfo().graOrg.template + '&from=now-24h&to=now&refresh=5');
   }
 
   createByForm() {
@@ -102,6 +102,19 @@ export class CreateComponent implements OnInit {
           this.notificationsService.addError('创建失败');
         }
     );
+  }
+
+  fileUploadError(err) {
+    this.spinnerService.hide();
+    this.notificationsService.addError('系统异常，请联系管理员！');
+    console.error(err);
+  }
+
+  fileStartUpload() {
+    this.spinnerService.show();
+  }
+  fileEnd() {
+    this.spinnerService.hide();
   }
 
 }

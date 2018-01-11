@@ -14,7 +14,7 @@
   <iframe [src]="grafanaHostDashboardUrl"></iframe>
 </div>
 <div *ngIf="templateType === 'batch'">
-  <app-upload (change)="fileChange($event)"></app-upload>
+  <app-upload (change)="fileChange($event)" (error)="fileUploadError($event)" (start)="fileStartUpload($event)"></app-upload>
   <div class="format-tips">
     格式：名称 | 标识 | URL | 领域 | 间隔 | 间隔单位
   </div>

@@ -28,4 +28,8 @@ export class TemplateService {
     return this.http.post('api/templates/files', params);
   }
 
+  deleteTemplate(id): Promise<any> {
+    return this.http.delete(`api/templates/${id}`).toPromise().catch(this.handleError);
+  }
+
 }

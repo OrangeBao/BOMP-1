@@ -9,7 +9,7 @@
     <div class="file-list">
         <div *ngFor="let f of fileList" class="l">
             <img src="assets/book-marker.png"/>
-            <span>{{f.name}}</span>
+            <span>{{f && f.name}}</span>
             <img src="assets/close.png" (click)="removeFile(f)"/>
         </div>
     </div>

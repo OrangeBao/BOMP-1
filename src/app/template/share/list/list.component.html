@@ -15,6 +15,7 @@
             <span>当前主页显示</span>
           </div>
           <img src="assets/pan.png" class="pan" alt="编辑" title="编辑"  [routerLink]="['/template/share/edit', dash.id]" [fragment]="dash.uri"/>
+          <img src="assets/recycle.png" class="remove" alt="删除" title="删除" on-click="deleteTemplate(dash.uri)"/>
         </div>
       </div>
     </div>

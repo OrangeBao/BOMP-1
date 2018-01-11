@@ -185,12 +185,16 @@ export class DashboardCreateComponent implements OnInit {
       this.template = response;
       this.selectedTemp = this.template[0];
     }).then(() => this.dataSourceService.getAll().then(data => this.dataSource = data))
-        .then(() => this.spinnerService.hide());
+        .then(() => this.spinnerService.hide()).catch((err) => {
+      this.spinnerService.hide();
+      this.notificationsService.addError('系统异常，请联系管理员！');
+      console.error(err);
+    });
 
     window.addEventListener('message', this.custTemplateHandler.bind(this), false);
     this.grafanaHostDashboardUrl = this.sanitizer
         .bypassSecurityTrustResourceUrl(environment.grafanaHost + 'dashboard/new?editview=settings&orgId='
-            + this.userService.getUserInfo().graOrg.template);
+            + this.userService.getUserInfo().graOrg.template + '&from=now-24h&to=now&refresh=5');
     this.reg = this.region[0];
     this.u = this.unit[0];
   }
@@ -243,6 +247,10 @@ export class DashboardCreateComponent implements OnInit {
       } else {
         this.notificationsService.addError('url不符合要求！');
       }
+    }).catch((err) => {
+      this.spinnerService.hide();
+      this.notificationsService.addError('系统异常，请联系管理员！');
+      console.error(err);
     });
   }
 
@@ -271,10 +279,27 @@ export class DashboardCreateComponent implements OnInit {
   finish() {
     this.spinnerService.show();
     this.dashboardService.create(this.params).then(() => this.spinnerService.hide())
-        .then(() => this.router.navigate(['/monitor/dashboard/list']));
+        .then(() => this.router.navigate(['/monitor/dashboard/list'])).catch(err => {
+      this.spinnerService.hide();
+      this.notificationsService.addError('系统异常，请联系管理员！');
+      console.error(err);
+    });
   }
 
   log() {
     console.log('loading');
+  }
+
+  fileUploadError(err) {
+    this.spinnerService.hide();
+    this.notificationsService.addError('系统异常，请联系管理员！');
+    console.error(err);
+  }
+
+  fileStartUpload() {
+    this.spinnerService.show();
+  }
+  fileEnd() {
+    this.spinnerService.hide();
   }
 }

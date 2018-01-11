@@ -36,7 +36,7 @@ export class EditComponent implements OnInit {
               this.grafanaHostDashboardUrl = this.sanitizer
                   .bypassSecurityTrustResourceUrl(
                       environment.grafanaHost + 'dashboard/' + uri + '?editview=settings&orgId='
-                      + this.userService.getUserInfo().graOrg.template);
+                      + this.userService.getUserInfo().graOrg.template + '&from=now-24h&to=now&refresh=5');
             }
         );
   }

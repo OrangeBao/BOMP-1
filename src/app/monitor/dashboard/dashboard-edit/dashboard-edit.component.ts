@@ -24,7 +24,8 @@ export class DashboardEditComponent implements OnInit {
         .map(fragment => fragment || '').subscribe(
         uri => {
           this.pageUrl = this.sanitizer
-              .bypassSecurityTrustResourceUrl(environment.grafanaHost + 'dashboard/' + uri + '?orgId=' + this.userService.getDashboardId());
+              .bypassSecurityTrustResourceUrl(environment.grafanaHost +
+                  'dashboard/' + uri + '?orgId=' + this.userService.getDashboardId() + '&from=now-24h&to=now&refresh=5');
         }
     );
   }

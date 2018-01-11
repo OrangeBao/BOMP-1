@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../../common/services/dashboard/dashboard.service';
 import { UserService } from '../../../common/services/user/user.service';
 import { Ng4LoadingSpinnerService } from '../../../loading';
+import { NotificationsService } from '../../../common/share.module';
 
 @Component({
   selector: 'app-dashboard-list',
@@ -12,7 +13,8 @@ export class DashboardListComponent implements OnInit {
   constructor(
       private dashboardService: DashboardService,
       private userService: UserService,
-      private spinnerService: Ng4LoadingSpinnerService
+      private spinnerService: Ng4LoadingSpinnerService,
+      private notificationsService: NotificationsService,
   ) { }
 
   dashboards: Array<any>;
@@ -25,9 +27,26 @@ export class DashboardListComponent implements OnInit {
     this.dashboardService.getDashboardList().then(response => {
       this.spinnerService.hide();
       this.dashboards = response;
+    }).catch(err => {
+      this.spinnerService.hide();
+      this.notificationsService.addError('系统异常，请联系管理员！');
+      console.error(err);
     });
   }
   setHomePage(uri) {
+    this.spinnerService.show();
     this.userService.setHomePage(uri);
+  }
+  deleteDashbaord(id) {
+    const param = id.split('b/')[1];
+    this.spinnerService.show();
+    this.dashboardService.deleteDashboard(param).then(() => {
+      this.spinnerService.hide();
+      this.dashboards = this.dashboards.filter(item => item.uri !== id);
+    }).catch(err => {
+      this.spinnerService.hide();
+      this.notificationsService.addError('系统异常，请联系管理员！');
+      console.error(err);
+    });
   }
 }

@@ -4,7 +4,10 @@
     <div class="d-detail">
         <div class="title-w">
           <div class="title">{{dash.lang1}}</div>
-          <img src="assets/pan.png" class="pan" alt="编辑" title="编辑" [routerLink]="['/monitor/data-source/edit', dash.id]"/>
+          <div class="title-w">
+              <img src="assets/pan.png" class="pan" alt="编辑" title="编辑" [routerLink]="['/monitor/data-source/edit', dash.id]"/>
+              <img src="assets/recycle.png" class="remove" alt="删除" title="删除" on-click="deleteDataSource(dash.id)"/>
+          </div>
         </div>
         <div class="lab-w">
           <div>领域:{{dash.regionName}}</div>

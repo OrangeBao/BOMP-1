@@ -19,13 +19,22 @@ export class CreateComponent implements OnInit {
   ngOnInit() {
     window.addEventListener('message', this.custTemplateHandler, false);
     this.grafanaHostDashboardUrl = this.sanitizer
-        .bypassSecurityTrustResourceUrl(environment.grafanaHost + 'dashboard/new?editview=settings&orgId=' +  this.userService.getUserInfo().graOrg.template);
+        .bypassSecurityTrustResourceUrl(environment.grafanaHost +
+            'dashboard/new?editview=settings&orgId=' +  this.userService.getUserInfo().graOrg.template);
   }
 
   create() {}
 
   fileChange(fileList) {
     this.files = fileList;
+  }
+
+  fileUploadError(err) {
+    console.error(err);
+  }
+
+  fileStartUpload() {
+
   }
 
   custTemplateHandler(event) {

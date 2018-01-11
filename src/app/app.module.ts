@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
-// import { HttpModule } from '@angular/http';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { DashboardService } from './common/services/dashboard/dashboard.service';
@@ -25,14 +24,13 @@ import { TabComponent } from './common/directives/tab/tab.component';
 import { MonitorModule } from './monitor/monitor.module';
 import { TemplateModule } from './template/template.module';
 import { TransformMenuPipe } from './common/pipes/transform-menu.pipe';
-// import { GobackComponent } from './common/directives/goback/goback.component';
 import { Ng4LoadingSpinnerModule } from './loading';
 // import { NgZorroAntdModule } from 'ng-zorro-antd';
 import {ShareModule, NotificationsService} from './common/share.module';
 
 
-export function configFactory(config: UserService) {
-  return  () => config.load();
+export function configFactory(config: UserService, config2: GrafanaService) {
+  return  () => config.load().then(() => config2.mockLogin()).catch(err => console.error(err));
 }
 
 @NgModule({
@@ -65,7 +63,7 @@ export function configFactory(config: UserService) {
     {
       provide: APP_INITIALIZER,
       useFactory: configFactory,
-      deps: [UserService],
+      deps: [UserService, GrafanaService],
       multi: true
     },
     DashboardService,
