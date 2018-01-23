@@ -194,7 +194,7 @@ export class DashboardCreateComponent implements OnInit {
     window.addEventListener('message', this.custTemplateHandler.bind(this), false);
     this.grafanaHostDashboardUrl = this.sanitizer
         .bypassSecurityTrustResourceUrl(environment.grafanaHost + 'dashboard/new?editview=settings&orgId='
-            + this.userService.getUserInfo().graOrg.template + '&from=now-24h&to=now&refresh=5');
+            + this.userService.getUserInfo().graOrg.template + '&from=now-24h&to=now&refresh=5s');
     this.reg = this.region[0];
     this.u = this.unit[0];
   }

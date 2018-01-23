@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
                   .bypassSecurityTrustResourceUrl(
                       environment.grafanaHost + 'dashboard/' +
                       this.userService.getHomePage() + '?orgId='
-                      + this.userService.getDashboardId() + '&from=now-24h&to=now&refresh=5');
+                      + this.userService.getDashboardId() + '&from=now-24h&to=now&refresh=5s');
       } else {
           this.hasHomePage = false;
       }

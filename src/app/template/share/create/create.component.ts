@@ -40,7 +40,7 @@ export class CreateComponent implements OnInit {
     this.grafanaHostDashboardUrl = this.sanitizer
         .bypassSecurityTrustResourceUrl(
             environment.grafanaHost + 'dashboard/new?editview=settings&orgId='
-            + this.userService.getUserInfo().graOrg.template + '&from=now-24h&to=now&refresh=5');
+            + this.userService.getUserInfo().graOrg.template + '&from=now-24h&to=now&refresh=5s');
   }
 
   createByForm() {

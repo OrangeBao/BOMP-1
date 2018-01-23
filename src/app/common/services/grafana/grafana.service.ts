@@ -21,6 +21,9 @@ export class GrafanaService {
 
   mockLogin() {
     return new Promise((resolve, reject) => {
+      if (environment.notLogin) {
+        resolve();
+      }
       if (this.userService.getUserInfo().geass) {
         this.login(resolve);
       } else {

@@ -331,7 +331,9 @@ app.post('/api/relations/datasources', function(req,res) {
   res.json({});
 });
 
-app.post('/upload', fileHelper.saveFile);
+app.post('/api/files/upload', function(req, res) {
+  setTimeout(() => res.end(), 10000)
+});
 
 app.get('/mock', function(req, res) {
   setTimeout(() => {

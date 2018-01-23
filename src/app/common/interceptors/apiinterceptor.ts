@@ -9,11 +9,6 @@ import 'rxjs/add/operator/do';
 export class APIInterceptor implements HttpInterceptor {
 
     getUrl(url): string {
-        // debugger;
-        // if (url.startsWith('grafana')) {
-        //     return environment.grafanaHost + url.split('grafana')[1].substring(1);
-        // }
-        debugger;
         return environment.host + url;
     }
 

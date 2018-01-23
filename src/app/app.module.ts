@@ -20,7 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DocComponent } from './doc/doc.component';
 import { TabComponent } from './common/directives/tab/tab.component';
 
-
+import { OpDisplayModule } from './op-display/op-display.module';
 import { MonitorModule } from './monitor/monitor.module';
 import { TemplateModule } from './template/template.module';
 import { TransformMenuPipe } from './common/pipes/transform-menu.pipe';
@@ -40,12 +40,13 @@ export function configFactory(config: UserService, config2: GrafanaService) {
     HomeComponent,
     DocComponent,
     TabComponent,
-    TransformMenuPipe,
+    TransformMenuPipe
     // GobackComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    OpDisplayModule,
     MonitorModule,
     TemplateModule,
     AppRoutingModule,

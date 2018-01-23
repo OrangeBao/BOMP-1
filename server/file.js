@@ -14,7 +14,7 @@ function saveFile(req, res, next) {
       console.log(err);
     }
 
-    var filename = files.file.name;
+    var filename = files.files.name;
 
     // 对文件名进行处理，以应对上传同名文件的情况
     var nameArray = filename.split('.');
@@ -29,11 +29,13 @@ function saveFile(req, res, next) {
     var avatarName = name + num +  '.' + type;
 
     var newPath = form.uploadDir + avatarName ;
-    fs.renameSync(files.file.path, newPath);  //重命名
-    res.json({
-      "fileId": avatarName,
-      'fileName': avatarName,
-      });
+    fs.renameSync(files.files.path, newPath);  //重命名
+    res.json([
+      {
+        "id": avatarName,
+        'name': avatarName,
+      }
+    ]);
   });
 }
 //

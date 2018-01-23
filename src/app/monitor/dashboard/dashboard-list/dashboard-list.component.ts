@@ -35,7 +35,7 @@ export class DashboardListComponent implements OnInit {
   }
   setHomePage(uri) {
     this.spinnerService.show();
-    this.userService.setHomePage(uri);
+    this.userService.setHomePage(uri).then(() => this.spinnerService.hide());
   }
   deleteDashbaord(id) {
     const param = id.split('b/')[1];

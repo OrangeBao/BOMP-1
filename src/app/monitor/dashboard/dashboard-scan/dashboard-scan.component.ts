@@ -25,7 +25,7 @@ export class DashboardScanComponent implements OnInit {
         uri => {
           this.pageUrl = this.sanitizer
               .bypassSecurityTrustResourceUrl(environment.grafanaHost + 'dashboard/' + uri + '?orgId='
-                  + this.userService.getDashboardId() + '&from=now-24h&to=now&refresh=5');
+                  + this.userService.getDashboardId() + '&from=now-24h&to=now&refresh=5s');
         }
     );
   }
