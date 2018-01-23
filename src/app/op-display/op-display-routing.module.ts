@@ -12,11 +12,11 @@ const opDisplayRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'share/list',
+        redirectTo: 'dashboard/list',
         pathMatch: 'full'
       },
       {
-        path: 'share',
+        path: 'dashboard',
         children: [
           {
             path: '',
@@ -28,7 +28,7 @@ const opDisplayRoutes: Routes = [
             component: ListComponent,
           },
           {
-            path: 'create',
+            path: 'detail',
             component: DetailComponent,
           }
         ]

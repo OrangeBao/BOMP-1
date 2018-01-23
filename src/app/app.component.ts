@@ -19,11 +19,9 @@ export class AppComponent implements OnInit {
     return this.userInfo && this.userInfo.menus;
   }
   get isShowNavigator() {
-    debugger;
-    return false;
+    return !this.router.url.startsWith('/op_display');
   }
   ngOnInit() {
-    debugger;
     this.userInfo = this.userService.getUserInfo();
   }
 }
