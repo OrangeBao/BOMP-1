@@ -1,17 +1,16 @@
 @import "../../../../theme.scss";
-$label-color: rgb(41, 41, 41);
 
 .f-w {
   margin-top: 20px;
-  background-color: #1f1d1e;
-  padding: 10px 50px;
+  background-color: $dashboard-create-background-color;
+  padding: 10px 20px;
   .tips {
     padding-top: 20px;
     padding-bottom: 5px;
-    border-bottom: 1px solid #3e3c3e;
+    border-bottom: 1px solid $line-color-thin;
   }
   .btn-w {
-    border-top: 1px solid #3e3c3e;
+    border-top: 1px solid $line-color-thin;
     padding-top: 30px;
   }
 
@@ -27,9 +26,9 @@ $label-color: rgb(41, 41, 41);
       & > div {
         font-size: 12px;
         padding: 10px 20px;
-        border-bottom: 1px solid #313131;
+        border-bottom: 1px solid $line-color-thin;
         &:first-child {
-          border-top: 1px solid #313131;
+          border-top: 1px solid $line-color-thin;
         }
         span {
           display: inline-block;
@@ -59,28 +58,42 @@ $label-color: rgb(41, 41, 41);
         overflow: hidden;
         flex-direction: column;
         background-color: transparent;
-        img {
+        .img {
           width: 120px;
           height: 70px;
+          &:first-child {
+            background: url($list-bite-img-1);
+            background-size: cover;
+          }
+          &:last-child {
+            background: url($list-bite-img-2);
+            background-size: cover;
+          }
         }
       }
     }
   }
 
   .line {
-    padding: 20px 0px;
+    // padding: 0
+    &.radio-w {
+      background: $radio-bar-background;
+      color:  $radio-bar-color;
+      padding: 10px 50px;
+    }
+    padding: 20px 50px;
     .p-d-l {
       padding-left: 120px;
     }
-    .lab {
-      padding: 7px 10px;
-      background-color: $label-color;
-      font-size: 12px;
-      .red-pointer {
-        color: #ff0000;
-      }
-      display: inline-block;
-    }
+    // .lab {
+    //   padding: 7px 10px;
+    //   background-color: $label-color;
+    //   font-size: 12px;
+    //   .red-pointer {
+    //     color: #ff0000;
+    //   }
+    //   display: inline-block;
+    // }
     .cho {
       display: inline-block;
       background-color: $bit-background;
@@ -88,11 +101,14 @@ $label-color: rgb(41, 41, 41);
       font-size: 12px;
       min-width: 450px;
     }
+    &.temp-select {
+      color: $search-bar-text-color;
+    }
   }
 }
 
-.custom-template {
-}
+// .custom-template {
+// }
 
 .custom-data-source {
   padding: 0 0 0 40px;
@@ -103,4 +119,5 @@ $label-color: rgb(41, 41, 41);
   display: flex;
   justify-content: center;
   align-items: center;
+  color: $search-bar-text-color;
 }

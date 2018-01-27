@@ -1,7 +1,84 @@
-$main-color: rgb(186, 173, 123);
-$line-color: #817754;
-$btn-primary: #90855d;
-$btn-hover: rgb(157, 144, 101);
+/* dark */
+// $main-color: rgb(186, 173, 123) !default;
+// $line-color: #817754;
+// $text-color-3: rgb(153, 153, 153);
+// $bit-background: rgb(51, 51, 51);
+// $nav-background: #292929;
+// $body-background-color: #141414;
+
+// $tab-color: #ffffff;
+// $tab-focuse-line: #23221d;
+
+// $list-bite-bg-color: #1f1d1e;
+// $list-bite-img-1: '/assets/ds_down.png';
+// $list-bite-img-2: '/assets/ds_up.png';
+// $list-bite-title-color: #ffffff;
+// $list-bite-desc-color: rgb(157, 144, 101);
+// $list-bite-border-color: transparent;
+
+// $btn-primary: #90855d;
+// $btn-hover: rgb(157, 144, 101);
+// $btn-primary-color: #ffffff;
+// $btn-default-color: #ffffff;
+// $btn-default-hover-color: #ffffff;
+// $btn-default-hover: #90855d;
+
+// $dashboard-create-background-color: #1f1d1e;
+
+// $label-color: rgb(41, 41, 41);
+
+
+// $setp-bar-text-color: rgb(153, 153, 153);
+// $setp-bar-active-color: #91865E;
+// $setp-bar-active-text-color: #d2d2d2;
+
+// $radio-bar-background: transparent;
+// $radio-bar-color:  #ffffff;
+
+// $search-bar-background-color: rgb(51, 51, 51);
+// $search-bar-text-color: #ffffff;
+// $search-bar-icon: '/assets/search-icon.png';
+
+// $line-color-thin: #313131;
+
+/* light */
+$main-color: rgb(44, 156, 250);
+$line-color:#e1e1e1;
 $text-color-3: rgb(153, 153, 153);
-$bit-background: rgb(51, 51, 51);
+$bit-background: #ffffff;
 $nav-background: #292929;
+$body-background-color: #ffffff;
+
+$tab-color: rgb(44, 156, 250);
+$tab-focuse-line: #fbfbfb;
+
+$list-bite-bg-color: #ffffff;
+$list-bite-img-1: '/assets/line.png';
+$list-bite-img-2: '/assets/bar.png';
+$list-bite-title-color: #333333;
+$list-bite-desc-color: #999999;
+$list-bite-border-color: rgb(242, 242, 242);
+
+$btn-primary: rgba(44, 156, 250, 1);
+$btn-primary-color: #ffffff;
+$btn-hover: rgba(92, 185, 255, 1);
+$btn-default-color: #3C3E4A;
+$btn-default-hover-color: rgba(44, 156, 250, 1);
+$btn-default-hover: #ffffff;
+
+$dashboard-create-background-color: #ffffff;
+
+$setp-bar-text-color: #d2d2d2;
+$setp-bar-active-color: rgb(44, 156, 250);
+$setp-bar-active-text-color: rgb(44, 156, 250);
+
+$radio-bar-background: #f4f4f4;
+$radio-bar-color:  #3C3E4A;
+
+$search-bar-background-color: #ffffff;
+$search-bar-text-color: #3C3E4A;
+$search-bar-icon: '/assets/search-icon-dark.png';
+
+$line-color-thin: #f4f4f4;
+
+$label-color: #ffffff;

@@ -8,7 +8,7 @@ import { DicService } from '../../../common/services/dic/dic.service';
 import { DataSource } from '../../../common/models/data-source';
 import { environment } from '../../../../environments/environment';
 import { File } from '../../../common/models/file';
-import { Router } from '@angular/router';
+import { Router,  ActivatedRoute } from '@angular/router';
 import { Ng4LoadingSpinnerService } from '../../../loading';
 import { NotificationsService } from '../../../common/share.module';
 
@@ -25,10 +25,11 @@ export class DashboardCreateComponent implements OnInit {
       private spinnerService: Ng4LoadingSpinnerService,
       private dashboardService: DashboardService,
       private sanitizer: DomSanitizer,
-              private router: Router,
-              private templateService: TemplateService,
-              private dataSourceService: DataSourceService,
-              private userService: UserService) { }
+      private router: Router,
+      private activeRoute:  ActivatedRoute,
+      private templateService: TemplateService,
+      private dataSourceService: DataSourceService,
+      private userService: UserService) { }
   files: Array<File> = new Array<File>();
   scrapeInterval: string;
   selectedTemp: any = {};
@@ -279,7 +280,7 @@ export class DashboardCreateComponent implements OnInit {
   finish() {
     this.spinnerService.show();
     this.dashboardService.create(this.params).then(() => this.spinnerService.hide())
-        .then(() => this.router.navigate(['/monitor/dashboard/list'])).catch(err => {
+        .then(() => this.router.navigate(['../list'], { relativeTo: this.activeRoute })).catch(err => {
       this.spinnerService.hide();
       this.notificationsService.addError('系统异常，请联系管理员！');
       console.error(err);

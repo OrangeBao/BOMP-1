@@ -11,10 +11,13 @@
   .p-d-l {
     padding-left: 120px;
   }
+  &.temp-select {
+    color: $search-bar-text-color;
+  }
 }
 
 .btn-w {
-  border-top: 1px solid #3e3c3e;
+  border-top: 1px solid $line-color-thin;
   padding-top: 20px;
 }
 

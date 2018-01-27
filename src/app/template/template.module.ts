@@ -7,7 +7,6 @@ import { TemplateRoutingModule } from './template-routing.module';
 import { TemplateComponent } from './template.component';
 import { ListComponent } from './share/list/list.component';
 import { CreateComponent } from './share/create/create.component';
-// import { GobackComponent } from '../common/directives/goback/goback.component';
 
 import { ShareModule } from '../common/share.module';
 import { EditComponent } from './share/edit/edit.component';
@@ -20,7 +19,7 @@ import { EditComponent } from './share/edit/edit.component';
     ShareModule
   ],
   declarations: [
-      TemplateComponent,
+    TemplateComponent,
     PersonalListComponent,
     ListComponent, CreateComponent,
     PersonalCreateComponent,

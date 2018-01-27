@@ -12,11 +12,6 @@ import { DataSourceListComponent } from './data-source/data-source-list/data-sou
 import { DataSourceCreateComponent } from './data-source/data-source-create/data-source-create.component';
 import { DataSourceEditComponent } from './data-source/data-source-edit/data-source-edit.component';
 
-import { StepBarComponent } from '../common/directives/step-bar/step-bar.component';
-import { SearchBarComponent } from '../common/directives/search-bar/search-bar.component';
-import { SelectComponent } from '../common/directives/select/select.component';
-// import { UploadComponent } from '../common/directives/upload/upload.component';
-// import { GobackComponent } from '../common/directives/goback/goback.component';
 import { ShareModule } from '../common/share.module';
 import { DashboardScanComponent } from './dashboard/dashboard-scan/dashboard-scan.component';
 import { DashboardEditComponent } from './dashboard/dashboard-edit/dashboard-edit.component';
@@ -37,12 +32,9 @@ import { DashboardEditComponent } from './dashboard/dashboard-edit/dashboard-edi
     DashboardCreateComponent,
     DataSourceEditComponent,
     DataSourceListComponent,
-    StepBarComponent,
-    SearchBarComponent,
-    DataSourceCreateComponent,
-    SelectComponent,
     DashboardScanComponent,
-    DashboardEditComponent
+    DashboardEditComponent,
+    DataSourceCreateComponent
     // UploadComponent,
     // GobackComponent
   ]

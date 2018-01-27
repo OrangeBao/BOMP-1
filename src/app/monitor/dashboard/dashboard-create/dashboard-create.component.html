@@ -1,10 +1,10 @@
 <app-step-bar [current]="current"></app-step-bar>
 <div class="f-w">
     <div [class.hidden]="current!=1">
-        <div class="tips">
+        <!-- <div class="tips">
             <span>选择模板</span>
-        </div>
-        <div class="line">
+        </div> -->
+        <div class="line radio-w">
             <label class="radio-inline">
                 <input type="radio" name="method" value="quote" checked="true" [(ngModel)]="templateType" (click)="slug=''"> 引用模板
             </label>
@@ -16,7 +16,7 @@
             <div class="line">
                 <app-search-bar (search)="tempKeyword=$event" placeholder="按模板名称搜索"></app-search-bar>
             </div>
-            <div class="line">
+            <div class="line temp-select">
                 <div class="list-select">
                     <div class="l-t">引用模板</div>
                     <div class="l-w">
@@ -33,8 +33,8 @@
                                 <div class="t">{{selectedTemp.title}}</div>
                                 <div class="d">{{selectedTemp.desc}}</div>
                                 <div class="img-w">
-                                    <img src="assets/ds_down.png" />
-                                    <img src="assets/ds_up.png" />
+                                   <div class="img"></div>
+                                   <div class="img"></div>
                                 </div>
                             </div>
                         </div>
@@ -47,10 +47,10 @@
         </div>
     </div>
     <div [class.hidden]="current!=2">
-        <div class="tips">
+        <!-- <div class="tips">
             <span>选择监控源</span>
-        </div>
-        <div class="line">
+        </div> -->
+        <div class="line radio-w">
             <label class="radio-inline">
                 <input type="radio" name="monitor-data-source" value="quote" checked="true" [(ngModel)]="dataSourceType"> 引用监控源
             </label>
@@ -62,7 +62,7 @@
             <div class="line">
                 <app-search-bar (search)="dataKeyword=$event" placeholder="按监控源搜索"></app-search-bar>
             </div>
-            <div class="line">
+            <div class="line temp-select">
                 <div class="list-select">
                     <div class="l-t">引用监控源</div>
                     <div class="l-w">
@@ -79,9 +79,9 @@
                                 <div class="t">{{selectedData[selectedData.length - 1].lang1}}</div>
                                 <div class="d">{{selectedData[selectedData.length - 1].desc}}</div>
                                 <div class="img-w">
-                                    <img src="assets/ds_down.png" />
-                                    <img src="assets/ds_up.png" />
-                                </div>
+                                    <div class="img"></div>
+                                    <div class="img"></div>
+                                 </div>
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
             </div>
         </div>
         <div class="custom-data-source" *ngIf="dataSourceType === 'custom'">
-            <div class="line">
+            <div class="line temp-select">
                 <label class="radio-inline">
                     <input type="radio" name="method" value="independent" checked="true" [(ngModel)]="method"> 独立创建
                 </label>

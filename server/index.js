@@ -4,6 +4,7 @@
 var express = require('express');
 var bodyParder = require('body-parser');
 var fileHelper = require('./file');
+var cors = require('cors');
 
 var app = express();
 
@@ -14,10 +15,11 @@ var allowCrossDomain = function(req, res, next) {
   next();
 }
 app.use(bodyParder.json());
-app.use(allowCrossDomain);
+// app.use(allowCrossDomain);
+app.use(cors());
 app.use(express.static('./public'));
 
-app.post('/api/relations/dashboards', function(req, res) {
+app.post('/api/dashboards', function(req, res) {
   setTimeout(() => res.json({}), 2000);
 });
 

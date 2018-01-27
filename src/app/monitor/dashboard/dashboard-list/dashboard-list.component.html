@@ -1,10 +1,10 @@
-<div class="btn primary" routerLink="/monitor/dashboard/create">新建仪表盘</div>
+<div class="btn primary" routerLink="../create">新建仪表盘</div>
 <div class="list-w">
   <div *ngFor="let dash of dashboards" class="d-w">
     <div class="d-detail">
       <div class="img-w">
-        <img src="assets/ds_down.png" />
-        <img src="assets/ds_up.png" />
+        <div class="img"></div>
+        <div class="img"></div>
       </div>
       <div class="text-w">
         <div class="title" routerLink="/monitor/scan" [fragment]="dash.uri">{{dash.title}}</div>

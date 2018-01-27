@@ -1,6 +1,7 @@
 /*引入外部样式*/
 @import "../node_modules/font-awesome/css/font-awesome.min.css";
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "./theme.scss";
 
 * {
   -ms-text-size-adjust: 100%;
@@ -17,7 +18,7 @@ body {
   font-family: 'PingFangSC-Thin', 'PingFang SC Thin', 'PingFang SC', '微软雅黑', 'Microsoft YaHei', '宋体', Tahoma, Helvetica, Arial, sans-serif;
   font-size: .7rem;
   line-height: 1.5;
-  background-color: #141414;
+  background-color: $body-background-color;
   >.container {
     padding: 3rem .75rem 0;
   }
@@ -27,7 +28,6 @@ body {
   min-width: 860px;
 }
 
-@import "./theme.scss";
 .btn {
   cursor: pointer;
   font-family:PingFangSC-Regular, "PingFang SC";
@@ -39,17 +39,19 @@ body {
   &.primary {
     border: 1px solid $btn-primary;
     background-color: $btn-primary;
-    color: #ffffff;
+    color: $btn-primary-color;
     &:hover {
       border: 1px solid $btn-hover;
       background-color: $btn-hover;
     }
   }
   &.default {
-    border: 1px solid $btn-hover;
-    color: #ffffff;
+    border: 1px solid $btn-default-color;
+    color: $btn-default-color;
     &:hover {
-      background-color: $btn-hover;
+      border: 1px solid $btn-default-hover-color;
+      background-color: $btn-default-hover;
+      color: $btn-default-hover-color;
     }
   }
   &.simple {
@@ -79,13 +81,22 @@ body {
     height: 32px;
     align-items: center;
     padding: 0 5px;
-    background-color: $nav-background;
+    background-color: $label-color;
+    border: 1px solid $line-color;
+    overflow: hidden;
     .dot {
       color: #ff0000;
     }
     .lab {
       flex: 1;
       padding-left: 5px;
+      padding: 7px 10px;
+      background-color: $label-color;
+      font-size: 12px;
+      .red-pointer {
+        color: #ff0000;
+      }
+      display: inline-block;
     }
     img {
       width: 12px;
@@ -93,7 +104,8 @@ body {
     }
   }
   .i-w {
-    background-color: #333333;
+    border: 1px solid $line-color;
+    background-color: $label-color;
     margin-left: 10px;
     display: flex;
     align-items: center;
@@ -116,12 +128,13 @@ body {
     margin-left: 10px;
   }
   app-select {
-    background-color: #333333;
+    background-color: $label-color;
     margin-left: 10px;
     display: flex;
     align-items: center;
     padding-left: 15px;
     width: 200px;
+    border: 1px solid $line-color;
   }
 
   &.space {
@@ -140,4 +153,36 @@ body {
 .format-tips {
   color: rgb(102, 102, 102);
   font-size: 13px;
+}
+
+
+.tabs {
+  display: flex;
+  .tab {
+    outline: none;
+    text-decoration: none;
+    user-select: none;
+    font-family:PingFangSC-Regular, "PingFang SC";
+    color: rgb(102, 102, 102);
+    padding: 5px 18px;
+    border-bottom: 1px solid $line-color;
+    cursor: pointer;
+    &.active {
+      color: $tab-color;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+      border: 1px solid $line-color;
+      border-bottom: 1px solid $tab-focuse-line;
+    }
+    &:not(.active):hover {
+      color: $main-color;
+    }
+  }
+  .space {
+    border-bottom: 1px solid $line-color;
+    flex: 1;
+  }
+}
+.tab-w {
+  padding: 20px 0px;
 }

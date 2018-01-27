@@ -29,7 +29,8 @@
     padding: 2px 15px;
     top: 34px;
     left: 0px;
-    background-color: #333333;
+    background-color: $label-color;
+    border: 1px solid $line-color;
     & > div {
       height: 28px;
       line-height: 28px;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-op-display',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OpDisplayComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
+  get isShowTab() {
+    const currentUrl = this.router.url.split('#')[0];
+    return currentUrl !== '/monitor/scan' && currentUrl !== '/monitor/edit';
+  }
   ngOnInit() {
   }
 

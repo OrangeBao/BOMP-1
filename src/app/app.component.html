@@ -4,7 +4,9 @@
         <a routerLink="/home" routerLinkActive="active">BOMP</a>
     </div>
     <nav>
-        <a *ngFor="let menu of menus" routerLink="{{'/' + menu}}" routerLinkActive="active">{{menu | transformMenu}}</a>
+        <a *ngFor="let menu of menus" routerLink="{{'/' + menu}}" routerLinkActive="active">
+            {{menu | transformMenu}}
+        </a>
     </nav>
     <div class="notice-w">
         <img src="assets/notice.png"/>

@@ -8,11 +8,13 @@
     margin: 10px;
     display: inline-block;
     width: calc(100%/3 - 20px);
+    border: 1px solid $list-bite-border-color;
     .d-detail {
       height: 124px;
-      background-color: #1f1d1e;
+      background-color: $list-bite-bg-color;
       display: flex;
       padding: 15px 25px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.149019607843137);
       flex-direction: column;
       .title-w {
         display: flex;
@@ -24,8 +26,9 @@
         }
         .title {
           font-size: 13px;
+          color: $list-bite-title-color;
           &:hover {
-            color: $main-color;
+            color: $btn-hover;
           }
           cursor: pointer;
         }

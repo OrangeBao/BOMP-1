@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { DataSourceService } from '../../../common/services/data-source/data-source.service';
 import { DataSource } from '../../../common/models/data-source';
@@ -20,6 +20,7 @@ export class DataSourceCreateComponent implements OnInit {
       private location: Location,
       private dataSourceService: DataSourceService,
       private router: Router,
+      private activeRoute:  ActivatedRoute,
       private spinnerService: Ng4LoadingSpinnerService
   ) { }
   dataSource: DataSource = new DataSource();
@@ -81,7 +82,7 @@ export class DataSourceCreateComponent implements OnInit {
         this.dataSourceService.create(params).then(() => {
           this.spinnerService.hide();
           this.notificationsService.addInfo('创建成功！');
-          this.router.navigate(['/monitor/data-source/list']);
+          this.router.navigate(['../list'], { relativeTo: this.activeRoute });
         }).catch(err => {
           this.spinnerService.hide();
           this.notificationsService.addError('系统异常，请联系管理员！');
@@ -96,7 +97,7 @@ export class DataSourceCreateComponent implements OnInit {
                 this.notificationsService.addError('创建失败！');
               } else {
                 this.notificationsService.addInfo('成功!');
-                this.router.navigate(['/monitor/data-source/list']);
+                this.router.navigate(['../list'], { relativeTo: this.activeRoute });
               }
             },
             () => {

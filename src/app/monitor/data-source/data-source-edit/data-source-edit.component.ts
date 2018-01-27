@@ -96,7 +96,7 @@ export class DataSourceEditComponent implements OnInit {
       this.dataSourceService.update(params).then(() => {
         this.spinnerService.hide();
         this.notificationsService.addInfo('更新成功！');
-        this.router.navigate(['/monitor/data-source/list']);
+        this.router.navigate(['../list'], { relativeTo: this.route });
       }).catch(err => {
         console.log(err);
         this.notificationsService.addError('更新失败！');
