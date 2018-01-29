@@ -12,7 +12,7 @@ export class OpDisplayComponent implements OnInit {
 
   get isShowTab() {
     const currentUrl = this.router.url.split('#')[0];
-    return currentUrl !== '/monitor/scan' && currentUrl !== '/monitor/edit';
+    return currentUrl !== '/op_display/scan' && currentUrl !== '/op_display/edit';
   }
   ngOnInit() {
   }

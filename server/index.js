@@ -137,7 +137,7 @@ app.all('/api/manager/relations/templates', function (req, res) {
   ]);
 });
 
-app.get('/api/manager/user/currentUser', function (req, res) {
+app.get('/api/user/currentUser', function (req, res) {
   setTimeout(function() {
     res.json({
       "userId": 1,

@@ -1,8 +1,6 @@
 <app-goback></app-goback>
-<div class="tips">
-  编辑监控源
-</div>
-<div class="line">
+
+<div class="line temp-select">
 
   <div *ngIf="'independent' === method">
     <div class="m-form-control">
@@ -74,5 +72,5 @@
 
 <div class="btn-w">
   <div class="btn primary" [class.disable]="!isTestUrl" on-click="publish()">发布</div>
-  <div class="btn default" routerLink="/monitor/data-source/list">取消</div>
+  <div class="btn default" routerLink="../../list">取消</div>
 </div>

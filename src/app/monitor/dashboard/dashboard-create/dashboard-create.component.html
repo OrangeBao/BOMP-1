@@ -197,7 +197,7 @@
     <div class="btn-w">
         <div *ngIf="current !== 3" class="btn primary" [class.disable]="noNext" (click)="next()">下一步</div>
         <div *ngIf="current > 1 && current !== 3" class="btn default" (click)="last()">上一步</div>
-        <div *ngIf="current === 1" class="btn default" routerLink="/monitor/dashboard/list">取消</div>
+        <div *ngIf="current === 1" class="btn default" routerLink="../list">取消</div>
         <div class="btn primary" *ngIf="current === 3" (click)="finish()">完成</div>
     </div>
 </div>
