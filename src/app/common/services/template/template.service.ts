@@ -5,7 +5,7 @@ import { UserService } from '../user/user.service';
 @Injectable()
 export class TemplateService {
 
-  private templateUrl = "api/relations/templates";
+  private templateUrl = "api/manager/relations/templates";
 
   constructor(private http: HttpClient, private userService: UserService) { }
 
@@ -21,15 +21,15 @@ export class TemplateService {
   }
 
   create(params) {
-    return this.http.post('api/relations', params);
+    return this.http.post('api/manager/relations', params);
   }
 
   createByFile(params) {
-    return this.http.post('api/templates/files', params);
+    return this.http.post('api/manager/templates/files', params);
   }
 
   deleteTemplate(id): Promise<any> {
-    return this.http.delete(`api/templates/${id}`).toPromise().catch(this.handleError);
+    return this.http.delete(`api/manager/templates/${id}`).toPromise().catch(this.handleError);
   }
 
 }

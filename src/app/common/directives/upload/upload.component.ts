@@ -41,7 +41,7 @@ export class UploadComponent implements OnInit {
   }
   sendFile(file) {
     defaultRequest({
-      action: `${environment.host}api/files/upload?orgId=1`,
+      action: `${environment.host}api/manager/files/upload?orgId=1`,
       filename: 'files',
       file: file,
       data: {},

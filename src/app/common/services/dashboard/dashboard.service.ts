@@ -6,7 +6,7 @@ import { Dashboard } from '../../models/dashboard';
 @Injectable()
 export class DashboardService {
 
-  private dashboardUrl = "api/relations/dashboards";
+  private dashboardUrl = "api/manager/relations/dashboards";
 
   constructor(private http: HttpClient, private userService: UserService) { }
 
@@ -22,9 +22,9 @@ export class DashboardService {
   }
 
   create(params): Promise<any> {
-    return this.http.post('api/dashboards', params).toPromise().catch(this.handleError);
+    return this.http.post('api/manager/dashboards', params).toPromise().catch(this.handleError);
   }
   deleteDashboard(slug): Promise<any> {
-    return this.http.delete(`api/dashboards/${slug}`).toPromise().catch(this.handleError);
+    return this.http.delete(`api/manager/dashboards/${slug}`).toPromise().catch(this.handleError);
   }
 }

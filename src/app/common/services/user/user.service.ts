@@ -36,7 +36,7 @@ export class UserService {
   }
 
   setHomePage(moduleStr: string) {
-    return this.http.put('api/relations/homePage', { renterId: this.getUserInfo().userId, moduleStr})
+    return this.http.put('api/manager/relations/homePage', { renterId: this.getUserInfo().userId, moduleStr})
         .toPromise().then(res => this.userInfo.homePage = moduleStr)
         .catch(this.handleError);
   }

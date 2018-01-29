@@ -9,7 +9,7 @@ export class DataSourceService {
   constructor(private http: HttpClient, private userService: UserService) { }
 
   getAll(): Promise<any> {
-    return this.http.get(`api/relations/datasources?renterType=USER&renterId=${this.userService.getUserInfo().userId}`)
+    return this.http.get(`api/manager/relations/datasources?renterType=USER&renterId=${this.userService.getUserInfo().userId}`)
         .toPromise()
         .catch(this.handleError);
   }
@@ -20,30 +20,30 @@ export class DataSourceService {
   }
 
   checkUrl(uri: string) {
-    return this.http.get(`api/datasources/checkConn?url=${uri}`)
+    return this.http.get(`api/manager/datasources/checkConn?url=${uri}`)
         .toPromise()
         .catch(this.handleError);
   }
 
   checkUrlFile(fileId: Array<number>): Observable<any> {
-    return this.http.put(`api/datasources/checkConn`, fileId);
+    return this.http.put(`api/manager/datasources/checkConn`, fileId);
         // .toPromise()
         // .catch(this.handleError);
   }
 
   create(params): Promise<any> {
-    return this.http.post('api/datasources', params).toPromise().catch(this.handleError);
+    return this.http.post('api/manager/datasources', params).toPromise().catch(this.handleError);
   }
 
   update(params): Promise<any> {
-    return this.http.put(`api/datasources/${params.id}`, params).toPromise();
+    return this.http.put(`api/manager/datasources/${params.id}`, params).toPromise();
   }
 
   createByFiles(fileIds: Array<number>): Observable<any> {
-    return this.http.post(`api/datasources/files`, fileIds);
+    return this.http.post(`api/manager/datasources/files`, fileIds);
   }
 
   deleteDataSource(id): Promise<any> {
-    return this.http.delete(`api/datasources/${id}`).toPromise().catch(this.handleError);
+    return this.http.delete(`api/manager/datasources/${id}`).toPromise().catch(this.handleError);
   }
 }

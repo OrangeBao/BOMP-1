@@ -19,11 +19,11 @@ app.use(bodyParder.json());
 app.use(cors());
 app.use(express.static('./public'));
 
-app.post('/api/dashboards', function(req, res) {
+app.post('/api/manager/dashboards', function(req, res) {
   setTimeout(() => res.json({}), 2000);
 });
 
-app.get('/api/relations/dashboards', function (req, res) {
+app.get('/api/manager/relations/dashboards', function (req, res) {
   res.json([
     {
       "id": 156,
@@ -108,7 +108,7 @@ app.get('/api/relations/dashboards', function (req, res) {
   // ]);
 });
 
-app.all('/api/relations/templates', function (req, res) {
+app.all('/api/manager/relations/templates', function (req, res) {
   res.json([
     {
       "id": 63,
@@ -137,7 +137,7 @@ app.all('/api/relations/templates', function (req, res) {
   ]);
 });
 
-app.get('/api/user/currentUser', function (req, res) {
+app.get('/api/manager/user/currentUser', function (req, res) {
   setTimeout(function() {
     res.json({
       "userId": 1,
@@ -214,7 +214,7 @@ app.get('/api/user/currentUser', function (req, res) {
 
 });
 
-app.put('/api/relations/homePage', function(req, res) {
+app.put('/api/manager/relations/homePage', function(req, res) {
   res.json({
     "id": 7,
     "renterType": "USER",
@@ -224,7 +224,7 @@ app.put('/api/relations/homePage', function(req, res) {
   });
 });
 
-app.get('/api/relations/datasources', function(req,res) {
+app.get('/api/manager/relations/datasources', function(req,res) {
   setTimeout(() => {
     res.json([
       {
@@ -325,15 +325,15 @@ app.get('/api/relations/datasources', function(req,res) {
   }, 2000)
 });
 
-app.get('/api/datasources/checkConn', function(req, res) {
+app.get('/api/manager/datasources/checkConn', function(req, res) {
   setTimeout(() => res.json({isOk: true}), 2000);
 });
 
-app.post('/api/relations/datasources', function(req,res) {
+app.post('/api/manager/relations/datasources', function(req,res) {
   res.json({});
 });
 
-app.post('/api/files/upload', function(req, res) {
+app.post('/api/manager/files/upload', function(req, res) {
   setTimeout(() => res.end(), 10000)
 });
 
