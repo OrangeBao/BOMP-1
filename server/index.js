@@ -31,7 +31,12 @@ app.get('/api/manager/relations/dashboards', function (req, res) {
       "uri": "db/xin-de-mo-ban",
       "type": "dash-db",
       "tags": [
-
+        "ddddd",
+        "eee",
+        "fffff",
+        "g",
+        "ddddd",
+        "eee",
       ],
       "isStarred": false,
       "orgId": 1,
@@ -43,7 +48,10 @@ app.get('/api/manager/relations/dashboards', function (req, res) {
       "uri": "db/node-overview",
       "type": "dash-db",
       "tags": [
-
+        "prometheus",
+        "aaaaa",
+        "bbbbb",
+        "cccccc"
       ],
       "isStarred": false,
       "orgId": 1,

@@ -1,0 +1,15 @@
+<div class="m-w" (click)="maskClick()">
+  <div class="m-b">
+    <div class="m-t">
+      <span>{{title}}</span>
+      <img src="/assets/modal-close.png" (click)="closeModal()"/>
+    </div>
+    <div class="c-w">
+      <ng-content></ng-content>
+    </div>
+    <div class="a-b">
+        <div class="btn primary" (click)="execOk()">{{okText || defaultOkText}}</div>
+        <div *ngIf="isShowCancelGet" class="btn default" (click)="execCancel()">{{cancelText || defaultCancelText}}</div>
+    </div>
+  </div>
+</div>

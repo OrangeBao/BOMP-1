@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-goback',
   templateUrl: './goback.component.html',
-  styleUrls: ['./goback.component.scss']
+  styleUrls: ['./goback.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class GobackComponent implements OnInit {
 

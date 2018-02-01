@@ -1,0 +1,12 @@
+.body-w {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    padding:0 40px;
+    .b {
+      // width: 1116px;
+      // max-width: 1116px;
+      width: calc(100% - 40px);
+      min-width: 600px;
+    }
+  }

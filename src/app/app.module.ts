@@ -24,9 +24,8 @@ import { OpDisplayModule } from './op-display/op-display.module';
 import { MonitorModule } from './monitor/monitor.module';
 import { TemplateModule } from './template/template.module';
 import { TransformMenuPipe } from './common/pipes/transform-menu.pipe';
-import { Ng4LoadingSpinnerModule } from './loading';
-// import { NgZorroAntdModule } from 'ng-zorro-antd';
-import {ShareModule, NotificationsService} from './common/share.module';
+
+import { ShareModule, NotificationsService} from './common/share.module';
 
 
 export function configFactory(config: UserService, config2: GrafanaService) {
@@ -50,10 +49,8 @@ export function configFactory(config: UserService, config2: GrafanaService) {
     MonitorModule,
     TemplateModule,
     AppRoutingModule,
-    Ng4LoadingSpinnerModule.forRoot(),
     BrowserAnimationsModule,
-    // NgZorroAntdModule.forRoot()
-    ShareModule
+    ShareModule.forRoot()
   ],
   providers: [
     {
@@ -72,7 +69,6 @@ export function configFactory(config: UserService, config2: GrafanaService) {
     UserService,
     AuthGuardService,
     DataSourceService,
-    // AuthGuardService
     NotificationsService,
     DicService,
     GrafanaService

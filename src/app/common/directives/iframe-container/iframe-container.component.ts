@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { LoadingService } from '../../services/loading/loading.service';
 
 @Component({
   selector: 'app-iframe-container',
@@ -7,21 +8,20 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class IframeContainerComponent implements OnInit {
 
-  isLoaded = false;
   @Input() isHiddenTitle = false;
   @Input() src: string;
-  config = {
-    c1: '#0055a5',
-    c2: '#45aee7',
-    width: '2'
-  };
-  constructor() { }
+  constructor(
+    private loadingService: LoadingService
+  ) { }
 
   ngOnInit() {
+    this.loadingService.show();
   }
 
   onload() {
     // TODO: grafana渲染延迟
-    setTimeout(() => this.isLoaded = true, 4000);
+    setTimeout(() => {
+      this.loadingService.hide();
+    }, 4000);
   }
 }

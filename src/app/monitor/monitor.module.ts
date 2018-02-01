@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DashboardRoutingModule } from './monitor-routing.module';
 import { MonitorComponent } from './monitor.component';
@@ -22,8 +22,8 @@ import { DashboardEditComponent } from './dashboard/dashboard-edit/dashboard-edi
     CommonModule,
     DashboardRoutingModule,
     FormsModule,
-    ShareModule,
-    // NgZorroAntdModule
+    ReactiveFormsModule,
+    ShareModule
   ],
   declarations: [
     MonitorComponent,
@@ -35,8 +35,6 @@ import { DashboardEditComponent } from './dashboard/dashboard-edit/dashboard-edi
     DashboardScanComponent,
     DashboardEditComponent,
     DataSourceCreateComponent
-    // UploadComponent,
-    // GobackComponent
   ]
 })
 export class MonitorModule { }

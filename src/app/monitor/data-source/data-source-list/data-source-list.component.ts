@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataSourceService } from '../../../common/services/data-source/data-source.service';
-import { Ng4LoadingSpinnerService } from '../../../loading';
 import { DicService } from '../../../common/services/dic/dic.service';
-import { NotificationsService } from '../../../common/share.module';
+import { NotificationsService, LoadingService } from '../../../common/share.module';
 
 @Component({
   selector: 'app-data-source-list',
@@ -15,7 +14,7 @@ export class DataSourceListComponent implements OnInit {
   constructor(
       private dicService: DicService,
       private dataSourceService: DataSourceService,
-      private spinnerService: Ng4LoadingSpinnerService,
+      private spinnerService: LoadingService,
       protected notificationsService: NotificationsService,
   ) { }
 

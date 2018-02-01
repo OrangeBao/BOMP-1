@@ -4,8 +4,7 @@ import { Location } from '@angular/common';
 import { DataSourceService } from '../../../common/services/data-source/data-source.service';
 import { DataSource } from '../../../common/models/data-source';
 import { File } from '../../../common/models/file';
-import { Ng4LoadingSpinnerService } from '../../../loading';
-import { NotificationsService } from '../../../common/share.module';
+import { NotificationsService, LoadingService } from '../../../common/share.module';
 import { DicService } from '../../../common/services/dic/dic.service';
 
 @Component({
@@ -21,7 +20,7 @@ export class DataSourceCreateComponent implements OnInit {
       private dataSourceService: DataSourceService,
       private router: Router,
       private activeRoute:  ActivatedRoute,
-      private spinnerService: Ng4LoadingSpinnerService
+      private spinnerService: LoadingService
   ) { }
   dataSource: DataSource = new DataSource();
   scrapeInterval: string;

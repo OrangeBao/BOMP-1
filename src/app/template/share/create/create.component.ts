@@ -5,8 +5,7 @@ import { File } from '../../../common/models/file';
 import { environment } from '../../../../environments/environment';
 import { UserService } from '../../../common/services/user/user.service';
 import { TemplateService } from '../../../common/services/template/template.service';
-import { NotificationsService } from '../../../common/share.module';
-import { Ng4LoadingSpinnerService } from '../../../loading';
+import { NotificationsService, LoadingService } from '../../../common/share.module';
 
 @Component({
   selector: 'app-create',
@@ -24,7 +23,7 @@ export class CreateComponent implements OnInit {
       private templateService: TemplateService,
       private sanitizer: DomSanitizer,
       private userService: UserService,
-      private spinnerService: Ng4LoadingSpinnerService
+      private spinnerService: LoadingService
   ) { }
 
   get canCreate() {

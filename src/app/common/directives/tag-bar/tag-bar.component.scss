@@ -1,0 +1,56 @@
+:host {
+    width: 100%;
+    background: rgba(248, 249, 249, 1);
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 15px 15px 15px;
+    font-size: 12px;
+    align-items: flex-start;
+    max-height: 56px;
+    overflow: hidden;
+    transition: all .5s ease;
+    &.all {
+        max-height: 100px; 
+    }
+    & > span {
+        color: #2C9CFA;
+        cursor: pointer;
+        white-space: nowrap;
+        display: inline-block;
+        margin-top: 15px;
+    }
+    .l-w {
+        display: flex;
+        align-items: flex-start;
+        & > span {
+            display: inline-block;
+            margin-top: 15px;
+        }
+    }
+    .t-w {
+        display: inline-block;
+        width: calc(100% - 100px);
+        .t {
+            cursor: pointer;
+            padding: 5px 10px;
+            font-family: 'PingFangSC-Regular', 'PingFang SC';
+            font-weight: 400;
+            font-style: normal;
+            border: 1px solid rgba(229, 229, 229, 1);
+            border-radius: 3px;
+            color: #1E1E1E;
+            display: inline-block;
+            margin-left: 15px;
+            background-color: #ffffff;
+            margin-top: 12px;
+            &:hover:not(.active) {
+                color: #2C9CFA;
+            }
+            &.active {
+                color: #ffffff;
+                background-color: rgba(132, 146, 166, 1);
+                border-color: rgba(132, 146, 166, 1);
+            }
+        }
+    }
+}

@@ -4,8 +4,7 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 import { UserService } from '../../../common/services/user/user.service';
 import { environment } from '../../../../environments/environment';
 import 'rxjs/add/operator/map';
-import { Ng4LoadingSpinnerService } from '../../../loading';
-import { NotificationsService } from '../../../common/share.module';
+import { NotificationsService, LoadingService } from '../../../common/share.module';
 import { TemplateService } from '../../../common/services/template/template.service';
 
 @Component({
@@ -23,7 +22,7 @@ export class EditComponent implements OnInit {
       protected notificationsService: NotificationsService,
       private sanitizer: DomSanitizer,
       private userService: UserService,
-      private spinnerService: Ng4LoadingSpinnerService
+      private spinnerService: LoadingService
   ) { }
 
   ngOnInit() {

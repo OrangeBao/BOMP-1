@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TemplateService } from '../../../common/services/template/template.service';
 import { UserService } from '../../../common/services/user/user.service';
-import { Ng4LoadingSpinnerService } from '../../../loading';
-import { NotificationsService } from '../../../common/share.module';
+import { NotificationsService, LoadingService } from '../../../common/share.module';
 
 @Component({
   selector: 'app-list',
@@ -12,7 +11,7 @@ import { NotificationsService } from '../../../common/share.module';
 export class ListComponent implements OnInit {
   template: Array<any>;
   constructor(
-      private spinnerService: Ng4LoadingSpinnerService,
+      private spinnerService: LoadingService,
       private templateService: TemplateService,
       private notificationsService: NotificationsService,
       private userService: UserService

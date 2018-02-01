@@ -17,7 +17,6 @@ export class SearchBarComponent implements OnInit {
 
   onKeyPress(event) {
     if (13 === event.keyCode) {
-      debugger;
       this.search.emit(event.target.value);
     }
   }

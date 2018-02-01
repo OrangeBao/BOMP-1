@@ -9,8 +9,7 @@ import { DataSource } from '../../../common/models/data-source';
 import { environment } from '../../../../environments/environment';
 import { File } from '../../../common/models/file';
 import { Router,  ActivatedRoute } from '@angular/router';
-import { Ng4LoadingSpinnerService } from '../../../loading';
-import { NotificationsService } from '../../../common/share.module';
+import { NotificationsService, LoadingService } from '../../../common/share.module';
 
 @Component({
   selector: 'app-dashboard-create',
@@ -22,7 +21,7 @@ export class DashboardCreateComponent implements OnInit {
   constructor(
       private dicService: DicService,
       private notificationsService: NotificationsService,
-      private spinnerService: Ng4LoadingSpinnerService,
+      private spinnerService: LoadingService,
       private dashboardService: DashboardService,
       private sanitizer: DomSanitizer,
       private router: Router,

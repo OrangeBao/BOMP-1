@@ -29,9 +29,8 @@ export class UserService {
     return this.userInfo.menus.indexOf(url.split('/')[1]) !== -1;
   }
 
-  private handleError(error: any): Promise<any> {``
+  private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
-    debugger;
     return Promise.reject(error.message || error);
   }
 
