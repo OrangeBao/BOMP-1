@@ -40,6 +40,7 @@ export class UploadComponent implements OnInit {
     this.sendFile(event.target.files[0]);
   }
   sendFile(file) {
+    debugger;
     defaultRequest({
       action: `${environment.host}api/manager/files/upload?orgId=1`,
       filename: 'files',

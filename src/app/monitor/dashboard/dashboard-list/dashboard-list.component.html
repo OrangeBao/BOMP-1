@@ -83,7 +83,7 @@
             <textarea  rows="5" class="form-control" formControlName="desc" [(ngModel)]="baseInfo.desc"></textarea>
             <div class="explain-w">
                 <div *ngIf="desc.invalid && (desc.dirty || desc.touched)">
-                    <div *ngIf="v.errors.required">
+                    <div *ngIf="desc.errors.required">
                       必填
                     </div>
                   </div>
