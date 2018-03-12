@@ -18,11 +18,8 @@ import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 // import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
-import { DocComponent } from './doc/doc.component';
 import { TabComponent } from './common/directives/tab/tab.component';
 
-import { OpDisplayModule } from './op-display/op-display.module';
-import { MonitorModule } from './monitor/monitor.module';
 import { TemplateModule } from './template/template.module';
 import { TransformMenuPipe } from './common/pipes/transform-menu.pipe';
 
@@ -38,7 +35,6 @@ export function configFactory(config: UserService, config2: GrafanaService) {
     AppComponent,
     NotFoundComponent,
     // HomeComponent,
-    DocComponent,
     TabComponent,
     TransformMenuPipe
     // GobackComponent
@@ -46,10 +42,6 @@ export function configFactory(config: UserService, config2: GrafanaService) {
   imports: [
     BrowserModule,
     HttpClientModule,
-    NgZorroAntdModule.forRoot(),
-
-    OpDisplayModule,
-    MonitorModule,
     TemplateModule,
     AppRoutingModule,
     BrowserAnimationsModule,

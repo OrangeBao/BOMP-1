@@ -3,8 +3,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 const menuMap = {
   'home': '首页',
   'monitor': '监控',
-  'template': '模板',
-  'doc': '文档',
+  'warning': '高警',
+  'console': '控制台',
 };
 
 @Pipe({

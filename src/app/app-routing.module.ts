@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 // import { TemplateComponent } from './template/template.component';
-import { DocComponent } from './doc/doc.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuardService } from './common/services/auth-guard/auth-guard.service';
 
@@ -14,23 +13,13 @@ const appRoutes: Routes = [
   },
   {
     path: 'home',
-    // component: HomeComponent,
     // canActivate: [AuthGuardService],
     loadChildren: './home/home.module#HomeModule'
   },
-  // {
-  //   path: 'monitor',
-  //   component: MonitorComponent,
-  // },
-  // {
-  //   path: 'template',
-  //   component: TemplateComponent,
-  //   canActivate: [AuthGuardService],
-  // },
   {
-    path: 'doc',
-    component: DocComponent,
-    canActivate: [AuthGuardService],
+    path: 'monitor',
+    // canActivate: [AuthGuardService],
+    loadChildren: './monitor/monitor.module#MonitorModule'
   },
   {
     path: 'warning',

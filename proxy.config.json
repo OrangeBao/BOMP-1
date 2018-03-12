@@ -1,0 +1,8 @@
+{
+    "*": {
+      "target": "http://10.254.2.95:7002/mock/57/",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true
+    }
+}
