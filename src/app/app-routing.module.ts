@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 // import { TemplateComponent } from './template/template.component';
 import { DocComponent } from './doc/doc.component';
@@ -9,13 +9,14 @@ import { AuthGuardService } from './common/services/auth-guard/auth-guard.servic
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'console',
     pathMatch: 'full'
   },
   {
     path: 'home',
-    component: HomeComponent,
-    canActivate: [AuthGuardService],
+    // component: HomeComponent,
+    // canActivate: [AuthGuardService],
+    loadChildren: './home/home.module#HomeModule'
   },
   // {
   //   path: 'monitor',
@@ -32,6 +33,14 @@ const appRoutes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: 'warning',
+    loadChildren: './warning/warning.module#WarningModule'
+  },
+  {
+    path: 'console',
+    loadChildren: './console/console.module#ConsoleModule'
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }
@@ -43,7 +52,8 @@ const appRoutes: Routes = [
       appRoutes,
       {
         enableTracing: false, // <-- debugging purposes only,
-        useHash: true
+        useHash: true,
+        preloadingStrategy: PreloadAllModules
       }
     )
   ],
