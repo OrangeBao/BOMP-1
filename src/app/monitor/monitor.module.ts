@@ -8,13 +8,15 @@ import { DashboardListComponent } from './dashboard/dashboard-list/dashboard-lis
 import { DashboardSummaryComponent } from './dashboard/dashboard-summary/dashboard-summary.component';
 import { DashboardCreateComponent } from './dashboard/dashboard-create/dashboard-create.component';
 // import { DashboardEditComponent } from './dashboard/dashboard-edit/dashboard-edit.component';
-import { DataSourceListComponent } from './data-source/data-source-list/data-source-list.component';
-import { DataSourceCreateComponent } from './data-source/data-source-create/data-source-create.component';
-import { DataSourceEditComponent } from './data-source/data-source-edit/data-source-edit.component';
 
 import { ShareModule } from '../common/share.module';
 import { DashboardScanComponent } from './dashboard/dashboard-scan/dashboard-scan.component';
 import { DashboardEditComponent } from './dashboard/dashboard-edit/dashboard-edit.component';
+import { TargetComponent } from './target/target.component';
+import { ItemComponent } from './target/item/item.component';
+import { ObjectComponent } from './target/object/object.component';
+import { TemplateComponent } from './template/template.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 // import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 @NgModule({
@@ -30,11 +32,13 @@ import { DashboardEditComponent } from './dashboard/dashboard-edit/dashboard-edi
     DashboardListComponent,
     DashboardSummaryComponent,
     DashboardCreateComponent,
-    DataSourceEditComponent,
-    DataSourceListComponent,
     DashboardScanComponent,
     DashboardEditComponent,
-    DataSourceCreateComponent
+    TargetComponent,
+    ItemComponent,
+    ObjectComponent,
+    TemplateComponent,
+    DashboardComponent,
   ]
 })
 export class MonitorModule { }
