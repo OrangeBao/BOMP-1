@@ -44,3 +44,5 @@ Thumbs.db
 
 # server
 /server/node_modules
+
+*.DS_Store
