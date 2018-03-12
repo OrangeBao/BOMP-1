@@ -2,6 +2,7 @@
 @import "../node_modules/font-awesome/css/font-awesome.min.css";
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import "./theme.scss";
+@import "./style/index.scss";
 
 * {
   -ms-text-size-adjust: 100%;
@@ -26,45 +27,6 @@ body {
   // color: #ffffff;
   margin: 0;
   min-width: 860px;
-}
-
-.btn {
-  cursor: pointer;
-  font-family:PingFangSC-Regular, "PingFang SC";
-  font-size: 14px;
-  padding: 5px 16px;
-  border-radius: 3px;
-  display: inline-block;
-  outline: 0;
-  &.primary {
-    border: 1px solid $btn-primary;
-    background-color: $btn-primary;
-    color: $btn-primary-color;
-    &:hover {
-      border: 1px solid $btn-hover;
-      background-color: $btn-hover;
-    }
-  }
-  &.default {
-    border: 1px solid $btn-default-border-color;
-    color: $btn-default-color;
-    &:hover {
-      border: 1px solid $btn-default-hover-color;
-      background-color: $btn-default-hover;
-      color: $btn-default-hover-color;
-    }
-  }
-  &.simple {
-    border: 1px solid $btn-hover;
-    color: $btn-hover;
-    &:hover {
-      color: #ffffff;
-      background-color: $btn-hover;
-    }
-  }
-  &.disable {
-    cursor: not-allowed;
-  }
 }
 
 .hidden {

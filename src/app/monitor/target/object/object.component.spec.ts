@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DashboardEditComponent } from './dashboard-edit.component';
+import { ObjectComponent } from './object.component';
 
-describe('DashboardEditComponent', () => {
-  let component: DashboardEditComponent;
-  let fixture: ComponentFixture<DashboardEditComponent>;
+describe('ObjectComponent', () => {
+  let component: ObjectComponent;
+  let fixture: ComponentFixture<ObjectComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardEditComponent ]
+      declarations: [ ObjectComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DashboardEditComponent);
+    fixture = TestBed.createComponent(ObjectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

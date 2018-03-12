@@ -5,9 +5,7 @@
 
 export const environment = {
   production: false,
-  host: 'http://localhost:3003/',
-  // host: 'http://172.20.29.163:8080/',
-  // grafanaHost: 'http://10.139.7.119:3000/'
+  host: '/',
   grafanaHost: 'http://10.139.12.21:3000/',
   notLogin: true
 };
