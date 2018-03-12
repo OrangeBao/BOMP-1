@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { DashboardService } from './common/services/dashboard/dashboard.service';
 import { TemplateService } from './common/services/template/template.service';
@@ -45,6 +46,8 @@ export function configFactory(config: UserService, config2: GrafanaService) {
   imports: [
     BrowserModule,
     HttpClientModule,
+    NgZorroAntdModule.forRoot(),
+
     OpDisplayModule,
     MonitorModule,
     TemplateModule,

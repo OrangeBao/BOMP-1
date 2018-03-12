@@ -16,7 +16,7 @@ import { DetailComponent } from './dashboard/detail/detail.component';
   declarations: [
     OpDisplayComponent,
     ListComponent,
-    DetailComponent
+    DetailComponent,
   ]
 })
 export class OpDisplayModule { }

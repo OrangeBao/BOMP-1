@@ -1,53 +1,3 @@
-// import { NgModule } from '@angular/core';
-// import { RouterModule, Routes } from '@angular/router';
-// import { OpDisplayComponent } from './op-display.component';
-// import { ListComponent } from './dashboard/list/list.component';
-// import { DetailComponent } from './dashboard/detail/detail.component';
-
-// const opDisplayRoutes: Routes = [
-//   {
-//     path: 'op_display',
-//     component: OpDisplayComponent,
-//     // canActivate: [AuthGuardService],
-//     children: [
-//       {
-//         path: '',
-//         redirectTo: 'dashboard/list',
-//         pathMatch: 'full'
-//       },
-//       {
-//         path: 'dashboard',
-//         children: [
-//           {
-//             path: '',
-//             redirectTo: 'list',
-//             pathMatch: 'full'
-//           },
-//           {
-//             path: 'list',
-//             component: ListComponent,
-//           },
-//           {
-//             path: 'detail',
-//             component: DetailComponent,
-//           }
-//         ]
-//       }
-//     ]
-//   }
-// ];
-
-// @NgModule({
-//   imports: [
-//     RouterModule.forChild(opDisplayRoutes)
-//   ],
-//   exports: [
-//     RouterModule
-//   ],
-//   providers: [ ]
-// })
-// export class OpDisplayRoutingModule { }
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OpDisplayComponent } from './op-display.component';
@@ -59,6 +9,7 @@ import { DataSourceEditComponent } from '../monitor/data-source/data-source-edit
 import { AuthGuardService } from '../common/services/auth-guard/auth-guard.service';
 import { DashboardScanComponent } from '../monitor/dashboard/dashboard-scan/dashboard-scan.component';
 import { DashboardEditComponent } from '../monitor/dashboard/dashboard-edit/dashboard-edit.component';
+import { IndexesComponent } from '../monitor/indexes/indexes.component';
 
 const opDisplayRoutes: Routes = [
   {
@@ -67,17 +18,17 @@ const opDisplayRoutes: Routes = [
     // canActivate: [AuthGuardService],
     children: [
       {
+        path: '',
+        redirectTo: 'dashboard/list',
+        pathMatch: 'full'
+      },
+      {
         path: 'scan',
         component: DashboardScanComponent,
       },
       {
         path: 'edit',
         component: DashboardEditComponent,
-      },
-      {
-        path: '',
-        redirectTo: 'dashboard/list',
-        pathMatch: 'full'
       },
       {
         path: 'dashboard',
@@ -96,6 +47,10 @@ const opDisplayRoutes: Routes = [
             component: DashboardCreateComponent,
           }
         ]
+      },
+      {
+        path: 'indexes',
+        component: IndexesComponent
       },
       {
         path: 'data-source',
