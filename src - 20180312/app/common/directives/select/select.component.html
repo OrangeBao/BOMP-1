@@ -1,9 +1,0 @@
-<div>
-  <div class="d-btn" (click)="switchDropMenu()">
-    <span>{{value}}</span>
-    <span>^</span>
-  </div>
-  <div class="d-menu" *ngIf="showDropMenu">
-    <div *ngFor="let o of options" (click)="choice(o)">{{o.value}}</div>
-  </div>
-</div>
