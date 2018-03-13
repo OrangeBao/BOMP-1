@@ -1,3 +1,48 @@
-<p>
-  dashboard-list works!
-</p>
+<div class="op-bar">
+  <div class="btn primary" [class.hidden]="isDeleteModel" routerLink="../create">+新建</div>
+  <div class="btn default" [class.hidden]="isDeleteModel" (click)="deleteModel()">批量删除</div>
+  <div class="btn primary" [class.hidden]="!isDeleteModel" (click)="confirmDelete()">删除</div>
+  <div class="btn default" [class.hidden]="!isDeleteModel" (click)="deleteModel()">取消</div>
+  <label class="checkbox-inline" [class.hidden]="!isDeleteModel">
+      <input type="checkbox" name="data-source-select-checkbox" [(ngModel)]="isAll" (click)="allSelectChange()">
+      <span>全选</span>
+  </label>
+</div>
+<app-tag-bar [tags]="allTags" (change)="tagChange($event)"></app-tag-bar>
+<div class="list-w" [class.isDelete]="isDeleteModel">
+  <div *ngFor="let dash of displayDashboards" class="d-w" (click)="addChoice(dash.uri, $event)" [class.choice]="isChoice(dash.uri)">
+    <div class="d-detail">
+      <div class="img-w">
+        <div class="img"></div>
+        <div class="img"></div>
+      </div>
+      <div class="text-w">
+        <div class="title-w">
+          <div class="title" routerLink="../../scan" [fragment]="dash.uri">{{dash.title}}</div>
+          <div class="icon-list">
+              <div *ngIf="dash.uri === homePage" class="c-home">
+                <i class="iconfont icon-dangqianshouyexianshi" alt="设为主页显示" title="设为主页显示"></i>
+                <span>当前主页显示</span>
+              </div>
+              <i *ngIf="dash.uri !== homePage" class="iconfont icon-zhuyexianshi" alt="设为主页显示" title="设为主页显示"  on-click="setHomePage(dash.uri)"></i>
+              <i class="iconfont icon-bianji" alt="编辑" title="编辑" on-click="editDashboard(dash.uri)"></i>
+              <i class="iconfont icon-shezhi" alt="配置" title="配置" routerLink="../../edit"></i>
+              <i class="iconfont icon-shanchu" alt="删除" title="删除" on-click="deleteDashbaordConfirm(dash.uri)"></i>
+          </div>
+        </div>
+        
+        <p class="desc">
+          <span>#</span>
+          <span *ngFor="let tag of dash.tags" class="tag">
+            {{tag}}
+          </span>
+        </p>
+      </div>
+      <div class="mask" *ngIf="isDeleteModel"></div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="dashboards && dashboards.length === 0" class="null-tips">
+  <span>暂无仪表盘！</span>
+</div>
