@@ -1,7 +1,7 @@
 import { Component, ViewChild, TemplateRef, OnInit } from "@angular/core";
 import { NzModalService } from 'ng-zorro-antd';
 
-import { IndexEditorComponent } from '../index-editor/index-editor.component';
+import { IndexEditorModalComponent } from '../index-editor-modal/index-editor-modal.component';
 
 @Component({
   selector: "bomp-monitor-indexes",
@@ -72,7 +72,7 @@ export class MonitorIndexesComponent implements OnInit {
 
     this.modalService.open({
       title          : this.tpl,
-      content        : IndexEditorComponent,
+      content        : IndexEditorModalComponent,
       footer         : false,
       closable: true,
       maskClosable: false,

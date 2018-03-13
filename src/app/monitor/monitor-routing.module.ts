@@ -5,10 +5,11 @@ import { AuthGuardService } from '../common/services/auth-guard/auth-guard.servi
 import { DashboardListComponent } from './dashboard/dashboard-list/dashboard-list.component';
 import { DashboardCreateComponent } from './dashboard/dashboard-create/dashboard-create.component';
 
-import { TargetComponent } from './target/target.component';
+// import { TargetComponent } from './target/target.component';
 import { ItemComponent } from './target/item/item.component';
 import { ObjectComponent } from './target/object/object.component';
 
+import { IndexesComponent } from './indexes/indexes.component';
 import { TemplateComponent } from './template/template.component';
 
 const dashboardRoutes: Routes = [
@@ -34,19 +35,22 @@ const dashboardRoutes: Routes = [
             component: DashboardCreateComponent,
           }
         ]
+      // }, {
+      //   path: 'target',
+      //   component: TargetComponent,
+      //   children: [
+      //     {
+      //       path: 'item',
+      //       component: ItemComponent,
+      //     },
+      //     {
+      //       path: 'object',
+      //       component: ObjectComponent,
+      //     },
+      //   ]
       }, {
-        path: 'target',
-        component: TargetComponent,
-        children: [
-          {
-            path: 'item',
-            component: ItemComponent,
-          },
-          {
-            path: 'object',
-            component: ObjectComponent,
-          },
-        ]
+        path: 'indexes',
+        component: IndexesComponent
       }, {
         path: 'template',
         component: TemplateComponent

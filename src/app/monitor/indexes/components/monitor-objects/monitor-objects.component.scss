@@ -2,7 +2,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 50px;
 }
 
 .tags {
@@ -10,4 +9,7 @@
     justify-content: flex-start;
     align-items: center;
     height: 50px;
+    width: 100%;
+    background-color: #F8F9F9;
+    margin: 20px 0;
 }

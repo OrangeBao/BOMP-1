@@ -1,13 +1,24 @@
 <div>
   <div class="menu">
-    <div class="buttons">
-      <button nz-button [nzType]="'primary'" [nzSize]="size">
+    <div class="buttons" *ngIf="!isBatchDeleteable">
+      <button nz-button [nzType]="'primary'" (click)="newObject()">
         <i class="fa fa-plus"></i>
         <span>新建</span>
       </button>
-      <button nz-button [nzType]="'default'">
+      <button nz-button [nzType]="'default'" (click)="batchDeleteObjects()">
         <span>批量删除</span>
       </button>
+    </div>
+    <div class="batch-delete-buttons" *ngIf="isBatchDeleteable">
+      <button nz-button [nzType]="'primary'" (click)="confirmBatchDelete()">
+        <span>删除</span>
+      </button>
+      <button nz-button [nzType]="'default'" (click)="cancelBatchDelete()">
+        <span>取消</span>
+      </button>
+      <label nz-checkbox [(ngModel)]="allChecked" (ngModelChange)="checkAllObjects($event)">
+        <span>全选</span>
+      </label>
     </div>
     <div class="search">
       <nz-input [nzType]="'search'" [nzPlaceHolder]="'按名称、标签、监控对象等搜索'" [(ngModel)]="searchText" style="width: 300px;"></nz-input>
@@ -20,28 +31,26 @@
     </nz-checkable-tag>
   </div>
   <div class="cards">
-    <nz-card style="width:300px;">
-      <ng-template #title>
-        Card title
-      </ng-template>
-      <ng-template #extra>
-        <div>
-          <i class="fa fa-plus"></i>
-          <i class="fa fa-plus"></i>
+    <!-- <ng-container *ngFor="let item of items"> -->
+
+    <!-- </ng-container> -->
+
+    <div nz-row [nzGutter]="16">
+      <div nz-col class="gutter-row" [nzSpan]="8">
+        <div class="gutter-box">
+          <bomp-monitor-object-card [isSelectable]="isBatchDeleteable" [monitorObject]="monitorObject" (selectChanged)="cardSelectChanged($event)"></bomp-monitor-object-card>
         </div>
-      </ng-template>
-      <ng-template #body>
-        <p>BI套件指标（全）的描述信息可能会非常非常非常非常非常</p>
-        <div>
-          <span>监控指标项数量：3</span>
-          <span>读数据源：aaa</span>
+      </div>
+      <div nz-col class="gutter-row" [nzSpan]="8">
+        <div class="gutter-box">
+          <bomp-monitor-object-card [isSelectable]="isBatchDeleteable" [monitorObject]="monitorObject" (selectChanged)="cardSelectChanged($event)"></bomp-monitor-object-card>
         </div>
-        <div class="card-tags">
-            <nz-tag>Tag1</nz-tag>
-            <nz-tag>Tag2</nz-tag>
-            <nz-tag>Tag3</nz-tag>
+      </div>
+      <div nz-col class="gutter-row" [nzSpan]="8">
+        <div class="gutter-box">
+          <bomp-monitor-object-card [isSelectable]="isBatchDeleteable" [monitorObject]="monitorObject" (selectChanged)="cardSelectChanged($event)"></bomp-monitor-object-card>
         </div>
-      </ng-template>
-    </nz-card>
+      </div>
+    </div>
   </div>
 </div>
