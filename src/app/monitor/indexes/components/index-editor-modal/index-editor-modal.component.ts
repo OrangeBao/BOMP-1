@@ -7,11 +7,11 @@ import {
 } from "@angular/forms";
 
 @Component({
-  selector: 'bomp-index-editor',
-  templateUrl: './index-editor.component.html',
-  styleUrls: ['./index-editor.component.scss']
+  selector: 'bomp-index-editor-modal',
+  templateUrl: './index-editor-modal.component.html',
+  styleUrls: ['./index-editor-modal.component.scss']
 })
-export class IndexEditorComponent implements OnInit {
+export class IndexEditorModalComponent implements OnInit {
   validateForm: FormGroup;
 
   constructor(private fb: FormBuilder) { }

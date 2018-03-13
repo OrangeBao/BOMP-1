@@ -3,11 +3,8 @@
     <nz-input [nzType]="'search'" [nzPlaceHolder]="'按名称、标签、监控对象等搜索'" [(ngModel)]="searchText" style="width: 300px;"></nz-input>
   </div>
   <div>
-    <nz-table #nzTable [nzDataSource]="data" [nzSize]="'small'" [nzBordered]="false"
-      [nzPageSize]="10" [nzShowTotal]="true" [nzShowQuickJumper]="true" 
-      (nzDataChange)="_displayDataChange($event)" 
-      (nzPageIndexChange)="_refreshStatus()"
-      (nzPageSizeChange)="_refreshStatus()">
+    <nz-table #nzTable [nzDataSource]="data" [nzSize]="'small'" [nzBordered]="false" [nzPageSize]="10" [nzShowTotal]="true" [nzShowQuickJumper]="true"
+      (nzDataChange)="_displayDataChange($event)" (nzPageIndexChange)="_refreshStatus()" (nzPageSizeChange)="_refreshStatus()">
       <thead nz-thead>
         <tr>
           <th nz-th [nzCheckbox]="true">
@@ -60,9 +57,9 @@
           <td nz-td>{{data.address}}</td>
           <td nz-td>
             <div>
-                <nz-tag>Tag1</nz-tag>
-                <nz-tag>Tag2</nz-tag>
-                <nz-tag>Tag3</nz-tag>
+              <nz-tag>Tag1</nz-tag>
+              <nz-tag>Tag2</nz-tag>
+              <nz-tag>Tag3</nz-tag>
             </div>
           </td>
           <td nz-td>
@@ -75,7 +72,7 @@
 </div>
 
 <ng-template #tpl>
-    <div>
-      <span>编辑指标</span>
-    </div>
-  </ng-template>
+  <div>
+    <span>编辑指标</span>
+  </div>
+</ng-template>

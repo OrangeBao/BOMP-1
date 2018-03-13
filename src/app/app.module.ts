@@ -28,7 +28,6 @@ import { ShareModule, NotificationsService} from './common/share.module';
 
 export function configFactory(config: UserService, config2: GrafanaService) {
   return  () => config.load().then(() => config2.mockLogin()).catch(err => console.error(err));
-  // return null; 
 }
 
 @NgModule({
