@@ -1,0 +1,6 @@
+<div *ngFor="let tag of tags; let i=index" class="t-w" (click)="deleteTag(i)">
+  <span>{{tag}}</span>
+  <img src="/assets/modal-close.png"/>
+</div>
+
+<input (change)="change($event)" (keyup.enter)="addTag()"/>

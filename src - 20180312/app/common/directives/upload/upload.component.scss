@@ -1,0 +1,57 @@
+@import "../../../../theme.scss";
+.upload-bar {
+  .upload-tool {
+    display: flex;
+    justify-content: center;
+    height: 60px;
+    img {
+      width: 20px;
+      height: 20px;
+    }
+    align-items: center;
+    .t {
+      color: #999999;
+      font-size: 13px;
+      margin: 0 10px;
+    }
+    .u-span {
+      font-size: 13px;
+      color: #9D9065;
+      cursor: pointer;
+    }
+  }
+  max-width: 700px;
+  border: 1px dashed #3e3c3e;
+  //&:hover {
+  //  border-color: #ff0000;
+  //}
+  &.is-active {
+    border-color: $main-color;
+  }
+}
+
+.file-list {
+  .l {
+    display: flex;
+    padding: 0 30px;
+    color: #666666;
+    align-items: center;
+    cursor: pointer;
+    span {
+      padding-left: 10px;
+    }
+    img {
+      width: 13px;
+      height: 13px;
+      &:last-child {
+        margin-left: auto;
+        visibility: hidden;
+      }
+    }
+    &:hover {
+      img {
+        visibility: visible;
+      }
+    }
+  }
+}

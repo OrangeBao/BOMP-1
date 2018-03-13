@@ -1,0 +1,23 @@
+<app-modal
+  [modalId]="globalAlertId"
+  [title]="alertInfo.title"
+  [okText]="alertInfo.okText"
+  (ok)="okCallback()()"
+  (cancel)="cancelCallback()()"
+  [maskClose]="true"
+  [isShowCancel]="isShowCancel"
+>
+  <div class="alert-w">
+    <div class="m">
+      <i class="iconfont icon-xinxi" *ngIf="alertInfo.type === 1"></i>
+      <i class="iconfont icon-jinggao" *ngIf="alertInfo.type === 2"></i>
+      <i class="iconfont icon-shibai" *ngIf="alertInfo.type === 3"></i>
+      <i class="iconfont icon-chenggong" *ngIf="alertInfo.type === 0"></i>
+      <span>{{alertInfo.content}}</span>
+    </div>
+    <div class="r">
+      {{alertInfo.remark}}
+    </div>
+  </div>
+</app-modal>
+

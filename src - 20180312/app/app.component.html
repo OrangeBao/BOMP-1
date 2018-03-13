@@ -1,0 +1,20 @@
+<div class="navigator" *ngIf="isShowNavigator">
+    <div class="logo-w">
+        <img src="assets/logo.png"/>
+        <a routerLink="/home" routerLinkActive="active">BOMP</a>
+    </div>
+    <nav>
+        <a *ngFor="let menu of menus" routerLink="{{'/' + menu}}" routerLinkActive="active">
+            {{menu | transformMenu}}
+        </a>
+    </nav>
+    <div class="notice-w">
+        <img src="assets/notice.png"/>
+        <span>{{userName}}</span>
+    </div>
+</div>
+<router-outlet></router-outlet>
+
+<app-angular4-notify-notifications-container></app-angular4-notify-notifications-container>
+<app-loading></app-loading>
+<app-alert></app-alert>

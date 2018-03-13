@@ -17,7 +17,7 @@ import { ItemComponent } from './target/item/item.component';
 import { ObjectComponent } from './target/object/object.component';
 import { TemplateComponent } from './template/template.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+// import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 @NgModule({
   imports: [

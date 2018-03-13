@@ -1,0 +1,23 @@
+@import "../../../../theme.scss";
+.search-bar {
+  background-color: $search-bar-background-color;
+  padding: 4px 10px;
+  max-width: 500px;
+  border: 1px solid #f4f4f4;
+  color: $search-bar-text-color;
+  display: flex;
+  align-items: center;
+}
+.search-icon {
+  width: 18px;
+  height: 18px;
+  background: url($search-bar-icon);
+  background-size: cover;
+  display: inline-block;
+}
+.search-in {
+  background-color: transparent;
+  border: 0px;
+  outline: 0;
+  width: calc(100% - 40px);
+}

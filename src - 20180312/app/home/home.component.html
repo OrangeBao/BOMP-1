@@ -1,0 +1,4 @@
+<app-iframe-container *ngIf="hasHomePage" [src]="homePage" [isHiddenTitle]="true"></app-iframe-container>
+<div *ngIf="!hasHomePage" class="null-tips">
+    当前主页未设置！
+</div>

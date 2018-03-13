@@ -1,0 +1,22 @@
+<div class="btn primary" routerLink="/template/personal/create">新建模板</div>
+<div class="list-w">
+  <div *ngFor="let dash of template" class="d-w">
+    <div class="d-detail">
+      <div class="img-w">
+        <img src="assets/ds_down.png" />
+        <img src="assets/ds_up.png" />
+      </div>
+      <div class="text-w">
+        <div class="title">{{dash.title}}</div>
+        <p class="desc">{{dash.desc}}</p>
+        <div class="icon-list">
+          <div *ngIf="dash.uri === homePage" class="c-home">
+            <img src="assets/chome.png" class="home" alt="设为主页显示" title="设为主页显示"/>
+            <span>当前主页显示</span>
+          </div>
+          <img src="assets/pan.png" class="pan" alt="编辑" title="编辑"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

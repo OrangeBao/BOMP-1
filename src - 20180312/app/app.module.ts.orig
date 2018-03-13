@@ -27,8 +27,7 @@ import { ShareModule, NotificationsService} from './common/share.module';
 
 
 export function configFactory(config: UserService, config2: GrafanaService) {
-  // return  () => config.load().then(() => config2.mockLogin()).catch(err => console.error(err));
-  return null; 
+  return  () => config.load().then(() => config2.mockLogin()).catch(err => console.error(err));
 }
 
 @NgModule({
@@ -43,6 +42,13 @@ export function configFactory(config: UserService, config2: GrafanaService) {
   imports: [
     BrowserModule,
     HttpClientModule,
+<<<<<<< HEAD
+    NgZorroAntdModule.forRoot(),
+
+    OpDisplayModule,
+    MonitorModule,
+=======
+>>>>>>> cfa6ef2f488edd64c47bd5a8edea052beb21e8f4
     TemplateModule,
     AppRoutingModule,
     BrowserAnimationsModule,

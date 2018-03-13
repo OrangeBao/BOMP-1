@@ -1,0 +1,20 @@
+@import "../../../../theme.scss";
+
+.tips {
+  padding-top: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #3e3c3e;
+}
+
+.line {
+  padding: 20px 0px;
+  &.temp-select {
+    color: $search-bar-text-color;
+  }
+}
+
+
+.btn-w {
+  border-top: 1px solid $line-color-thin;
+  padding-top: 30px;
+}
