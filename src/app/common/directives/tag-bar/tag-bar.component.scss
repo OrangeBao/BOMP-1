@@ -31,7 +31,9 @@
         display: inline-block;
         width: calc(100% - 100px);
         .t {
+            user-select: none;
             cursor: pointer;
+            white-space: nowrap;
             padding: 5px 10px;
             font-family: 'PingFangSC-Regular', 'PingFang SC';
             font-weight: 400;
