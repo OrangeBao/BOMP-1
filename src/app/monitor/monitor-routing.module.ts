@@ -11,6 +11,7 @@ import { ObjectComponent } from './target/object/object.component';
 
 import { IndexesComponent } from './indexes/indexes.component';
 import { TemplateComponent } from './template/template.component';
+import { ObjectAddComponent} from './indexes/components/object-add/object-add.component';
 
 const dashboardRoutes: Routes = [
   {
@@ -56,6 +57,10 @@ const dashboardRoutes: Routes = [
         component: TemplateComponent
       }
     ]
+  }, {
+    path: 'monitorobj/add',
+    component: ObjectAddComponent,
+    canActivate: [AuthGuardService],
   }
 ];
 

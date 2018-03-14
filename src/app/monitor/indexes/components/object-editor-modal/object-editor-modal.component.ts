@@ -5,8 +5,10 @@ import {
   Validators,
   FormControl
 } from "@angular/forms";
-
 import { NzInputDirectiveComponent } from "ng-zorro-antd";
+import { NzModalSubject } from 'ng-zorro-antd';
+
+import { MonitorService } from '../../../../common/services/monitor/monitor.service';
 
 @Component({
   selector: "bomp-object-editor-modal",
@@ -18,7 +20,7 @@ export class ObjectEditorModalComponent implements OnInit {
   @Input('monitorObject')
   set monitorObject(value: any) {
     this._monitorObject = value;
-    this.tempTags = _.clone(this._monitorObject.tags);
+    this.tempTags = this._monitorObject.tags.slice();
   }
   get monitorObject(): any {
     return this._monitorObject;
@@ -27,25 +29,17 @@ export class ObjectEditorModalComponent implements OnInit {
   @ViewChild("input") input: NzInputDirectiveComponent;
 
   validateForm: FormGroup;
-
-
   tempTags: Array<any> = [];
   isAddingTag: boolean = false;
   newTagValue: string;
 
-  dataSourceList: Array<any> = [
-    { value: "jack", label: "Jack" },
-    { value: "lucy", label: "Lucy" },
-    { value: "disabled", label: "Disabled", disabled: true }
-  ];
-
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private subject: NzModalSubject, private _monitorService: MonitorService) {}
 
   ngOnInit() {
     this.validateForm = this.fb.group({
       name: [this.monitorObject["name"], [Validators.required]],
-      description: [this.monitorObject["description"], [Validators.required]],
-      datasource: [null, [Validators.required]]
+      description: [this.monitorObject["desc"], [Validators.required]],
+      // datasource: [null, [Validators.required]]
     });
   }
 
@@ -80,5 +74,12 @@ export class ObjectEditorModalComponent implements OnInit {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
     }
+    
+    this._monitorService.editMonitorObject(this.monitorObject).subscribe((result)=>{
+      console.log(result);
+
+      this.subject.destroy();
+    });
   }
+
 }

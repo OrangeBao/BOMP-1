@@ -24,8 +24,11 @@ import { MonitorIndexesComponent } from "./indexes/components/monitor-indexes/mo
 import { MonitorObjectsComponent } from "./indexes/components/monitor-objects/monitor-objects.component";
 import { IndexEditorModalComponent } from "./indexes/components/index-editor-modal/index-editor-modal.component";
 import { MonitorObjectCardComponent } from "./indexes/components/monitor-object-card/monitor-object-card.component";
+import { ObjectAddComponent} from './indexes/components/object-add/object-add.component';
 import { ObjectEditorModalComponent } from './indexes/components/object-editor-modal/object-editor-modal.component';
 import { ObjectDeleteModalComponent } from './indexes/components/object-delete-modal/object-delete-modal.component';
+
+import { MonitorService } from '../common/services/monitor/monitor.service';
 
 @NgModule({
   imports: [
@@ -54,9 +57,13 @@ import { ObjectDeleteModalComponent } from './indexes/components/object-delete-m
     MonitorObjectsComponent,
     IndexEditorModalComponent,
     MonitorObjectCardComponent,
+    ObjectAddComponent,
     ObjectEditorModalComponent,
     ObjectDeleteModalComponent
   ],
-  entryComponents: [IndexEditorModalComponent, ObjectEditorModalComponent, ObjectDeleteModalComponent]
+  entryComponents: [IndexEditorModalComponent, ObjectEditorModalComponent, ObjectDeleteModalComponent],
+  providers: [
+    MonitorService
+  ]
 })
 export class MonitorModule {}

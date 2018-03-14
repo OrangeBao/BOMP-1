@@ -17,7 +17,7 @@ export class ObjectDeleteModalComponent implements OnInit {
   }
 
   confirm(e) {
-    const deletedArray: Array<string> = _.map(this.monitorObjects, _.partialRight(_.pick, ['name']));
+    const deletedArray: Array<any> = this.monitorObjects.map(item => item.id);
     this.subject.next({deletedArray: deletedArray});
   }
 

@@ -1,17 +1,17 @@
-<div class="card" [ngClass]="{selected: isSelected}" (click)="select()">
+<div class="card" [ngClass]="{'selected': isSelectable && isSelected, 'point-cursor': isSelectable}" (click)="select()" (mouseover)="showMoreMenu(true)" (mouseleave)="showMoreMenu(false)">
   <div class="title">
     <span>{{monitorObject.name}}</span>
-    <div class="more">
+    <div class="more" *ngIf="!isSelectable && isMouseOvered">
       <i class="fa fa-edit" title="编辑" (click)="edit()"></i>
       <i class="fa fa-times-circle" title="删除" (click)="delete()"></i>
     </div>
   </div>
-  <div class="description" title="{{monitorObject.description}}">
-    {{monitorObject.description}}
+  <div class="description" title="{{monitorObject.desc}}">
+    {{monitorObject.desc}}
   </div>
   <div class="index">
     <span>监控指标项数量：{{monitorObject.indexNum}}</span>
-    <span>读数据源：{{monitorObject.dataSource}}</span>
+    <span>读数据源：{{monitorObject.datasource.name}}</span>
   </div>
   <div class="tags">
     <span>#</span>
