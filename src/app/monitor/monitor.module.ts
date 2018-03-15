@@ -62,8 +62,8 @@ import { MonitorService } from '../common/services/monitor/monitor.service';
     ObjectDeleteModalComponent
   ],
   entryComponents: [IndexEditorModalComponent, ObjectEditorModalComponent, ObjectDeleteModalComponent],
-  providers: [
-    MonitorService
-  ]
+  // providers: [
+  //   MonitorService
+  // ]
 })
 export class MonitorModule {}

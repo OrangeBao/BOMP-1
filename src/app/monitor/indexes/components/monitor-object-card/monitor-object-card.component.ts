@@ -88,14 +88,14 @@ export class MonitorObjectCardComponent implements OnInit {
     subscription.subscribe(result => {
       if (result["deletedArray"]) {
         const deletedArray = result.deletedArray;
-
+        debugger;
         this._monitorService
           .deleteMonitorObjects(deletedArray)
           .subscribe(result => {
             console.log(111);
           });
 
-        subscription.destroy();  
+        // subscription.destroy();  
       }
     });
   }

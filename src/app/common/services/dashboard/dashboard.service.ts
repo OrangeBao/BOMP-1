@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../user/user.service';
 import { Dashboard } from '../../models/dashboard';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class DashboardService {
@@ -10,10 +11,8 @@ export class DashboardService {
 
   constructor(private http: HttpClient, private userService: UserService) { }
 
-  getDashboardList(): Promise<any> {
-    return this.http.get(`${this.dashboardUrl}?renterType=USER&renterId=${this.userService.getUserInfo().userId}`)
-        .toPromise()
-        .catch(this.handleError);
+  getDashboardList(): Observable<any> {
+    return this.http.get(`${this.dashboardUrl}?renterType=USER&renterId=${this.userService.getUserInfo().userId}`);
   }
 
   private handleError(error: any): Promise<any> {

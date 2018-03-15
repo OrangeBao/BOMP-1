@@ -64,10 +64,10 @@ export class DashboardListComponent implements OnInit {
 
   ngOnInit() {
     this.spinnerService.show();
-    this.dashboardService.getDashboardList().then(response => {
+    this.dashboardService.getDashboardList().subscribe(response => {
       this.spinnerService.hide();
       this.dashboards = response;
-    }).catch(err => {
+    }, err => {
       this.spinnerService.hide();
       this.notificationsService.addError('系统异常，请联系管理员！');
       console.error(err);
