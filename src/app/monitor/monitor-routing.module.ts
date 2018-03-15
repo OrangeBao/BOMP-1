@@ -10,8 +10,11 @@ import { ItemComponent } from './target/item/item.component';
 import { ObjectComponent } from './target/object/object.component';
 
 import { IndexesComponent } from './indexes/indexes.component';
-import { TemplateComponent } from './template/template.component';
+import { MonitorObjectsComponent } from "./indexes/components/monitor-objects/monitor-objects.component";
+import { MonitorIndexesComponent } from "./indexes/components/monitor-indexes/monitor-indexes.component";
 import { ObjectAddComponent} from './indexes/components/object-add/object-add.component';
+
+import { TemplateComponent } from './template/template.component';
 
 const dashboardRoutes: Routes = [
   {
@@ -19,6 +22,11 @@ const dashboardRoutes: Routes = [
     component: MonitorComponent,
     canActivate: [AuthGuardService],
     children: [
+      {
+        path: '',
+        redirectTo: 'indexes',
+        pathMatch: 'full'
+      },
       {
         path: 'dashboard',
         children: [
@@ -52,16 +60,31 @@ const dashboardRoutes: Routes = [
       //   ]
       }, {
         path: 'indexes',
-        component: IndexesComponent
+        component: IndexesComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: 'object',
+            pathMatch: 'full'
+          },
+          {
+            path: 'object',
+            component: MonitorObjectsComponent
+          },
+          {
+            path: 'index',
+            component: MonitorIndexesComponent
+          },
+          {
+            path: 'add',
+            component: ObjectAddComponent
+          }
+        ]
       }, {
         path: 'template',
         component: TemplateComponent
       }
     ]
-  }, {
-    path: 'monitorobj/add',
-    component: ObjectAddComponent,
-    canActivate: [AuthGuardService],
   }
 ];
 

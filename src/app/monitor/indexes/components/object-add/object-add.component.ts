@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -6,17 +6,18 @@ import {
   FormControl
 } from "@angular/forms";
 import { NzInputDirectiveComponent } from "ng-zorro-antd";
-import { NzModalSubject } from 'ng-zorro-antd';
+import { NzModalSubject } from "ng-zorro-antd";
 
-import { DataSource } from '../../../../common/models/data-source';
-import { DataSourceService } from '../../../../common/services/data-source/data-source.service';
-import { MonitorService } from '../../../../common/services/monitor/monitor.service';
-import { MonitorObject } from '../../../../common/models/monitor/monitor-object';
+import { TitleService } from "../../../../common/share.module";
+import { DataSource } from "../../../../common/models/data-source";
+import { DataSourceService } from "../../../../common/services/data-source/data-source.service";
+import { MonitorService } from "../../../../common/services/monitor/monitor.service";
+import { MonitorObject } from "../../../../common/models/monitor/monitor-object";
 
 @Component({
-  selector: 'app-object-add',
-  templateUrl: './object-add.component.html',
-  styleUrls: ['./object-add.component.scss']
+  selector: "app-object-add",
+  templateUrl: "./object-add.component.html",
+  styleUrls: ["./object-add.component.scss"]
 })
 export class ObjectAddComponent implements OnInit {
   @ViewChild("input") input: NzInputDirectiveComponent;
@@ -27,10 +28,21 @@ export class ObjectAddComponent implements OnInit {
   isAddingTag: boolean = false;
   newTagValue: string;
 
-  constructor(private fb: FormBuilder, private subject: NzModalSubject, private _dataSourceService: DataSourceService, private _monitorService: MonitorService) { }
+  constructor(
+    private fb: FormBuilder,
+    private subject: NzModalSubject,
+    private title: TitleService,
+    private _dataSourceService: DataSourceService,
+    private _monitorService: MonitorService
+  ) {
+    this.title.sendMsg({
+      showTitle: true,
+      text: '新建指标',
+    });
+  }
 
   ngOnInit() {
-    this._dataSourceService.getAll().subscribe((data) => {
+    this._dataSourceService.getAll().subscribe(data => {
       this.dataSourceList = data;
     });
 
@@ -38,6 +50,13 @@ export class ObjectAddComponent implements OnInit {
       name: [null, [Validators.required]],
       description: [null, [Validators.required]],
       datasource: [null, [Validators.required]]
+    });
+  }
+
+  ngOnDestroy() {
+    this.title.sendMsg({
+      showTitle: false,
+      text: '',
     });
   }
 
@@ -74,13 +93,13 @@ export class ObjectAddComponent implements OnInit {
     }
 
     let monitorObject: MonitorObject = new MonitorObject();
-    monitorObject.name = this.getFormControl('name').value;
-    monitorObject.desc = this.getFormControl('description').value;
+    monitorObject.name = this.getFormControl("name").value;
+    monitorObject.desc = this.getFormControl("description").value;
     monitorObject.tags = this.tempTags;
-    monitorObject.datasource = this.getFormControl('datasource').value;
+    monitorObject.datasource = this.getFormControl("datasource").value;
 
-    this._monitorService.editMonitorObject(monitorObject).subscribe((result)=>{
-      if(result.status === "success") {
+    this._monitorService.editMonitorObject(monitorObject).subscribe(result => {
+      if (result.status === "success") {
         // TODO: 弹出成功模态窗
       }
     });
