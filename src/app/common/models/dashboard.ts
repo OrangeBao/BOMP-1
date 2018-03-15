@@ -7,4 +7,5 @@ export class Dashboard {
     isStarred: boolean;
     orgId: number;
     desc: string;
+    monitorObj: string;
 }

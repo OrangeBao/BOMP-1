@@ -24,7 +24,12 @@ export class DashboardService {
   create(params): Promise<any> {
     return this.http.post('api/manager/dashboards', params).toPromise().catch(this.handleError);
   }
+  
   deleteDashboard(slug): Promise<any> {
     return this.http.delete(`api/manager/dashboards/${slug}`).toPromise().catch(this.handleError);
+  }
+
+  deleteDashboardList(slugs: string[]) {
+    return this.http.delete(`api/manager/dashboards`)
   }
 }

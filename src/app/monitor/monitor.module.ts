@@ -38,7 +38,7 @@ import { MonitorService } from '../common/services/monitor/monitor.service';
     DashboardRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ShareModule
+    ShareModule,
   ],
   declarations: [
     MonitorComponent,

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { DashboardService } from '../../../common/services/dashboard/dashboard.service';
 import { UserService } from '../../../common/services/user/user.service';
-import { NotificationsService, LoadingService, ModalService, AlertService } from '../../../common/share.module';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NotificationsService, LoadingService } from '../../../common/share.module';
+import { ModalService } from 'zu-modal';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Dashboard } from '../../../common/models/dashboard';
-import { Alert } from '../../../common/models/alert';
 import { validateCounterRange } from '../../../common/directives/tag-input/tag-input.component';
 
 @Component({
@@ -13,28 +13,14 @@ import { validateCounterRange } from '../../../common/directives/tag-input/tag-i
   styleUrls: ['./dashboard-list.component.scss']
 })
 export class DashboardListComponent implements OnInit {
-  editModalId: string = 'editModalId';
+  @ViewChild('modifyFormUrl') modifyFormUrl: TemplateRef<any>;
   choiceList: Array<string> = [];
   isDeleteModel: boolean = false;
 
   isTouched: boolean = false;
 
   baseInfo: any = {};
-  get title() { return this.baseInfoForm.get('title'); }
-  get desc() { return this.baseInfoForm.get('desc'); }
-  get tags() { return this.baseInfoForm.get('tags')}
-  baseInfoForm: FormGroup = new FormGroup({
-    'title': new FormControl(this.baseInfo.title, [
-      Validators.required,
-      Validators.minLength(4),
-    ]),
-    'tags': new FormControl(this.baseInfo.tags, [
-      validateCounterRange
-    ]),
-    'desc': new FormControl(this.baseInfo.desc, [
-      Validators.required
-    ]),
-  });
+  modifyForm: FormGroup;
 
   constructor(
       private dashboardService: DashboardService,
@@ -42,8 +28,14 @@ export class DashboardListComponent implements OnInit {
       private spinnerService: LoadingService,
       private notificationsService: NotificationsService,
       private modalService: ModalService,
-      private alertService: AlertService,
-  ) { }
+      private fb: FormBuilder
+  ) {
+    this.modifyForm = this.fb.group({
+      name              : [ '', [ Validators.required ] ],
+      tags              : [ '', [ Validators.required ] ],
+      remark            : [ '' ],
+    });
+  }
 
   dashboards: Array<Dashboard>;
   // displayDashboards: Array<Dashboard>;
@@ -86,11 +78,11 @@ export class DashboardListComponent implements OnInit {
     this.userService.setHomePage(uri).then(() => this.spinnerService.hide());
   }
   deleteDashbaordConfirm(id) {
-    this.alertService.warn({
+    this.modalService.warn({
       title: '删除',
       content: `确定删除仪表${id}吗？`,
-      ok: () => this.deleteDashbaord(id),
-    } as Alert);
+      onOk: () => this.deleteDashbaord(id),
+    });
   }
   deleteDashbaord(id) {
     const param = id.split('b/')[1];
@@ -104,18 +96,43 @@ export class DashboardListComponent implements OnInit {
       console.error(err);
     });
   }
+
+  checkModifyForm() {
+    for (const i in this.modifyForm.controls) {
+      this.modifyForm.controls[ i ].markAsDirty();
+    }
+  }
+
   editDashboard(id) {
     this.baseInfo = {...this.dashboards.find(i => i.uri === id)};
     // this.baseInfo = this.dashboards.find(i => i.uri === id);
-    this.modalService.show(this.editModalId);
+    // this.modalService.show(this.editModalId);
+    this.modifyForm.controls['name'].setValue(this.baseInfo.title);
+    this.modifyForm.controls['tags'].setValue(this.baseInfo.tags);
+    this.modifyForm.controls['remark'].setValue(this.baseInfo.desc);
+    this.modalService.open({
+      title: '修改仪表盘基本信息',
+      content: this.modifyFormUrl,
+      cancelText: 'cancel',
+      onOk: () => {
+        this.checkModifyForm();
+        return new Promise((resolve, reject) => {
+          if (this.modifyForm.valid) {
+            resolve();
+          } else {
+            reject();
+          }
+        });
+      }
+    })
   }
   
   modifyInfo() {
-    if (!this.baseInfoForm.valid) {
-      this.isTouched = true;
-    } else {
-      this.modalService.hide(this.editModalId);
-    }
+    // if (!this.baseInfoForm.valid) {
+    //   this.isTouched = true;
+    // } else {
+    //   // this.modalService.hide(this.editModalId);
+    // }
   }
 
   isChoice(uri) {
@@ -138,15 +155,15 @@ export class DashboardListComponent implements OnInit {
   confirmDelete() {
     const choiceList = this.choiceList;
     if (choiceList.length === 0) return;
-    this.alertService.warn({
+    debugger;
+    this.modalService.warn({
       title: '删除',
       content: `已选择${choiceList.length}个仪表盘，确定删除？`,
       remark: choiceList.join(','),
-      ok: () => {
-        // TODO: 确认删除的回调
+      onOk: () => {
         console.log('XXXXX');
       },
-    } as Alert);
+    });
   }
   allSelectChange() {
     if (this.isAll) {
@@ -157,5 +174,9 @@ export class DashboardListComponent implements OnInit {
   }
   tagChange($event) {
     this.includeTags = $event;
+  }
+
+  getFormControl(name) {
+    return this.modifyForm.controls[ name ];
   }
 }
