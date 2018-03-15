@@ -35,7 +35,7 @@ import { ObjectDeleteModalComponent } from './indexes/components/object-delete-m
     DashboardRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ShareModule
+    ShareModule,
   ],
   declarations: [
     MonitorComponent,

@@ -1,4 +1,10 @@
-<div class="body-w">
+<ng-container *ngIf="titleData?.showTitle">
+    <div class="title-bar">
+        <app-goback></app-goback>
+        <span>{{titleData.text}}</span>
+    </div>
+</ng-container>
+<div class="body-w" *ngIf="!titleData?.showTitle">
     <div class="b">
       <div class="tabs">
         <div routerLink="dashboard" routerLinkActive="active" class="tab">仪表盘</div>
@@ -6,8 +12,9 @@
         <div routerLink="template" routerLinkActive="active" class="tab">模板</div>
         <div class="space"></div>
       </div>
-      <div class="tab-w">
-        <router-outlet></router-outlet>
-      </div>
     </div>
+  </div>
+
+<div class="tab-w">
+  <router-outlet></router-outlet>
 </div>

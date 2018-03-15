@@ -32,6 +32,7 @@ const dashboardRoutes: Routes = [
           },
           {
             path: 'create',
+            data: { showTitle: 'true' },
             component: DashboardCreateComponent,
           }
         ]

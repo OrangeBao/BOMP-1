@@ -15,20 +15,17 @@ import { SelectComponent } from './directives/select/select.component';
 import { LoadingComponent } from './directives/loading/loading.component';
 import { LoadingService } from './services/loading/loading.service';
 
-import { ModalComponent } from './directives/modal/modal.component';
-import { ModalService } from './services/modal/modal.service';
 import { TagBarComponent } from './directives/tag-bar/tag-bar.component';
-import { AlertComponent } from './directives/alert/alert.component';
-import { AlertService } from './services/alert/alert.service';
 import { TagInputComponent } from './directives/tag-input/tag-input.component';
+
+import { TitleService } from './services/title/title.service';
 
 export * from './components/container/container.component';
 export * from './components/notification/notification.component';
 export * from './services/notifications.service';
 
 export * from './services/loading/loading.service';
-export * from './services/modal/modal.service';
-export * from './services/alert/alert.service';
+export * from './services/title/title.service';
 
 
 @NgModule({
@@ -45,9 +42,7 @@ export * from './services/alert/alert.service';
     StepBarComponent,
     SearchBarComponent,
     LoadingComponent,
-    ModalComponent,
     TagBarComponent,
-    AlertComponent,
     TagInputComponent,
   ],
   exports: [
@@ -60,9 +55,7 @@ export * from './services/alert/alert.service';
     StepBarComponent,
     SearchBarComponent,
     LoadingComponent,
-    ModalComponent,
     TagBarComponent,
-    AlertComponent,
     TagInputComponent
   ]
 })
@@ -73,8 +66,7 @@ export class ShareModule {
       providers: [
         NotificationsService,
         LoadingService,
-        ModalService,
-        AlertService
+        TitleService
       ]
     };
   }

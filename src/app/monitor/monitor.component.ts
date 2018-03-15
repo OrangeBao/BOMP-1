@@ -1,18 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute, RoutesRecognized } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import { TitleService } from '../common/share.module';
 
 @Component({
   selector: 'app-monitor',
   templateUrl: './monitor.component.html',
   styleUrls: ['./monitor.component.scss']
 })
-export class MonitorComponent implements OnInit {
-  constructor(private router: Router) { }
+export class MonitorComponent implements OnInit, OnDestroy {
+  eventHandle: Subscription;
+  titleData: {
+    showTitle: boolean;
+    text: string;
+  } = {
+    showTitle: false,
+    text: ''
+  };
+  constructor(private router: Router, private route:ActivatedRoute, private title: TitleService) {}
 
-  get isShowTab() {
-    const currentUrl = this.router.url.split('#')[0];
-    return currentUrl !== '/monitor/scan' && currentUrl !== '/monitor/edit';
-  }
   ngOnInit() {
+    this.eventHandle = this.title.getMessage().subscribe(msg => {
+      this.titleData.showTitle = msg.showTitle;
+      this.titleData.text = msg.text;
+    })
+  }
+
+  ngOnDestroy() {
+    this.eventHandle && this.eventHandle.unsubscribe();
   }
 }

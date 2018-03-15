@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TitleService } from '../../../common/share.module';
 
 @Component({
   selector: 'app-dashboard-create',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardCreateComponent implements OnInit {
 
-  constructor() { }
+  constructor(private title: TitleService) {
+    this.title.sendMsg({
+      showTitle: true,
+      text: '新建仪表盘',
+    });
+  }
 
   ngOnInit() {
+    
+  }
+
+  ngOnDestroy() {
+    this.title.sendMsg({
+      showTitle: false,
+      text: '',
+    });
   }
 
 }

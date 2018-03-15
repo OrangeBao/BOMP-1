@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 const menuMap = {
   'home': '首页',
   'monitor': '监控',
-  'warning': '高警',
+  'warning': '告警',
   'console': '控制台',
 };
 
