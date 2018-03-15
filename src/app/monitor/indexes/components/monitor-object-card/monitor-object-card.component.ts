@@ -1,8 +1,18 @@
-import { Component, Input, Output, EventEmitter, ViewChild, TemplateRef, OnInit } from "@angular/core";
-import { NzModalService } from 'ng-zorro-antd';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+  TemplateRef,
+  OnInit,
+  SimpleChanges
+} from "@angular/core";
+import { NzModalService } from "ng-zorro-antd";
 
-import { ObjectEditorModalComponent } from '../object-editor-modal/object-editor-modal.component';
-import { ObjectDeleteModalComponent } from '../object-delete-modal/object-delete-modal.component';
+import { ObjectEditorModalComponent } from "../object-editor-modal/object-editor-modal.component";
+import { ObjectDeleteModalComponent } from "../object-delete-modal/object-delete-modal.component";
+import { MonitorService } from "../../../../common/services/monitor/monitor.service";
 
 @Component({
   selector: "bomp-monitor-object-card",
@@ -15,35 +25,46 @@ export class MonitorObjectCardComponent implements OnInit {
 
   @Output() public selectChanged: EventEmitter<any> = new EventEmitter<any>();
 
-  @ViewChild('tplEdit')
-  tplEdit: TemplateRef<any>;
-  @ViewChild('tplDelete')
-  tplDelete: TemplateRef<any>;
+  @ViewChild("tplEdit") tplEdit: TemplateRef<any>;
+  @ViewChild("tplDelete") tplDelete: TemplateRef<any>;
 
   isSelected: boolean = false;
+  isMouseOvered: boolean = false;
 
-  // TODO: isSelected变化后，应该清空选中的card的样式
+  // TODO: isSelectable 变化后，应该清空选中的card的样式
 
-  constructor(private modalService: NzModalService) {}
+  constructor(
+    private _modalService: NzModalService,
+    private _monitorService: MonitorService
+  ) {}
 
   ngOnInit() {}
+
+  // ngOnChanges(changes: SimpleChanges) {
+    // if(!changes.isSelectable){
+    // }
+  // }
 
   select() {
     if (this.isSelectable) {
       this.isSelected = !this.isSelected;
 
       this.selectChanged.emit({
-        id: 1,
+        monitorObject: this.monitorObject,
         selected: this.isSelected
       });
     }
   }
 
-  edit(){
-    this.modalService.open({
-      title          : this.tplEdit,
-      content        : ObjectEditorModalComponent,
-      footer         : false,
+  showMoreMenu(flag: boolean) {
+    this.isMouseOvered = flag;
+  }
+
+  edit() {
+    this._modalService.open({
+      title: this.tplEdit,
+      content: ObjectEditorModalComponent,
+      footer: false,
       closable: true,
       maskClosable: false,
       componentParams: {
@@ -52,23 +73,30 @@ export class MonitorObjectCardComponent implements OnInit {
     });
   }
 
-  delete(){
-    const subscription = this.modalService.open({
-      title          : this.tplDelete,
-      content        : ObjectDeleteModalComponent,
-      footer         : false,
+  delete() {
+    const subscription = this._modalService.open({
+      title: this.tplDelete,
+      content: ObjectDeleteModalComponent,
+      footer: false,
       closable: true,
       maskClosable: false,
       componentParams: {
-        monitorObjects: [this.monitorObject, this.monitorObject]
-      },
+        monitorObjects: [this.monitorObject]
+      }
     });
 
     subscription.subscribe(result => {
-      if(result["deletedArray"]){
+      if (result["deletedArray"]) {
         const deletedArray = result.deletedArray;
-        console.log(deletedArray);
+
+        this._monitorService
+          .deleteMonitorObjects(deletedArray)
+          .subscribe(result => {
+            console.log(111);
+          });
+
+        subscription.destroy();  
       }
-    })
+    });
   }
 }

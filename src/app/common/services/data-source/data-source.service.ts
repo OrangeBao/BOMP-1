@@ -3,15 +3,21 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from '../user/user.service';
 import {Observable} from 'rxjs/Observable';
 
+const DATA_SOURCE_URL = 'api/monitor/datasources';
+
 @Injectable()
 export class DataSourceService {
 
   constructor(private http: HttpClient, private userService: UserService) { }
 
-  getAll(): Promise<any> {
-    return this.http.get(`api/manager/relations/datasources?renterType=USER&renterId=${this.userService.getUserInfo().userId}`)
-        .toPromise()
-        .catch(this.handleError);
+  // getAll(): Promise<any> {
+  //   return this.http.get(`api/manager/relations/datasources?renterType=USER&renterId=${this.userService.getUserInfo().userId}`)
+  //       .toPromise()
+  //       .catch(this.handleError);
+  // }
+  //new getAll
+  getAll(): Observable<any> {
+    return this.http.get(DATA_SOURCE_URL);
   }
 
   private handleError(error: any): Promise<any> {
@@ -46,4 +52,5 @@ export class DataSourceService {
   deleteDataSource(id): Promise<any> {
     return this.http.delete(`api/manager/datasources/${id}`).toPromise().catch(this.handleError);
   }
+
 }

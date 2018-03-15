@@ -21,32 +21,22 @@
       </label>
     </div>
     <div class="search">
-      <nz-input [nzType]="'search'" [nzPlaceHolder]="'按名称、标签、监控对象等搜索'" [(ngModel)]="searchText" style="width: 300px;"></nz-input>
+      <nz-input [nzPlaceHolder]="'按名称、标签、监控对象等搜索'" [(ngModel)]="searchText" style="width: 300px;"></nz-input>
+      <button nz-button [nzType]="'primary'" (click)="onSearch()">
+        <span>搜索</span>
+      </button>
     </div>
   </div>
   <div class="tags">
     <strong>标签: </strong>
-    <nz-checkable-tag *ngFor="let tag of hotTags" [nzChecked]="selectedTags.indexOf(tag) > -1" (nzChange)="handleChange($event, tag)">
+    <nz-tag (click)="changeCheckTag('all')" [nzColor]="selectedTags.includes('all') ? '#8492A6' : null">不限</nz-tag>
+    <nz-tag *ngFor="let tag of monitorTags" (click)="changeCheckTag(tag)" [nzColor]="selectedTags.includes(tag) ? '#8492A6' : null">
       {{tag}}
-    </nz-checkable-tag>
+    </nz-tag>
   </div>
   <div class="cards">
-    <!-- <ng-container *ngFor="let item of items"> -->
-
-    <!-- </ng-container> -->
-
     <div nz-row [nzGutter]="16">
-      <div nz-col class="gutter-row" [nzSpan]="8">
-        <div class="gutter-box">
-          <bomp-monitor-object-card [isSelectable]="isBatchDeleteable" [monitorObject]="monitorObject" (selectChanged)="cardSelectChanged($event)"></bomp-monitor-object-card>
-        </div>
-      </div>
-      <div nz-col class="gutter-row" [nzSpan]="8">
-        <div class="gutter-box">
-          <bomp-monitor-object-card [isSelectable]="isBatchDeleteable" [monitorObject]="monitorObject" (selectChanged)="cardSelectChanged($event)"></bomp-monitor-object-card>
-        </div>
-      </div>
-      <div nz-col class="gutter-row" [nzSpan]="8">
+      <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let monitorObject of monitorFiltedObjects">
         <div class="gutter-box">
           <bomp-monitor-object-card [isSelectable]="isBatchDeleteable" [monitorObject]="monitorObject" (selectChanged)="cardSelectChanged($event)"></bomp-monitor-object-card>
         </div>
@@ -54,3 +44,9 @@
     </div>
   </div>
 </div>
+
+<ng-template #tplDelete>
+  <div>
+    <span>批量删除</span>
+  </div>
+</ng-template>
