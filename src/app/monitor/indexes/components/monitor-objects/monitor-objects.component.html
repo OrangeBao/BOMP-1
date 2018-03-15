@@ -16,15 +16,19 @@
       <button nz-button [nzType]="'default'" (click)="cancelBatchDelete()">
         <span>取消</span>
       </button>
-      <label nz-checkbox [(ngModel)]="allChecked" (ngModelChange)="checkAllObjects($event)">
+      <label nz-checkbox [(ngModel)]="allChecked">
         <span>全选</span>
       </label>
     </div>
     <div class="search">
-      <nz-input [nzPlaceHolder]="'按名称、标签、监控对象等搜索'" [(ngModel)]="searchText" style="width: 300px;"></nz-input>
-      <button nz-button [nzType]="'primary'" (click)="onSearch()">
-        <span>搜索</span>
-      </button>
+      <!-- <nz-input [nzPlaceHolder]="'按名称、标签、监控对象等搜索'" [(ngModel)]="searchText" style="width: 300px;"></nz-input>
+      <button nz-button (click)="onSearch()">
+        <i class="iconfont icon-sousuo"></i>
+      </button> -->
+
+      <nz-input [nzPlaceHolder]="'按名称、标签、监控对象等搜索'" [(ngModel)]="searchText" style="width: 300px;">
+        <ng-template #addOnAfter><i class="iconfont icon-sousuo point-cursor" (click)="onSearch()"></i></ng-template>
+      </nz-input>
     </div>
   </div>
   <div class="tags">
@@ -38,15 +42,15 @@
     <div nz-row [nzGutter]="16">
       <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let monitorObject of monitorFiltedObjects">
         <div class="gutter-box">
-          <bomp-monitor-object-card [isSelectable]="isBatchDeleteable" [monitorObject]="monitorObject" (selectChanged)="cardSelectChanged($event)"></bomp-monitor-object-card>
+          <bomp-monitor-object-card [isSelectable]="isBatchDeleteable" [isSelected]="allChecked" [monitorObject]="monitorObject" (selectChanged)="cardSelectChanged($event)" (deleteChanged)="cardDeleteChanged($event)"></bomp-monitor-object-card>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<ng-template #tplDelete>
+<!-- <ng-template #tplDelete>
   <div>
     <span>批量删除</span>
   </div>
-</ng-template>
+</ng-template> -->

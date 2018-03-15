@@ -1,14 +1,17 @@
-<nz-tabset>
-  <nz-tab>
-    <ng-template #nzTabHeading>
-      监控对象
-    </ng-template>
-    <bomp-monitor-objects></bomp-monitor-objects>
-  </nz-tab>
-  <nz-tab>
-    <ng-template #nzTabHeading>
-      监控指标项
-    </ng-template>
-    <bomp-monitor-indexes></bomp-monitor-indexes>
-  </nz-tab>
-</nz-tabset>
+<ng-container *ngIf="!titleData?.showTitle">
+  <nz-tabset>
+    <nz-tab (nzSelect)="tabSelectChange('object')">
+      <ng-template #nzTabHeading>
+        监控对象
+      </ng-template>
+      <!-- <bomp-monitor-objects></bomp-monitor-objects> -->
+    </nz-tab>
+    <nz-tab (nzSelect)="tabSelectChange('index')">
+      <ng-template #nzTabHeading>
+        监控指标项
+      </ng-template>
+      <!-- <bomp-monitor-indexes></bomp-monitor-indexes> -->
+    </nz-tab>
+  </nz-tabset>
+</ng-container>
+<router-outlet></router-outlet>

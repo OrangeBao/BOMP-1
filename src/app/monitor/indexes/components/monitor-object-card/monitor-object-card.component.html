@@ -2,8 +2,8 @@
   <div class="title">
     <span>{{monitorObject.name}}</span>
     <div class="more" *ngIf="!isSelectable && isMouseOvered">
-      <i class="fa fa-edit" title="编辑" (click)="edit()"></i>
-      <i class="fa fa-times-circle" title="删除" (click)="delete()"></i>
+      <i class="iconfont icon-bianji" title="编辑" (click)="edit()"></i>
+      <i class="iconfont icon-shanchu" title="删除" (click)="confirmDelete()"></i>
     </div>
   </div>
   <div class="description" title="{{monitorObject.desc}}">
