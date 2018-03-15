@@ -18,11 +18,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 18px;
+  font-size: 14px;
+  font-family: 'PingFangSC-Medium', 'PingFang SC Medium', 'PingFang SC';
 }
 
 .more > i {
   cursor: pointer;
+  font-size:12px;
 }
 
 .index {

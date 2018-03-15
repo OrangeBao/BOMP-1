@@ -39,8 +39,8 @@ export class MonitorObjectsComponent implements OnInit {
         this.monitorObjects = data || [];
 
         // TODO: only for test
-        // this.monitorObjects.push(...this.monitorObjects);
-        // this.monitorObjects.push(...this.monitorObjects);
+        this.monitorObjects.push(...this.monitorObjects);
+        this.monitorObjects.push(...this.monitorObjects);
 
         this.monitorFiltedObjects = this.monitorObjects;
       }
