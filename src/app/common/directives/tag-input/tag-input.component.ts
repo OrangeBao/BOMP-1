@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, ViewChild, TemplateRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR,
   ValidatorFn, AbstractControl, ValidationErrors,
   NG_VALIDATORS } from '@angular/forms';
@@ -30,6 +30,9 @@ export class TagInputComponent implements ControlValueAccessor {
 
   @Input() _tags: string[] = [];
 
+  @ViewChild('tagInput') inputTemp: any;
+
+  flag: boolean = false;
   inValue: string = '';
 
   change(event) {
@@ -65,7 +68,15 @@ export class TagInputComponent implements ControlValueAccessor {
   addTag() {
     if (this.inValue && this.inValue.length > 0) {
       this.tags = [...this.tags, this.inValue]
+      this.inputTemp.nativeElement.value = '';
     }
+    this.flag = false;
+  }
+
+  addNew() {
+    this.flag = true;
+    setTimeout(() => this.inputTemp.nativeElement.focus(), 100);
+    ;
   }
 
 }

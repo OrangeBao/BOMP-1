@@ -1,0 +1,136 @@
+@import "../../../../theme.scss";
+:host {
+    display: block;
+    padding: 10px 40px;
+}
+
+.body-w {
+    border-top: 1px solid #e8e8e8;
+    margin: 30px 20px;
+    min-height: 300px;
+    padding: 40px 60px;
+    margin-bottom: 0px;
+    .template-display, .monitor-display {
+        margin-top: 40px;
+    }
+    .monitor-display {
+        .title {
+            display: flex;
+            & > div {
+                flex: 1;
+                display: flex;
+                justify-content: space-between;
+                label {
+                    margin-right: 20px;
+                }
+            }
+        }
+    }
+    .m-tag {
+        display: inline-block;
+        background-color: #8391a6;
+        color: #fff;
+        border-radius: 3px;
+        padding: 0 10px;
+        margin-left: 10px;
+    }
+    nz-radio-group, .checkbox-group {
+        width: 100%;
+        label {
+            display: block;
+            padding: 10px;
+            border-bottom: 1px solid #e8e8e8;
+            cursor: pointer;
+        } 
+    } 
+    .list-w {
+        display: flex;
+        .scroll-w, .display-w {
+            flex: 1;
+        }
+
+        .scroll-w {
+            border-top: 1px solid #e8e8e8;
+            max-height: 242px;
+            min-height: 242px;
+            overflow: auto;
+        }
+
+        .display-w {
+            margin-left: 20px;
+            padding: 18px;
+            background-color: #f8f9f9;
+            min-height: 242px;
+            overflow: auto;
+            .template-title {
+                font-size: 13px;
+                font-family: PingFangSC-Regular, "PingFang SC";
+                font-weight: 400;
+                font-style: normal;
+                color: rgb(60, 62, 74);
+            }
+            .template-desc {
+                font-family: PingFangSC-Light, "PingFang SC Light", "PingFang SC";
+                font-weight: 200;
+                font-style: normal;
+                font-size: 12px;
+                color: rgb(153, 153, 153);
+                padding: 10px 0px;
+            }
+            .img-w {
+                width: 250px;
+                .img {
+                    display: inline-block;
+                    width: 120px;
+                    height: 70px;
+                    &:nth-child(1) {
+                        background: url($list-bite-img-1);
+                        background-size: cover;
+                    }
+                    &:nth-child(2) {
+                        background: url($list-bite-img-2);
+                        background-size: cover;
+                    }
+                    &:nth-child(4) {
+                        background: url($list-bite-img-1);
+                        background-size: cover;
+                    }
+                    &:nth-child(3) {
+                        background: url($list-bite-img-2);
+                        background-size: cover;
+                    }
+                }
+            }
+        }
+    }
+    .form-w {
+        display: flex;
+        justify-content: center;
+        .dark-wrapper {
+            display: flex;
+            min-height: 300px;
+            background-color: rgba(248, 249, 249, 1);
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+.btn-w {
+    text-align: center;
+    border-top: 1px solid #e8e8e8;
+    padding-top: 60px;
+}
+
+
+.jump-info-w {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
+
+.count-w {
+    display: inline-block;
+    width: 210px;
+}

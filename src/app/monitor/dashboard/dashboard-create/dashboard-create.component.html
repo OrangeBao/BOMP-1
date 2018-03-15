@@ -1,3 +1,145 @@
-<p>
-  dashboard-create works!
-</p>
+<app-step-bar [current]="currentStep" [steps]="steps"></app-step-bar>
+<div class="body-w">
+    <ng-template [ngTemplateOutlet]="[stepOne, stepTwo, stepThree, stepFour, stepFive][currentStep]"></ng-template>
+</div>
+<div class="btn-w" *ngIf="currentStep !== 4">
+    <div *ngIf="currentStep !== 4" class="btn primary" [class.disable]="noNext" (click)="next()">{{currentStep === 3 ? '发布' : '下一步'}}</div>
+    <div *ngIf="currentStep > 0"class="btn default" (click)="currentStep = currentStep - 1">上一步</div>
+    <div class="btn default" routerLink="../list">取消</div>
+    <div *ngIf="currentStep === 4" class="btn primary" (click)="finish()">完成</div>
+</div>
+
+
+<ng-template #stepOne>
+    <nz-input [nzPlaceHolder]="'按模板名搜索'" #searchText  style="width: 480px;">
+        <ng-template #addOnAfter>
+            <i class="iconfont icon-sousuo" (click)="filter(searchText.value)"></i>
+        </ng-template>
+    </nz-input>
+    <div class="template-display">
+            <div>引用模板</div>
+            <div class="list-w">
+                <div class="scroll-w">
+                    <nz-radio-group [(ngModel)]="selectTemplateId">
+                        <label nz-radio [nzValue]="temp.id" *ngFor="let temp of dashboardList;let i = index ">
+                            <span>{{temp.title}}</span>
+                        </label>
+                    </nz-radio-group>
+                </div>
+                <div class="display-w">
+                    <div class="template-title">{{displayTemplate?.title}}</div>
+                    <div class="template-desc">{{displayTemplate?.desc}}</div>
+                    <div class="img-w">
+                        <div class="img"></div>
+                        <div class="img"></div>
+                        <div class="img"></div>
+                        <div class="img"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</ng-template>
+
+<ng-template #stepTwo>
+    <nz-input [nzPlaceHolder]="'按名称搜索'" #searchText  style="width:  480px;">
+        <ng-template #addOnAfter>
+            <i class="iconfont icon-sousuo" (click)="filter(searchText.value)"></i>
+        </ng-template>
+    </nz-input>
+    <div class="monitor-display">
+        <div class="title">
+            <div>
+               <span>引用模板</span>
+               <label nz-checkbox [(ngModel)]="isSelectAll" (ngModelChange)="selectAll($event)">
+                    <span>全选</span>
+                </label>
+            </div>
+            <div></div>
+        </div>
+        <div class="list-w">
+            <div class="scroll-w">
+                <div class="checkbox-group">
+                    <label *ngFor="let item of monitorObjsOption" nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="updateSelectMonitorObjs($event, item.value)">
+                        <span>{{item.label}}</span>
+                    </label>
+                </div>
+            </div>
+            <div class="display-w">
+                <ng-container *ngFor="let mobj of displayMonitorObjs">
+                    <div class="template-title">{{mobj.name}}</div>
+                    <div class="template-desc">{{mobj.desc}}</div>
+                    <div *ngFor="let tag of mobj.tags" class="m-tag">
+                        <span>{{tag}}</span>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #stepThree>
+    <div class="form-w">
+        <form nz-form [formGroup]="modifyForm" style="width:600px">
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="4">
+                    <label nz-form-item-required>名称</label>
+                </div>
+                <div nz-col [nzSpan]="15" nz-form-control>
+                    <nz-input formControlName="name" [nzType]="'text'" [nzPlaceHolder]="'请输入'" [nzSize]="'large'">
+                    </nz-input>
+                    <div nz-form-explain *ngIf="getFormControl('name').dirty&&getFormControl('name').hasError('required')">请输入名称!</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="4">
+                    <label nz-form-item-required>标签</label>
+                </div>
+                <div nz-col [nzSpan]="15" nz-form-control>
+                    <app-tag-input formControlName="tags" ></app-tag-input>
+                    <div nz-form-explain *ngIf="getFormControl('tags').dirty&&getFormControl('tags').hasError('required')">请输入tags!</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="4">
+                    <label>备注</label>
+                </div>
+                <div nz-col [nzSpan]="15" nz-form-control>
+                    <nz-input formControlName="remark" [nzRows]="3" [nzType]="'textarea'" [nzPlaceHolder]="'请输入'" [nzSize]="'large'">
+                    </nz-input>
+                    <div nz-form-explain *ngIf="getFormControl('remark').dirty&&getFormControl('remark').hasError('required')">请输入tags!</div>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #stepFour>
+    <div>
+        <div class="template-title">{{displayTemplate?.title}}</div>
+        <div class="template-desc">{{displayTemplate?.desc}}</div>
+        <div *ngFor="let tag of displayTemplate.tags" class="m-tag">
+            <span>{{tag}}</span>
+        </div>
+        <div>
+            <ng-container *ngFor="let mobj of displayMonitorObjs">
+                <div class="template-title">{{mobj.name}}</div>
+                <div class="template-desc">{{mobj.desc}}</div>
+                <div *ngFor="let tag of mobj.tags" class="m-tag">
+                    <span>{{tag}}</span>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #stepFive>
+    <div class="form-w">
+        <div class="dark-wrapper">
+            <img src="assets/u4513.png"/>
+            <div class="jump-info-w">
+                <span class="count-w">仪表盘新建成功，页面即将跳转 <span>{{count}}</span> s.{{count % 2 === 0 ? '..' : ''}}</span>
+                <a routerLink="../list">返回监控主页</a>
+            </div>
+        </div>
+    </div>
+</ng-template>

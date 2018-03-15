@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { MonitorObject } from "../../models/monitor/monitor-object";
 
@@ -38,6 +38,6 @@ export class MonitorService {
     });
 
     // TODO: 报错
-    return this.http.delete(MONITOR_OBJS_URL + params);
+    return this.http.delete(MONITOR_OBJS_URL);
   }
 }

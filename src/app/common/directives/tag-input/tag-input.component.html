@@ -2,5 +2,5 @@
   <span>{{tag}}</span>
   <img src="/assets/modal-close.png"/>
 </div>
-
-<input (change)="change($event)" (keyup.enter)="addTag()"/>
+<div (click)="addNew()" [class.hidden]="flag" class="add-btn">＋添加</div>
+<input  #tagInput  (change)="change($event)" (keyup.enter)="addTag()" [class.hidden]="!flag"/>

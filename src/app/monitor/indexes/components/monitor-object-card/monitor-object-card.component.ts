@@ -94,22 +94,18 @@ export class MonitorObjectCardComponent implements OnInit {
   //       monitorObjects: [this.monitorObject]
   //     }
   //   });
-
   //   subscription.subscribe(result => {
   //     if (result["deletedArray"]) {
   //       const deletedArray = result.deletedArray;
-
   //       this._monitorService
   //         .deleteMonitorObjects(deletedArray)
   //         .subscribe(result => {
   //           console.log(111);
   //         });
-
   //       subscription.destroy();
   //     }
   //   });
   // }
-
   confirmDelete() {
     this.modalService.warn({
       title: "删除",

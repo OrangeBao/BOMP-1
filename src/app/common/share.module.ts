@@ -19,6 +19,8 @@ import { TagBarComponent } from './directives/tag-bar/tag-bar.component';
 import { TagInputComponent } from './directives/tag-input/tag-input.component';
 
 import { TitleService } from './services/title/title.service';
+import { DashboardService} from './services/dashboard/dashboard.service';
+import { MonitorService } from './services/monitor/monitor.service';
 
 export * from './components/container/container.component';
 export * from './components/notification/notification.component';
@@ -26,6 +28,13 @@ export * from './services/notifications.service';
 
 export * from './services/loading/loading.service';
 export * from './services/title/title.service';
+
+export * from './services/dashboard/dashboard.service';
+export * from './services/monitor/monitor.service';
+
+
+
+
 
 
 @NgModule({
@@ -66,7 +75,9 @@ export class ShareModule {
       providers: [
         NotificationsService,
         LoadingService,
-        TitleService
+        TitleService,
+        DashboardService,
+        MonitorService
       ]
     };
   }

@@ -11,8 +11,28 @@ export class StepBarComponent implements OnInit {
     this.current = 1;
   }
 
+  @Input() steps: string[];
+
   @Input() current;
   ngOnInit() {
+  }
+
+  getStatus(step) {
+    if (step === this.current) {
+      return 'active';
+    } else if (step < this.current) {
+      return 'pass';
+    } else {
+      return '';
+    }
+  }
+
+  getText(step) {
+    if (step >= this.current) {
+      return step + 1;
+    } else {
+      return '✓';
+    } 
   }
 
 }
