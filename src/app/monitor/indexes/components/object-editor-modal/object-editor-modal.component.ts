@@ -39,6 +39,7 @@ export class ObjectEditorModalComponent implements OnInit {
     this.validateForm = this.fb.group({
       name: [this.monitorObject["name"], [Validators.required]],
       description: [this.monitorObject["desc"], [Validators.required]],
+      tags: [this.monitorObject["tags"], [ Validators.required ] ],
       // datasource: [null, [Validators.required]]
     });
   }
@@ -70,16 +71,23 @@ export class ObjectEditorModalComponent implements OnInit {
     return this.validateForm.controls[name];
   }
 
-  submitForm() {
+  submitForm(event) {
+    console.log(event);
+
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
     }
     
-    this._monitorService.editMonitorObject(this.monitorObject).subscribe((result)=>{
-      console.log(result);
-
-      this.subject.destroy();
-    });
+    if(this.validateForm.valid) {
+      this._monitorService.editMonitorObject(this.monitorObject).subscribe((result)=>{
+        console.log(result);
+  
+        this.subject.destroy();
+      });
+    } else {
+      alert('');
+    }
+    
   }
 
 }

@@ -8,7 +8,13 @@ import {
   OnInit,
   SimpleChanges
 } from "@angular/core";
-import { NzModalService } from "ng-zorro-antd";
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl
+} from "@angular/forms";
+// import { NzModalService } from "ng-zorro-antd";
 import { ModalService } from "zu-modal";
 
 import { LoadingService } from "../../../../common/share.module";
@@ -30,24 +36,41 @@ export class MonitorObjectCardComponent implements OnInit {
   @Output() public selectChanged: EventEmitter<any> = new EventEmitter<any>();
   @Output() public deleteChanged: EventEmitter<any> = new EventEmitter<any>();
 
-  @ViewChild("tplEdit") tplEdit: TemplateRef<any>;
-  @ViewChild("tplDelete") tplDelete: TemplateRef<any>;
+  // @ViewChild("tplEdit") tplEdit: TemplateRef<any>;
+  // @ViewChild("tplDelete") tplDelete: TemplateRef<any>;
+  @ViewChild("tplEditForm") tplEditForm: TemplateRef<any>;
 
+  validateForm: FormGroup;
 
   isMouseOvered: boolean = false;
 
   constructor(
-    private _modalService: NzModalService,
+    private fb: FormBuilder,
+    // private _modalService: NzModalService,
     private _monitorService: MonitorService,
     private spinnerService: LoadingService,
     private modalService: ModalService
-  ) {}
+  ) {
+    // this.validateForm = this.fb.group({
+    //   name: [this.monitorObject["name"], [Validators.required]],
+    //   description: [this.monitorObject["desc"], [Validators.required]],
+    //   tags: [this.monitorObject["tags"], [ Validators.required ] ],
+    //   // datasource: [null, [Validators.required]]
+    // });
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.validateForm = this.fb.group({
+      name: [this.monitorObject["name"], [Validators.required]],
+      description: [this.monitorObject["desc"], [Validators.required]],
+      tags: [this.monitorObject["tags"], [Validators.required]]
+      // datasource: [null, [Validators.required]]
+    });
+  }
 
   // isSelectable 变化后，是否需清空选中的card的样式
   ngOnChanges(changes: SimpleChanges) {
-    if(changes.isSelected && !changes.isSelected.firstChange){
+    if (changes.isSelected && !changes.isSelected.firstChange) {
       this.selectChanged.emit({
         monitorObject: this.monitorObject,
         selected: changes.isSelected.currentValue
@@ -70,18 +93,19 @@ export class MonitorObjectCardComponent implements OnInit {
     this.isMouseOvered = flag;
   }
 
-  edit() {
-    this._modalService.open({
-      title: this.tplEdit,
-      content: ObjectEditorModalComponent,
-      footer: false,
-      closable: true,
-      maskClosable: false,
-      componentParams: {
-        monitorObject: this.monitorObject
-      }
-    });
-  }
+  /** ng-zorro */
+  // edit() {
+  //   this._modalService.open({
+  //     title: this.tplEdit,
+  //     content: ObjectEditorModalComponent,
+  //     footer: false,
+  //     closable: true,
+  //     maskClosable: false,
+  //     componentParams: {
+  //       monitorObject: this.monitorObject
+  //     }
+  //   });
+  // }
 
   // confirmDelete() {
   //   const subscription = this._modalService.open({
@@ -106,6 +130,43 @@ export class MonitorObjectCardComponent implements OnInit {
   //     }
   //   });
   // }
+  /** ng-zorro */
+
+  edit() {
+    this.modalService.open({
+      title: "编辑指标基本信息",
+      content: this.tplEditForm,
+      cancelText: "cancel",
+      onOk: () => {
+        for (const i in this.validateForm.controls) {
+          this.validateForm.controls[i].markAsDirty();
+        }
+
+        return new Promise((resolve, reject) => {
+          if (this.validateForm.valid) {
+            resolve();
+          } else {
+            reject();
+          }
+        }).then(() => {
+          this._monitorService
+            .editMonitorObject(this.monitorObject)
+            .subscribe(result => {
+              console.log(result);
+            });
+        });
+
+        // if(this.validateForm.valid) {
+        //   this._monitorService.editMonitorObject(this.monitorObject).subscribe((result)=>{
+        //     console.log(result);
+        //   });
+        // } else {
+
+        // }
+      }
+    });
+  }
+
   confirmDelete() {
     this.modalService.warn({
       title: "删除",
@@ -119,15 +180,19 @@ export class MonitorObjectCardComponent implements OnInit {
   }
 
   // delete(id) {
-    // const deletedArray = [id];
-    // this.spinnerService.show();
-    // this._monitorService
-    //   .deleteMonitorObjects(deletedArray)
-    //   .subscribe(result => {
-    //     this.spinnerService.hide();
-    //     this.deleteChanged.emit({
-    //       monitorObject: this.monitorObject
-    //     });
-    //   });
+  // const deletedArray = [id];
+  // this.spinnerService.show();
+  // this._monitorService
+  //   .deleteMonitorObjects(deletedArray)
+  //   .subscribe(result => {
+  //     this.spinnerService.hide();
+  //     this.deleteChanged.emit({
+  //       monitorObject: this.monitorObject
+  //     });
+  //   });
   // }
+
+  getFormControl(name) {
+    return this.validateForm.controls[name];
+  }
 }

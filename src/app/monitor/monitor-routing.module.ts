@@ -16,7 +16,7 @@ import { ObjectAddComponent} from './indexes/components/object-add/object-add.co
 
 import { TemplateComponent } from './template/template.component';
 
-const dashboardRoutes: Routes = [
+const monitorRoutes: Routes = [
   {
     path: '',
     component: MonitorComponent,
@@ -90,11 +90,11 @@ const dashboardRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(dashboardRoutes)
+    RouterModule.forChild(monitorRoutes)
   ],
   exports: [
     RouterModule
   ],
   providers: [ ]
 })
-export class DashboardRoutingModule { }
+export class MonitorRoutingModule { }

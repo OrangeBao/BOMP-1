@@ -1,12 +1,12 @@
 import { Component, ViewChild, TemplateRef, OnInit } from "@angular/core";
-import { Router} from '@angular/router';
+import { Router } from "@angular/router";
 import { ModalService } from "zu-modal";
 
 import { LoadingService } from "../../../../common/share.module";
-import { MonitorService } from '../../../../common/services/monitor/monitor.service';
+import { MonitorService } from "../../../../common/services/monitor/monitor.service";
 import { MonitorObject } from "../../../../common/models/monitor/monitor-object";
 
-import { ObjectDeleteModalComponent } from '../object-delete-modal/object-delete-modal.component';
+import { ObjectDeleteModalComponent } from "../object-delete-modal/object-delete-modal.component";
 
 @Component({
   selector: "bomp-monitor-objects",
@@ -14,28 +14,28 @@ import { ObjectDeleteModalComponent } from '../object-delete-modal/object-delete
   styleUrls: ["./monitor-objects.component.scss"]
 })
 export class MonitorObjectsComponent implements OnInit {
-  @ViewChild('tplDelete')
-  tplDelete: TemplateRef<any>;
+  @ViewChild("tplDelete") tplDelete: TemplateRef<any>;
 
-  searchText: string = '';
+  searchText: string = "";
   monitorTags: Array<string>;
   monitorObjects: Array<MonitorObject>;
   monitorFiltedObjects: Array<MonitorObject>;
   monitorDeleteList: Array<MonitorObject> = new Array<MonitorObject>();
-  
-  selectedTags = [];
+
+  selectedTags: Array<string> = [];
   allChecked = false;
   isBatchDeleteable: boolean = false;
 
   constructor(
-    private _router: Router, 
+    private _router: Router,
     private _monitorService: MonitorService,
     private spinnerService: LoadingService,
-    private modalService: ModalService) {}
+    private modalService: ModalService
+  ) {}
 
   ngOnInit() {
     this._monitorService.getMonitorObjs().subscribe({
-      next: (data: any)=>{
+      next: (data: any) => {
         this.monitorObjects = data || [];
 
         // TODO: only for test
@@ -47,34 +47,55 @@ export class MonitorObjectsComponent implements OnInit {
     });
 
     this._monitorService.getMonitorTags().subscribe({
-      next: (data: any)=>{
+      next: (data: any) => {
         this.monitorTags = data || [];
+
+        // TODO: only for test
+        // this.monitorTags.push(...this.monitorObjects[0].tags);
+        // this.monitorTags.push(...this.monitorObjects[1].tags);
       }
     });
   }
 
   onSearch(): void {
-    this.monitorFiltedObjects = this.monitorObjects.filter((item)=>{
-      return this.searchText == '' ? true : item.name.includes(this.searchText) || item.tags.includes(this.searchText);
+    this.monitorFiltedObjects = this.monitorObjects.filter(item => {
+      return this.searchText == ""
+        ? true
+        : item.name.includes(this.searchText) ||
+            item.tags.includes(this.searchText);
     });
   }
 
-  changeCheckTag(tag) {
-    if(this.selectedTags.includes(tag)) {
-      this.selectedTags = this.selectedTags.filter(item => item !== tag);
-    } else {
-      if(tag === 'all'){
-        this.selectedTags = [];
-      } else {
-        this.selectedTags = this.selectedTags.filter(item => item !== 'all');
-      }
-      this.selectedTags.push(tag);
-    }
+  tagChange($event) {
+    this.selectedTags = $event;
 
-    this.monitorFiltedObjects = this.monitorObjects.filter((item)=>{
-      return this.selectedTags.includes('all') ? true : item.tags.some(r=> this.selectedTags.includes(r));
+    // console.log(this.selectedTags);
+
+    this.monitorFiltedObjects = this.monitorObjects.filter(item => {
+      return (this.selectedTags.includes("all") || this.selectedTags.length === 0)
+        ? true
+        : item.tags.some(r => this.selectedTags.includes(r));
     });
   }
+
+  // changeCheckTag(tag) {
+  //   if (this.selectedTags.includes(tag)) {
+  //     this.selectedTags = this.selectedTags.filter(item => item !== tag);
+  //   } else {
+  //     if (tag === "all") {
+  //       this.selectedTags = [];
+  //     } else {
+  //       this.selectedTags = this.selectedTags.filter(item => item !== "all");
+  //     }
+  //     this.selectedTags.push(tag);
+  //   }
+
+  //   this.monitorFiltedObjects = this.monitorObjects.filter(item => {
+  //     return this.selectedTags.includes("all")
+  //       ? true
+  //       : item.tags.some(r => this.selectedTags.includes(r));
+  //   });
+  // }
 
   newObject() {
     this._router.navigateByUrl("/monitor/indexes/add");
@@ -84,6 +105,7 @@ export class MonitorObjectsComponent implements OnInit {
     this.isBatchDeleteable = true;
   }
 
+  /** ng-zorro */
   // confirmBatchDelete() {
   //   const subscription = this._modalService.open({
   //     title          : this.tplDelete,
@@ -99,27 +121,29 @@ export class MonitorObjectsComponent implements OnInit {
   //   subscription.subscribe(result => {
   //     if(result["deletedArray"]){
   //       const deletedArray = result.deletedArray;
-        
+
   //       this._monitorService
   //         .deleteMonitorObjects(deletedArray)
   //         .subscribe(result => {
   //           console.log(111);
   //         });
 
-  //       subscription.destroy();  
+  //       subscription.destroy();
   //     }
   //   });
   // }
+  /** ng-zorro */
+
   confirmBatchDelete() {
     this.modalService.warn({
       title: "批量删除",
       content: `已选择${this.monitorDeleteList.length}个仪表盘，确定删除？`,
-      remark: this.monitorDeleteList.map(item => item.name).join(','),
+      remark: this.monitorDeleteList.map(item => item.name).join(","),
       onOk: () => this.delete()
     });
   }
 
-  delete(){
+  delete() {
     this.spinnerService.show();
     this._monitorService
       .deleteMonitorObjects(this.monitorDeleteList)
@@ -135,27 +159,33 @@ export class MonitorObjectsComponent implements OnInit {
     this.isBatchDeleteable = false;
   }
 
-  refreshMonitorObjects(){
-     // 前端删除 or 后端重新获取数据???
-    this.monitorObjects = this.monitorObjects.filter((item)=>{
+  refreshMonitorObjects() {
+    // 前端删除 or 后端重新获取数据???
+    this.monitorObjects = this.monitorObjects.filter(item => {
       return !this.monitorDeleteList.includes(item);
     });
     this.monitorFiltedObjects = this.monitorObjects;
   }
 
   // output event
-  cardSelectChanged(event: any){
-    if(event.selected) {
+  cardSelectChanged(event: any) {
+    if (event.selected) {
       // 如果原来已存则不重复存
-      if(!this.monitorDeleteList.some(r => { return r.id == event.monitorObject.id})){
+      if (
+        !this.monitorDeleteList.some(r => {
+          return r.id == event.monitorObject.id;
+        })
+      ) {
         this.monitorDeleteList.push(event.monitorObject);
       }
     } else {
-      this.monitorDeleteList = this.monitorDeleteList.filter(item => item.id !== event.monitorObject.id);
+      this.monitorDeleteList = this.monitorDeleteList.filter(
+        item => item.id !== event.monitorObject.id
+      );
     }
   }
 
-  cardDeleteChanged(event: any){
+  cardDeleteChanged(event: any) {
     this.monitorDeleteList.push(event.monitorObject);
     this.delete();
   }

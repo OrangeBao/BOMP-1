@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { NgZorroAntdModule } from "ng-zorro-antd";
 
-import { DashboardRoutingModule } from "./monitor-routing.module";
+import { MonitorRoutingModule } from "./monitor-routing.module";
 import { MonitorComponent } from "./monitor.component";
 import { DashboardListComponent } from "./dashboard/dashboard-list/dashboard-list.component";
 import { DashboardSummaryComponent } from "./dashboard/dashboard-summary/dashboard-summary.component";
@@ -33,12 +33,12 @@ import { MonitorService } from '../common/services/monitor/monitor.service';
 @NgModule({
   imports: [
     CommonModule,
-    NgZorroAntdModule,
-
-    DashboardRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgZorroAntdModule,
+
     ShareModule,
+    MonitorRoutingModule,
   ],
   declarations: [
     MonitorComponent,

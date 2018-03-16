@@ -22,13 +22,14 @@
       </nz-input>
     </div>
   </div>
-  <div class="tags">
+  <!-- <div class="tags">
     <strong>标签: </strong>
     <nz-tag (click)="changeCheckTag('all')" [nzColor]="selectedTags.includes('all') ? '#8492A6' : null">不限</nz-tag>
     <nz-tag *ngFor="let tag of monitorTags" (click)="changeCheckTag(tag)" [nzColor]="selectedTags.includes(tag) ? '#8492A6' : null">
       {{tag}}
     </nz-tag>
-  </div>
+  </div> -->
+  <app-tag-bar [tags]="monitorTags" (change)="tagChange($event)"></app-tag-bar>
   <div class="cards">
     <div nz-row [nzGutter]="16">
       <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let monitorObject of monitorFiltedObjects">

@@ -1,0 +1,19 @@
+<ng-container *ngIf="titleData?.showTitle">
+    <div class="title-bar">
+        <app-goback></app-goback>
+        <span class="title-w">{{titleData.text}}</span>
+    </div>
+</ng-container>
+<div class="body-w" *ngIf="!titleData?.showTitle">
+    <div class="b">
+      <div class="tabs">
+        <div routerLink="datasourcecontrol" routerLinkActive="active" class="tab">数据源控制</div>
+        <div routerLink="collectioncontrol" routerLinkActive="active" class="tab">采集控制</div>
+        <div class="space"></div>
+      </div>
+    </div>
+  </div>
+
+<div class="tab-w">
+  <router-outlet></router-outlet>
+</div>
