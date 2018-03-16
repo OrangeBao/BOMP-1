@@ -21,9 +21,10 @@ class Options {
 
 
 export class DataSource {
-    id: number;
+    id: number | undefined;
     orgId: number;
     name: string;
+    permission: string;
     type: string;
     typeLogoUrl: string;
     access: string;
@@ -36,4 +37,5 @@ export class DataSource {
     basicAuthPassword: string;
     isDefault: boolean;
     jsonData: object;
+    desc: string;
 }

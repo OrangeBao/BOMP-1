@@ -1,0 +1,29 @@
+
+
+
+
+
+
+.form-w {
+    display: flex;
+    justify-content: center;
+    .dark-wrapper {
+        display: flex;
+        min-height: 300px;
+        background-color: rgba(248, 249, 249, 1);
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.jump-info-w {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
+
+.count-w {
+    display: inline-block;
+    width: 210px;
+}

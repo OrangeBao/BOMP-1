@@ -1,3 +1,66 @@
-<p>
-  datasource-control-table works!
-</p>
+<div>
+  <div class="menu">
+    <div class="buttons">
+      <div class="btn primary" (click)="addDatasource()">+添加</div>
+    </div>
+    <div class="search">
+      <nz-input [nzPlaceHolder]="'按名称、标签、监控对象等搜索'" [(ngModel)]="searchText" style="width: 300px;">
+        <ng-template #addOnAfter>
+          <i class="iconfont icon-sousuo point-cursor" (click)="onSearch()"></i>
+        </ng-template>
+      </nz-input>
+    </div>
+  </div>
+
+  <div>
+    <nz-table #nzTable [nzDataSource]="dataSources" [nzSize]="'small'" [nzBordered]="false" 
+      [nzPageSize]="10" [nzShowTotal]="true" nzShowSizeChanger [nzShowQuickJumper]="true" 
+      (nzDataChange)="displayDataChange($event)" (nzPageIndexChange)="refreshStatus()" 
+      (nzPageSizeChange)="refreshStatus()">
+      <thead nz-thead>
+        <tr>
+          <th nz-th>
+            <span>名称</span>
+          </th>
+          <th nz-th>
+            <span>URL</span>
+          </th>
+          <th nz-th>
+            <span>读/写</span>
+          </th>
+          <th nz-th>
+            <span>类型</span>
+          </th>
+          <th nz-th>
+            <span>用户</span>
+          </th>
+          <th nz-th>
+            <span>密码</span>
+          </th>
+          <th nz-th>
+            <span>描述</span>
+          </th>
+          <th nz-th [nzWidth]="'100px'">
+            <span>操作</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody nz-tbody>
+        <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+          <td nz-td>{{data.name}}</td>
+          <td nz-td>{{data.url}}</td>
+          <td nz-td>{{data.permission}}</td>
+          <td nz-td>{{data.type}}</td>
+          <td nz-td>{{data.basicAuthUser}}</td>
+          <td nz-td>{{data.basicAuthPassword}}</td>
+          <td nz-td>{{data.desc}}</td>
+          <td nz-td>
+            <i class="iconfont icon-ceshilianjie point-cursor" (click)="onSearch()"></i>
+            <i class="iconfont icon-bianji point-cursor" (click)="onSearch()"></i>
+            <i class="iconfont icon-shanchu point-cursor" (click)="onSearch()"></i>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

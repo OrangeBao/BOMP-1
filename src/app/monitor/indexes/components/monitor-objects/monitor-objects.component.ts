@@ -27,14 +27,14 @@ export class MonitorObjectsComponent implements OnInit {
   isBatchDeleteable: boolean = false;
 
   constructor(
-    private _router: Router,
-    private _monitorService: MonitorService,
+    private router: Router,
+    private monitorService: MonitorService,
     private spinnerService: LoadingService,
     private modalService: ModalService
   ) {}
 
   ngOnInit() {
-    this._monitorService.getMonitorObjs().subscribe({
+    this.monitorService.getMonitorObjs().subscribe({
       next: (data: any) => {
         this.monitorObjects = data || [];
 
@@ -46,7 +46,7 @@ export class MonitorObjectsComponent implements OnInit {
       }
     });
 
-    this._monitorService.getMonitorTags().subscribe({
+    this.monitorService.getMonitorTags().subscribe({
       next: (data: any) => {
         this.monitorTags = data || [];
 
@@ -98,7 +98,7 @@ export class MonitorObjectsComponent implements OnInit {
   // }
 
   newObject() {
-    this._router.navigateByUrl("/monitor/indexes/add");
+    this.router.navigateByUrl("/monitor/indexes/add");
   }
 
   batchDeleteObjects() {
@@ -139,13 +139,13 @@ export class MonitorObjectsComponent implements OnInit {
       title: "批量删除",
       content: `已选择${this.monitorDeleteList.length}个仪表盘，确定删除？`,
       remark: this.monitorDeleteList.map(item => item.name).join(","),
-      onOk: () => this.delete()
+      onOk: () => this.deleteMonitors()
     });
   }
 
-  delete() {
+  deleteMonitors() {
     this.spinnerService.show();
-    this._monitorService
+    this.monitorService
       .deleteMonitorObjects(this.monitorDeleteList)
       .subscribe(result => {
         this.spinnerService.hide();
@@ -187,6 +187,6 @@ export class MonitorObjectsComponent implements OnInit {
 
   cardDeleteChanged(event: any) {
     this.monitorDeleteList.push(event.monitorObject);
-    this.delete();
+    this.deleteMonitors();
   }
 }

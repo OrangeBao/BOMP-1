@@ -1,4 +1,5 @@
 import { Component, ViewChild, OnInit } from "@angular/core";
+import { Router } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
@@ -22,6 +23,10 @@ import { MonitorObject } from "../../../../common/models/monitor/monitor-object"
 export class ObjectAddComponent implements OnInit {
   @ViewChild("input") input: NzInputDirectiveComponent;
 
+  isFinished: boolean;
+  count: number;
+  timer: any;
+
   validateForm: FormGroup;
   dataSourceList: Array<DataSource>;
   tempTags: Array<any> = [];
@@ -30,11 +35,13 @@ export class ObjectAddComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private subject: NzModalSubject,
+    private router: Router, 
+    // private subject: NzModalSubject,
     private title: TitleService,
-    private _dataSourceService: DataSourceService,
-    private _monitorService: MonitorService
+    private dataSourceService: DataSourceService,
+    private monitorService: MonitorService
   ) {
+    // TODO: 放ngOnInit会报错???
     this.title.sendMsg({
       showTitle: true,
       text: '新建指标',
@@ -42,7 +49,7 @@ export class ObjectAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._dataSourceService.getAll().subscribe(data => {
+    this.dataSourceService.getAll().subscribe(data => {
       this.dataSourceList = data;
     });
 
@@ -93,15 +100,23 @@ export class ObjectAddComponent implements OnInit {
     }
 
     let monitorObject: MonitorObject = new MonitorObject();
-    monitorObject.name = this.getFormControl("name").value;
-    monitorObject.desc = this.getFormControl("description").value;
-    monitorObject.tags = this.tempTags;
-    monitorObject.datasource = this.getFormControl("datasource").value;
+    Object.assign(monitorObject, {
+      name: this.getFormControl("name").value,
+      desc: this.getFormControl("description").value,
+      tags: this.tempTags,
+      datasource: this.getFormControl("datasource").value
+    });
 
-    this._monitorService.editMonitorObject(monitorObject).subscribe(result => {
-      if (result.status === "success") {
-        // TODO: 弹出成功模态窗
-      }
+    this.monitorService.editMonitorObject(monitorObject).subscribe(result => {
+      this.isFinished = true;
+
+      this.count = 5;
+      this.timer = setInterval( () => {
+        this.count -= 1;
+        if (this.count === 0) {
+          this.router.navigate(['/monitor/indexes/object']);
+        }
+      }, 1000);
     });
   }
 }

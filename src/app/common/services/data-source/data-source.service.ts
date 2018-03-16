@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../user/user.service';
 import {Observable} from 'rxjs/Observable';
+import { DataSource} from '../../models/data-source';
 
 const DATA_SOURCE_URL = 'api/monitor/datasources';
 
@@ -37,6 +38,10 @@ export class DataSourceService {
         // .catch(this.handleError);
   }
 
+  addDataSource(dataSource: DataSource): Observable<any> {
+    return this.http.post(DATA_SOURCE_URL, dataSource);
+  }
+  // TODO: 还有用吗
   create(params): Promise<any> {
     return this.http.post('api/manager/datasources', params).toPromise().catch(this.handleError);
   }

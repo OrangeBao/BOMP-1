@@ -73,15 +73,13 @@ export class DashboardCreateComponent implements OnInit {
       }
       this.dashboardList = templates;
       this.monitorList = monitorObjs;
-      this.monitorObjsOption = this.monitorList.map(item => ({label: item.name, value: item.id, checked: false}))
-      debugger;
+      this.monitorObjsOption = this.monitorList.map(item => ({label: item.name, value: item.id, checked: false}));
     }, () => {}, () => {
       this.spinnerService.hide();
     });
   }
 
   updateSelectMonitorObjs(event, id) {
-    debugger;
     let isAllSelect = true;
     this.monitorObjsOption = this.monitorObjsOption.map(item => {
       if (item.id === id) {

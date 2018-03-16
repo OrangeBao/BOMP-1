@@ -8,7 +8,7 @@ import { AuthGuardService } from './common/services/auth-guard/auth-guard.servic
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'monitor',
+    redirectTo: 'console',
     pathMatch: 'full'
   },
   {
