@@ -50,6 +50,12 @@
       padding: 0 32px;
       line-height: 50px;
       display: inline-block;
+
+      font-family: PingFangSC-Light, "PingFang SC Light", "PingFang SC";
+      font-weight: 200;
+      font-style: normal;
+      font-size: 14px;
+
       &.active {
         border-bottom: 3px solid $main-color;
         color: $main-color;

@@ -19,7 +19,7 @@
 </div>
 <app-tag-bar [tags]="allTags" (change)="tagChange($event)"></app-tag-bar>
 <div class="list-w" [class.isDelete]="isDeleteModel">
-  <div *ngFor="let dash of displayDashboards" class="d-w" (click)="addChoice(dash.uri, $event)" [class.choice]="isChoice(dash.uri)">
+  <div *ngFor="let dash of displayDashboards" class="d-w" (click)="addChoice(dash.uri)" [class.choice]="isChoice(dash.uri)">
     <div class="d-detail">
       <div class="img-w">
         <div class="img"></div>
@@ -54,6 +54,10 @@
       <div class="mask" *ngIf="isDeleteModel"></div>
     </div>
   </div>
+</div>
+<div [style.display]="needLoad ? 'block' : 'none'" class="loading-w" >
+    <img src="assets/page-loading.gif" *ngIf="!noMore"/>
+    <span *ngIf="noMore">没有更多数据了</span>
 </div>
 
 <div *ngIf="dashboards && dashboards.length === 0" class="null-tips">

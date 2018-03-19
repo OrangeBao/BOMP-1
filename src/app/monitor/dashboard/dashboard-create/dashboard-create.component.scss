@@ -33,6 +33,16 @@
         border-radius: 3px;
         padding: 0 10px;
         margin-left: 10px;
+        &.f {
+            background-color: transparent;
+            color: #8391a6;
+            border: 0px;
+            margin-left: 0px;
+            padding: 0px;
+        }
+    }
+    .tag-w .m-tag:first-child {
+        margin-left: 0px;
     }
     nz-radio-group, .checkbox-group {
         width: 100%;
@@ -133,4 +143,39 @@
 .count-w {
     display: inline-block;
     width: 210px;
+}
+
+.step-four-w {
+    .template-title {
+        font-family: 'PingFangSC-Medium', 'PingFang SC Medium', 'PingFang SC';
+        font-weight: 500;
+        font-style: normal;
+        font-size: 16px;
+        margin-bottom: 10px
+    }
+    .template-desc {
+        font-family: 'PingFangSC-Regular', 'PingFang SC';
+        font-weight: 400;
+        font-style: normal;
+        font-size: 14px;
+        color: #999999;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .monitor-t {
+        font-family: 'PingFangSC-Regular', 'PingFang SC';
+        font-weight: 400;
+        font-style: normal;
+        font-size: 14px;
+        color: #666666;
+        display: inline-block;
+    }
+    .monitor-title {
+        font-family: 'PingFangSC-Regular', 'PingFang SC';
+        font-weight: 400;
+        font-style: normal;
+        font-size: 14px;
+        color: #666666;
+        display: inline-block;
+    }
 }

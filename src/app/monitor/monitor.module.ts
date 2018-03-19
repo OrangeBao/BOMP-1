@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { NgZorroAntdModule } from "ng-zorro-antd";
+import { NgZorroAntdModule, NzNotificationService } from "ng-zorro-antd";
 
 import { MonitorRoutingModule } from "./monitor-routing.module";
 import { MonitorComponent } from "./monitor.component";
@@ -28,7 +28,7 @@ import { ObjectAddComponent} from './indexes/components/object-add/object-add.co
 import { ObjectEditorModalComponent } from './indexes/components/object-editor-modal/object-editor-modal.component';
 import { ObjectDeleteModalComponent } from './indexes/components/object-delete-modal/object-delete-modal.component';
 
-import { MonitorService } from '../common/services/monitor/monitor.service';
+import { TemplateListComponent } from './template/template-list/template-list.component';
 
 @NgModule({
   imports: [
@@ -36,7 +36,6 @@ import { MonitorService } from '../common/services/monitor/monitor.service';
     FormsModule,
     ReactiveFormsModule,
     NgZorroAntdModule,
-
     ShareModule,
     MonitorRoutingModule,
   ],
@@ -59,11 +58,12 @@ import { MonitorService } from '../common/services/monitor/monitor.service';
     MonitorObjectCardComponent,
     ObjectAddComponent,
     ObjectEditorModalComponent,
-    ObjectDeleteModalComponent
+    ObjectDeleteModalComponent,
+    TemplateListComponent
   ],
   entryComponents: [IndexEditorModalComponent, ObjectEditorModalComponent, ObjectDeleteModalComponent],
-  // providers: [
-  //   MonitorService
-  // ]
+  providers: [
+    NzNotificationService
+  ]
 })
 export class MonitorModule {}

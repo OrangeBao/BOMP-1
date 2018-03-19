@@ -35,10 +35,20 @@ export class DashboardCreateComponent implements OnInit {
   }
 
   monitorObjsOption: any[];
+  hoverMonitorObj: any;
 
   get displayMonitorObjs() {
-    const selectItems = this.monitorObjsOption.filter(item => item.checked).map(item => item.value);
-    return this.monitorList.filter(item => selectItems.indexOf(item.id) !== -1);
+    if (!this.hoverMonitorObj) return null;
+    const selectItems = this.hoverMonitorObj.value;
+    return this.monitorList.find(item => selectItems === item.id);
+  }
+
+  modifyHoverObj(item , flag) {
+    if (!flag) {
+      this.hoverMonitorObj = null;
+    } else {
+      this.hoverMonitorObj = item;
+    }
   }
 
   modifyForm: FormGroup;
@@ -71,8 +81,8 @@ export class DashboardCreateComponent implements OnInit {
       if (templates && templates.length > 0) {
         this.selectTemplateId = templates[0].id;
       }
-      this.dashboardList = templates;
-      this.monitorList = monitorObjs;
+      this.dashboardList = templates.content;
+      this.monitorList = monitorObjs.content;
       this.monitorObjsOption = this.monitorList.map(item => ({label: item.name, value: item.id, checked: false}));
     }, () => {}, () => {
       this.spinnerService.hide();
