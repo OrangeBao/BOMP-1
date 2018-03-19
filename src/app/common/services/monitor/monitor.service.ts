@@ -11,6 +11,11 @@ export class MonitorService {
   constructor(private http: HttpClient) {}
 
   getMonitorObjs(): Observable<any> {
+    // let url = MONITOR_OBJS_URL + "?offset=" + offset;
+    // if(limit) {
+    //   url += "&limit=" + limit;
+    // } 
+    // return this.http.get(url);
     return this.http.get(MONITOR_OBJS_URL);
   }
 
@@ -37,7 +42,6 @@ export class MonitorService {
       }
     });
 
-    // TODO: 报错
-    return this.http.delete(MONITOR_OBJS_URL);
+    return this.http.delete(MONITOR_OBJS_URL + params);
   }
 }

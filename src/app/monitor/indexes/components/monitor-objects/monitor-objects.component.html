@@ -2,12 +2,12 @@
   <div class="menu">
     <div class="buttons" *ngIf="!isBatchDeleteable">
       <div class="btn primary" (click)="newObject()">+新建</div>
-      <div class="btn default" style="margin-left: 10px;" (click)="batchDeleteObjects()">批量删除</div>
+      <div class="btn default" style="margin-left: 15px;" (click)="batchDeleteObjects()">批量删除</div>
     </div>
     <div class="batch-delete-buttons" *ngIf="isBatchDeleteable">
       <div class="btn primary" (click)="confirmBatchDelete()">删除</div>
-      <div class="btn default" style="margin-left: 10px;" (click)="cancelBatchDelete()">取消</div>
-      <label nz-checkbox style="margin-left: 10px;" [(ngModel)]="allChecked">
+      <div class="btn default" style="margin-left: 15px;" (click)="cancelBatchDelete()">取消</div>
+      <label nz-checkbox style="margin-left: 15px;" [(ngModel)]="allChecked">
         <span>全选</span>
       </label>
     </div>

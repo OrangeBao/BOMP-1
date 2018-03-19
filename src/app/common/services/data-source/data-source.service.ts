@@ -54,8 +54,19 @@ export class DataSourceService {
     return this.http.post(`api/manager/datasources/files`, fileIds);
   }
 
-  deleteDataSource(id): Promise<any> {
-    return this.http.delete(`api/manager/datasources/${id}`).toPromise().catch(this.handleError);
-  }
+  // deleteDataSource(id): Promise<any> {
+  //   return this.http.delete(`api/manager/datasources/${id}`).toPromise().catch(this.handleError);
+  // }
+  deleteDataSource(idArray: Array<number>): Observable<any> {
+    let params = '';
+    idArray.forEach((value, index) => {
+      if(index === 0) {
+        params += '?id=' + value;
+      } else {
+        params += '&id=' + value;
+      }
+    });
 
+    return this.http.delete(DATA_SOURCE_URL + params);
+  }
 }

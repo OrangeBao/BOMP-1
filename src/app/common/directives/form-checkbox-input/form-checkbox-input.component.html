@@ -1,0 +1,6 @@
+<div style="display: flex; justify-content: start; align-items: center;">
+  <div *ngFor="let item of items" style="display: flex; justify-content: start; align-items: center; margin-right: 20px;">
+    <input type="checkbox" group="groupname" name="item.label" value="item.value" style="margin-right: 3px;" [checked]="isCheck(item)" (click)="clickItem($event,item)"/>
+    {{item.label}}
+  </div>
+</div>

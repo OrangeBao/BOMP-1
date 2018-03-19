@@ -1,5 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { GobackComponent } from './directives/goback/goback.component';
 import { UploadComponent } from './directives/upload/upload.component';
 
@@ -17,6 +18,7 @@ import { LoadingService } from './services/loading/loading.service';
 
 import { TagBarComponent } from './directives/tag-bar/tag-bar.component';
 import { TagInputComponent } from './directives/tag-input/tag-input.component';
+import { FormCheckboxInputComponent } from './directives/form-checkbox-input/form-checkbox-input.component';
 
 import { TitleService } from './services/title/title.service';
 import { DashboardService} from './services/dashboard/dashboard.service';
@@ -53,6 +55,7 @@ export * from './services/monitor/monitor.service';
     LoadingComponent,
     TagBarComponent,
     TagInputComponent,
+    FormCheckboxInputComponent,
   ],
   exports: [
     GobackComponent,
@@ -65,7 +68,8 @@ export * from './services/monitor/monitor.service';
     SearchBarComponent,
     LoadingComponent,
     TagBarComponent,
-    TagInputComponent
+    TagInputComponent,
+    FormCheckboxInputComponent
   ]
 })
 export class ShareModule {

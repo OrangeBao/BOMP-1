@@ -32,7 +32,7 @@
           <div nz-form-label nz-col [nzSpan]="4">
             <label [attr.for]="'tags'">标签</label>
           </div>
-          <div nz-form-control nz-col [nzSpan]="20">
+          <!-- <div nz-form-control nz-col [nzSpan]="20">
             <ng-container *ngFor="let tag of tempTags">
               <nz-tag [nzClosable]="true" (nzClose)="deleteTag(tag)">{{tag}}</nz-tag>
             </ng-container>
@@ -42,9 +42,10 @@
             </button>
             <input nz-input #input *ngIf="isAddingTag" type="text" [(ngModel)]="newTagValue" [ngModelOptions]="{standalone: true}" style="width: 100px;"
               (blur)="confirmAddTag()" (keydown.enter)="confirmAddTag()">
-            <!-- <nz-input id="inputTagText" *ngIf="isAddingTag" style="width: 100px;" [(ngModel)]="newTagValue" [ngModelOptions]="{standalone: true}"
-                (keyup.enter)="enterTagText()">
-              </nz-input> -->
+          </div> -->
+          <div nz-form-control nz-col [nzSpan]="20">
+              <app-tag-input formControlName="tags"></app-tag-input>
+              <div nz-form-explain *ngIf="getFormControl('tags').dirty && getFormControl('tags').hasError('required')">请输入tags!</div>
           </div>
         </div>
       </div>
@@ -64,14 +65,17 @@
         </div>
       </div>
     </div>
-    <div nz-form-item nz-row>
+    <!-- <div nz-form-item nz-row>
       <div nz-form-control nz-col [nzSpan]="24" style="text-align: center;">
-        <button nz-button [nzType]="'primary'" [disabled]="!validateForm.valid">
+        <button nz-button [nzType]="'primary'">
           <span>确定</span>
         </button>
       </div>
-    </div>
+    </div> -->
   </form>
+  <button nz-button [nzType]="'primary'" (click)="submitForm()">
+      <span>确定</span>
+    </button>
 </div>
 
 <div *ngIf="isFinished">

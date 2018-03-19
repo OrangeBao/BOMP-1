@@ -51,12 +51,6 @@ export class MonitorObjectCardComponent implements OnInit {
     private spinnerService: LoadingService,
     private modalService: ModalService
   ) {
-    // this.validateForm = this.fb.group({
-    //   name: [this.monitorObject["name"], [Validators.required]],
-    //   description: [this.monitorObject["desc"], [Validators.required]],
-    //   tags: [this.monitorObject["tags"], [ Validators.required ] ],
-    //   // datasource: [null, [Validators.required]]
-    // });
   }
 
   ngOnInit() {

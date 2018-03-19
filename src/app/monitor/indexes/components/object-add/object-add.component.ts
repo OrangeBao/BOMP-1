@@ -29,9 +29,9 @@ export class ObjectAddComponent implements OnInit {
 
   validateForm: FormGroup;
   dataSourceList: Array<DataSource>;
-  tempTags: Array<any> = [];
-  isAddingTag: boolean = false;
-  newTagValue: string;
+  // tempTags: Array<any> = [];
+  // isAddingTag: boolean = false;
+  // newTagValue: string;
 
   constructor(
     private fb: FormBuilder,
@@ -56,6 +56,7 @@ export class ObjectAddComponent implements OnInit {
     this.validateForm = this.fb.group({
       name: [null, [Validators.required]],
       description: [null, [Validators.required]],
+      tags: [null, [Validators.required]],
       datasource: [null, [Validators.required]]
     });
   }
@@ -67,28 +68,28 @@ export class ObjectAddComponent implements OnInit {
     });
   }
 
-  deleteTag(removedTag: any): void {
-    this.tempTags = this.tempTags.filter(tag => tag !== removedTag);
-  }
+  // deleteTag(removedTag: any): void {
+  //   this.tempTags = this.tempTags.filter(tag => tag !== removedTag);
+  // }
 
-  addTag() {
-    this.isAddingTag = true;
+  // addTag() {
+  //   this.isAddingTag = true;
 
-    // TODO: 没有setTimeout就是undefined
-    // console.log(this.input);
-    setTimeout(() => {
-      // console.log(this.input.nativeElement);
-      this.input.nativeElement.focus();
-    }, 0);
-  }
+  //   // TODO: 没有setTimeout就是undefined
+  //   // console.log(this.input);
+  //   setTimeout(() => {
+  //     // console.log(this.input.nativeElement);
+  //     this.input.nativeElement.focus();
+  //   }, 0);
+  // }
 
-  confirmAddTag() {
-    if (this.newTagValue) {
-      this.tempTags.push(this.newTagValue);
-    }
-    this.isAddingTag = false;
-    this.newTagValue = "";
-  }
+  // confirmAddTag() {
+  //   if (this.newTagValue) {
+  //     this.tempTags.push(this.newTagValue);
+  //   }
+  //   this.isAddingTag = false;
+  //   this.newTagValue = "";
+  // }
 
   getFormControl(name) {
     return this.validateForm.controls[name];
@@ -99,24 +100,26 @@ export class ObjectAddComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
     }
 
-    let monitorObject: MonitorObject = new MonitorObject();
-    Object.assign(monitorObject, {
-      name: this.getFormControl("name").value,
-      desc: this.getFormControl("description").value,
-      tags: this.tempTags,
-      datasource: this.getFormControl("datasource").value
-    });
+    if (this.validateForm.valid) {
+      let monitorObject: MonitorObject = new MonitorObject();
+      Object.assign(monitorObject, {
+        name: this.getFormControl("name").value,
+        desc: this.getFormControl("description").value,
+        tags: this.getFormControl("tags").value,
+        datasource: this.getFormControl("datasource").value
+      });
 
-    this.monitorService.editMonitorObject(monitorObject).subscribe(result => {
-      this.isFinished = true;
+      this.monitorService.editMonitorObject(monitorObject).subscribe(result => {
+        this.isFinished = true;
 
-      this.count = 5;
-      this.timer = setInterval( () => {
-        this.count -= 1;
-        if (this.count === 0) {
-          this.router.navigate(['/monitor/indexes/object']);
-        }
-      }, 1000);
-    });
+        this.count = 5;
+        this.timer = setInterval( () => {
+          this.count -= 1;
+          if (this.count === 0) {
+            this.router.navigate(['/monitor/indexes/object']);
+          }
+        }, 1000);
+      });
+    }
   }
 }

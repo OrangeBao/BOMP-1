@@ -36,11 +36,11 @@ export class MonitorObjectsComponent implements OnInit {
   ngOnInit() {
     this.monitorService.getMonitorObjs().subscribe({
       next: (data: any) => {
-        this.monitorObjects = data || [];
+        this.monitorObjects = data.content || [];
 
         // TODO: only for test
-        this.monitorObjects.push(...this.monitorObjects);
-        this.monitorObjects.push(...this.monitorObjects);
+        // this.monitorObjects.push(...this.monitorObjects);
+        // this.monitorObjects.push(...this.monitorObjects);
 
         this.monitorFiltedObjects = this.monitorObjects;
       }

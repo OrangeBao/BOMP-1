@@ -1,9 +1,9 @@
 <div *ngIf="!isFinished">
-  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-    <div nz-row [nzGutter]="0" class="row">
+  <form nz-form [formGroup]="validateForm">
+    <div nz-row [nzGutter]="0">
       <div nz-col [nzSpan]="24">
-        <div nz-form-item nz-row class="row">
-          <div nz-form-label nz-col [nzSpan]="3">
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="3" class="column-left">
             <label [attr.for]="'name'" nz-form-item-required>名称</label>
           </div>
           <div nz-form-control nz-col [nzSpan]="8">
@@ -13,111 +13,119 @@
         </div>
       </div>
     </div>
-    <div nz-row [nzGutter]="0" class="row">
+    <div nz-row [nzGutter]="0">
       <div nz-col [nzSpan]="24">
-        <div nz-form-item nz-row class="row">
-          <div nz-form-label nz-col [nzSpan]="3">
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="3" class="column-left">
+            <label [attr.for]="'url'" nz-form-item-required>类型</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="8">
+            <nz-input [nzPlaceHolder]="'请输入...'" [formControlName]="'type'" [nzId]="'type'"></nz-input>
+            <div nz-form-explain *ngIf="getFormControl('type').dirty && getFormControl('type').hasError('required')">请输入类型</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="0">
+      <div nz-col [nzSpan]="24">
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="3" class="column-left">
             <label [attr.for]="'url'" nz-form-item-required>URL</label>
           </div>
           <div nz-form-control nz-col [nzSpan]="8">
             <nz-input [nzPlaceHolder]="'请输入...'" [formControlName]="'url'" [nzId]="'url'"></nz-input>
             <div nz-form-explain *ngIf="getFormControl('url').dirty && getFormControl('url').hasError('required')">支持表达式方式，例如： http://[11-12]:[221-223].11.11/[A-Z][bc]</div>
           </div>
-          <div nz-form-control nz-col [nzSpan]="4">
+          <!-- <div nz-form-control nz-col [nzSpan]="4">
             <div class="btn default" style="margin-left: 10px;" (click)="batchDeleteObjects()">测试连接</div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="0">
+      <div nz-col [nzSpan]="24">
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="3" class="column-left">
+            <label [attr.for]="'access'" nz-form-item-required>访问</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="8">
+            <nz-select [formControlName]="'access'" [nzPlaceHolder]="'请选择'">
+              <nz-option *ngFor="let option of accessList" [nzLabel]="option" [nzValue]="option">
+              </nz-option>
+            </nz-select>
+            <div nz-form-explain *ngIf="getFormControl('access').dirty && getFormControl('access').hasError('required')">请输入访问</div>
           </div>
         </div>
       </div>
     </div>
-    <div nz-row [nzGutter]="0" class="row">
+    <div nz-row [nzGutter]="0">
       <div nz-col [nzSpan]="24">
-        <div nz-form-item nz-row class="row">
-          <div nz-form-label nz-col [nzSpan]="3">
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="3" class="column-left">
+            <label [attr.for]="'authentication'" nz-form-item-required>Http认证</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="10">
+            <!-- <nz-checkbox-group [formControlName]="'authentication'" [(ngModel)]="checkOptionsOne"></nz-checkbox-group> -->
+            <app-form-checkbox-input [formControlName]="'authentication'"></app-form-checkbox-input>
+            <div nz-form-explain *ngIf="getFormControl('authentication').dirty && getFormControl('authentication').hasError('required')">请选择Http认证</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="0">
+      <div nz-col [nzSpan]="24">
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="3" class="column-left">
             <label [attr.for]="'permission'" nz-form-item-required>读/写</label>
           </div>
           <div nz-form-control nz-col [nzSpan]="8">
-            <!-- <nz-input [nzPlaceHolder]="'请输入...'" [formControlName]="'url'" [nzId]="'url'"></nz-input>
-                <div nz-form-explain *ngIf="getFormControl('url').dirty && getFormControl('url').hasError('required')">请输入名称</div> -->
             <span #permissionSpan>只读</span>
           </div>
         </div>
       </div>
     </div>
-    <div nz-row [nzGutter]="0" class="row">
+    <div nz-row [nzGutter]="0">
       <div nz-col [nzSpan]="24">
-        <div nz-form-item nz-row class="row">
-          <div nz-form-label nz-col [nzSpan]="3">
-            <label [attr.for]="'type'" nz-form-item-required>类型</label>
-          </div>
-          <div nz-form-control nz-col [nzSpan]="8">
-            <nz-select [formControlName]="'type'" [nzPlaceHolder]="'请选择'">
-              <nz-option *ngFor="let option of typeList" [nzLabel]="option" [nzValue]="option">
-              </nz-option>
-            </nz-select>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div nz-row [nzGutter]="0" class="row">
-      <div nz-col [nzSpan]="24">
-        <div nz-form-item nz-row class="row">
-          <div nz-form-label nz-col [nzSpan]="3">
-            <label [attr.for]="'basicAuthUser'">用户名</label>
-          </div>
-          <div nz-form-control nz-col [nzSpan]="8">
-            <nz-input [nzPlaceHolder]="'请输入...'" [formControlName]="'basicAuthUser'" [nzId]="'basicAuthUser'"></nz-input>
-            <div nz-form-explain *ngIf="getFormControl('basicAuthUser').dirty && getFormControl('basicAuthUser').hasError('required')">请输入名称</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div nz-row [nzGutter]="0" class="row">
-      <div nz-col [nzSpan]="24">
-        <div nz-form-item nz-row class="row">
-          <div nz-form-label nz-col [nzSpan]="3">
-            <label [attr.for]="'basicAuthPassword'">密码</label>
-          </div>
-          <div nz-form-control nz-col [nzSpan]="8">
-            <nz-input [nzPlaceHolder]="'请输入...'" [formControlName]="'basicAuthPassword'" [nzId]="'basicAuthPassword'"></nz-input>
-            <div nz-form-explain *ngIf="getFormControl('basicAuthPassword').dirty && getFormControl('basicAuthPassword').hasError('required')">请输入密码</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div nz-row [nzGutter]="0" class="row">
-      <div nz-col [nzSpan]="24">
-        <div nz-form-item nz-row class="row">
-          <div nz-form-label nz-col [nzSpan]="3">
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="3" class="column-left">
             <label [attr.for]="'description'">描述</label>
           </div>
           <div nz-form-control nz-col [nzSpan]="8">
             <nz-input [nzPlaceHolder]="'请输入...'" [formControlName]="'description'" [nzId]="'description'" [nzType]="'textarea'" [nzRows]="'4'"></nz-input>
-            <div nz-form-explain *ngIf="getFormControl('description').dirty && getFormControl('description').hasError('required')">不超过200个字符</div>
+            <div nz-form-explain>不超过200个字符</div>
           </div>
         </div>
       </div>
     </div>
-    <div nz-form-item nz-row>
-      <div nz-form-control nz-col [nzSpan]="11" style="text-align: center;">
-        <button nz-button [nzType]="'primary'" [disabled]="!validateForm.valid">
+    <div nz-row [nzGutter]="0">
+      <div class="btn default" style="margin-left: 204px;" (click)="batchDeleteObjects()">测试连接</div>
+    </div>
+  </form>
+  <!-- <span style="border-top: solid 1px #ccc; margin-top: 30px; margin-bottom: 15px;"></span> -->
+  <hr style="color: #ccc; margin-top: 30px; margin-bottom: 15px;" />
+  <div style="text-align: right;">
+    <div nz-row [nzGutter]="0">
+      <div nz-form-control nz-col [nzSpan]="13">
+        <button nz-button [nzType]="'primary'" style="margin-right: 20px;" (click)="submitForm()">
           <span>完成</span>
         </button>
         <button nz-button>
-          <span>取消</span>
-        </button>
+            <span>取消</span>
+          </button>
       </div>
     </div>
-  </form>
+  </div>
 </div>
 
 <div *ngIf="isFinished">
-    <div class="form-w">
-        <div class="dark-wrapper">
-            <img src="assets/u4513.png"/>
-            <div class="jump-info-w">
-                <span class="count-w">添加数据源成功，页面即将跳转 <span>{{count}}</span> s.{{count % 2 === 0 ? '..' : ''}}</span>
-                <a routerLink="../table">返回控制台</a>
-            </div>
-        </div>
+  <div class="form-w">
+    <div class="dark-wrapper">
+      <img src="assets/u4513.png" />
+      <div class="jump-info-w">
+        <span class="count-w">添加数据源成功，页面即将跳转
+          <span>{{count}}</span> s.{{count % 2 === 0 ? '..' : ''}}</span>
+        <a routerLink="../table">返回控制台</a>
+      </div>
     </div>
+  </div>
 </div>
