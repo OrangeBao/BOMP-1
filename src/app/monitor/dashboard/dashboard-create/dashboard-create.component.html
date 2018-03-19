@@ -59,19 +59,20 @@
         <div class="list-w">
             <div class="scroll-w">
                 <div class="checkbox-group">
-                    <label *ngFor="let item of monitorObjsOption" nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="updateSelectMonitorObjs($event, item.value)">
+                    <label *ngFor="let item of monitorObjsOption" (mouseenter)="modifyHoverObj(item, true)" (mouseleave)="modifyHoverObj(item)" nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="updateSelectMonitorObjs($event, item.value)">
                         <span>{{item.label}}</span>
                     </label>
                 </div>
             </div>
             <div class="display-w">
-                <ng-container *ngFor="let mobj of displayMonitorObjs">
-                    <div class="template-title">{{mobj.name}}</div>
-                    <div class="template-desc">{{mobj.desc}}</div>
-                    <div *ngFor="let tag of mobj.tags" class="m-tag">
-                        <span>{{tag}}</span>
-                    </div>
-                </ng-container>
+                <div class="template-title">{{displayMonitorObjs?.name}}</div>
+                <div class="template-desc">{{displayMonitorObjs?.desc}}</div>
+                <div  class="m-tag f" *ngIf="displayMonitorObjs">
+                    <span>#</span>
+                </div>
+                <div *ngFor="let tag of displayMonitorObjs?.tags" class="m-tag">
+                    <span>{{tag}}</span>
+                </div>
             </div>
         </div>
     </div>
@@ -114,21 +115,18 @@
 </ng-template>
 
 <ng-template #stepFour>
-    <div>
+    <div class="step-four-w">
         <div class="template-title">{{displayTemplate?.title}}</div>
+        <div class="tag-w">
+            <div *ngFor="let tag of displayTemplate.tags" class="m-tag">
+                <span>{{tag}}</span>
+            </div>
+        </div>
         <div class="template-desc">{{displayTemplate?.desc}}</div>
-        <div *ngFor="let tag of displayTemplate.tags" class="m-tag">
-            <span>{{tag}}</span>
-        </div>
-        <div>
-            <ng-container *ngFor="let mobj of displayMonitorObjs">
-                <div class="template-title">{{mobj.name}}</div>
-                <div class="template-desc">{{mobj.desc}}</div>
-                <div *ngFor="let tag of mobj.tags" class="m-tag">
-                    <span>{{tag}}</span>
-                </div>
-            </ng-container>
-        </div>
+        <div class="monitor-t">读数据源:</div>
+        <ng-container *ngFor="let mon of monitorObjsOption" >
+            <div class="monitor-title" *ngIf="mon.checked">{{mon?.label}}</div>
+        </ng-container>
     </div>
 </ng-template>
 

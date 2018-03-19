@@ -1,35 +1,38 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, HostListener } from '@angular/core';
 import { DashboardService } from '../../../common/services/dashboard/dashboard.service';
 import { UserService } from '../../../common/services/user/user.service';
-import { NotificationsService, LoadingService } from '../../../common/share.module';
+import { LoadingService } from '../../../common/share.module';
 import { ModalService } from 'zu-modal';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Dashboard } from '../../../common/models/dashboard';
 import { validateCounterRange } from '../../../common/directives/tag-input/tag-input.component';
+import { NzNotificationService } from 'ng-zorro-antd';
+
+import { PageComponent } from '../../../common/components/page.component';
 
 @Component({
   selector: 'app-dashboard-list',
   templateUrl: './dashboard-list.component.html',
   styleUrls: ['./dashboard-list.component.scss']
 })
-export class DashboardListComponent implements OnInit {
+export class DashboardListComponent extends PageComponent implements OnInit  {
   @ViewChild('modifyFormUrl') modifyFormUrl: TemplateRef<any>;
-  choiceList: Array<string> = [];
-  isDeleteModel: boolean = false;
-
-  isTouched: boolean = false;
 
   baseInfo: any = {};
   modifyForm: FormGroup;
+
+  sort: any;   // 排序
+  filter: any; // 过滤
 
   constructor(
       private dashboardService: DashboardService,
       private userService: UserService,
       private spinnerService: LoadingService,
-      private notificationsService: NotificationsService,
+      private notification: NzNotificationService,
       private modalService: ModalService,
       private fb: FormBuilder
   ) {
+    super();
     this.modifyForm = this.fb.group({
       name              : [ '', [ Validators.required ] ],
       tags              : [ '', [ Validators.required ] ],
@@ -62,21 +65,45 @@ export class DashboardListComponent implements OnInit {
       (item.tags || []).find(t => this.includeTags.includes(t)));
   }
 
-  ngOnInit() {
-    this.spinnerService.show();
+  requestData(needLoading, append) {
+    needLoading && this.spinnerService.show();
     this.dashboardService.getDashboardList().subscribe(response => {
-      this.spinnerService.hide();
-      this.dashboards = response;
+      needLoading && this.spinnerService.hide();
+      if (append) {
+        this.dashboards = [...this.dashboards, ...response.content];
+      } else {
+        this.dashboards = response.content
+      }
     }, err => {
-      this.spinnerService.hide();
-      this.notificationsService.addError('系统异常，请联系管理员！');
+      needLoading && this.spinnerService.hide();
+      this.notification.create('error', '异常', '仪表盘初始化异常，请联系管理员！');
       console.error(err);
     });
+  }
+
+  fetchData(endLoad, showNoMore) {
+    this.dashboardService.getDashboardList().subscribe(response => {
+      debugger;
+      if (response.last === true) {
+        showNoMore();
+      } else {
+        endLoad();
+      }
+      this.dashboards = [...this.dashboards, ...response.content];
+    }, err => {
+      this.notification.create('error', '异常', '仪表盘初始化异常，请联系管理员！');
+      console.error(err);
+    });
+  }
+
+  ngOnInit() {
+    this.requestData(true, false);
   }
   setHomePage(uri) {
     this.spinnerService.show();
     this.userService.setHomePage(uri).then(() => this.spinnerService.hide());
   }
+
   deleteDashbaordConfirm(id) {
     this.modalService.warn({
       title: '删除',
@@ -84,6 +111,7 @@ export class DashboardListComponent implements OnInit {
       onOk: () => this.deleteDashbaord(id),
     });
   }
+
   deleteDashbaord(id) {
     const param = id.split('b/')[1];
     this.spinnerService.show();
@@ -92,7 +120,7 @@ export class DashboardListComponent implements OnInit {
       this.dashboards = this.dashboards.filter(item => item.uri !== id);
     }).catch(err => {
       this.spinnerService.hide();
-      this.notificationsService.addError('系统异常，请联系管理员！');
+      this.notification.create('error', '异常', '仪表盘初始化异常，请联系管理员！');
       console.error(err);
     });
   }
@@ -105,8 +133,6 @@ export class DashboardListComponent implements OnInit {
 
   editDashboard(id) {
     this.baseInfo = {...this.dashboards.find(i => i.uri === id)};
-    // this.baseInfo = this.dashboards.find(i => i.uri === id);
-    // this.modalService.show(this.editModalId);
     this.modifyForm.controls['name'].setValue(this.baseInfo.title);
     this.modifyForm.controls['tags'].setValue(this.baseInfo.tags);
     this.modifyForm.controls['remark'].setValue(this.baseInfo.desc);
@@ -126,36 +152,10 @@ export class DashboardListComponent implements OnInit {
       }
     })
   }
-  
-  modifyInfo() {
-    // if (!this.baseInfoForm.valid) {
-    //   this.isTouched = true;
-    // } else {
-    //   // this.modalService.hide(this.editModalId);
-    // }
-  }
-
-  isChoice(uri) {
-    return this.choiceList.includes(uri);
-  }
-
-  deleteModel() {
-    this.choiceList = [];
-    this.isDeleteModel = !this.isDeleteModel;
-  }
-  addChoice(uri, event) {
-    if (this.isDeleteModel) {
-      if (this.choiceList.includes(uri)) {
-        this.choiceList = this.choiceList.filter(i => i !== uri);
-      } else {
-        this.choiceList.push(uri);
-      }
-    }
-  }
+ 
   confirmDelete() {
     const choiceList = this.choiceList;
     if (choiceList.length === 0) return;
-    debugger;
     this.modalService.warn({
       title: '删除',
       content: `已选择${choiceList.length}个仪表盘，确定删除？`,
@@ -165,6 +165,7 @@ export class DashboardListComponent implements OnInit {
       },
     });
   }
+  
   allSelectChange() {
     if (this.isAll) {
       this.choiceList = [];
@@ -172,6 +173,7 @@ export class DashboardListComponent implements OnInit {
       this.choiceList = (this.dashboards || []).map(item => item.uri);
     }
   }
+
   tagChange($event) {
     this.includeTags = $event;
   }
@@ -179,4 +181,6 @@ export class DashboardListComponent implements OnInit {
   getFormControl(name) {
     return this.modifyForm.controls[ name ];
   }
+
+  
 }

@@ -12,7 +12,7 @@ export class TagBarComponent implements OnInit {
   @Input() tags: string[];
   @Output() change = new EventEmitter();
   selectTag: string[] = [];
-  isNone: boolean = false;
+  isNone: boolean = true;
   isShowAll: boolean = false;
   constructor() { }
 
@@ -24,6 +24,7 @@ export class TagBarComponent implements OnInit {
   }
 
   select(tag) {
+    this.isNone = false;
     if (this.selectTag.find(t => t === tag)) {
       this.selectTag = this.selectTag.filter(t => t !== tag);
     } else {
@@ -42,6 +43,7 @@ export class TagBarComponent implements OnInit {
 
   selectNone() {
     this.isNone = !this.isNone;
+    this.selectTag = [];
     this.emitChange();
   }
 
