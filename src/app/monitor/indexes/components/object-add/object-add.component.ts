@@ -49,8 +49,8 @@ export class ObjectAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataSourceService.getAll().subscribe(data => {
-      this.dataSourceList = data;
+    this.dataSourceService.getAll(0).subscribe(data => {
+      this.dataSourceList = data.content || [];
     });
 
     this.validateForm = this.fb.group({

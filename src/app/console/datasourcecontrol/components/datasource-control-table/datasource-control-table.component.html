@@ -13,8 +13,10 @@
   </div>
 
   <div>
-    <nz-table #nzTable [nzDataSource]="dataSources" [nzSize]="'small'" [nzBordered]="'false'" 
-      [nzPageSize]="10" [nzShowTotal]="true" nzShowSizeChanger [nzShowQuickJumper]="true">
+    <!-- <nz-table #nzTable [nzDataSource]="dataSources" [nzSize]="'small'" [nzBordered]="'false'" 
+      [nzPageSize]="10" [nzShowTotal]="true" nzShowSizeChanger [nzShowQuickJumper]="true"> -->
+    <nz-table #nzTable [nzAjaxData]="dataSources" [nzSize]="'small'" [nzBordered]="'false'" [nzShowSizeChanger]="true" [nzShowQuickJumper]="true" [nzShowTotal]="true" [nzTotal]="_total" 
+      (nzPageIndexChange)="refreshData()" [(nzPageIndex)]="_current" [(nzPageSize)]="_pageSize" (nzPageSizeChange)="refreshData(true)">
       <thead nz-thead>
         <tr style="height: 44px;">
           <th nz-th [nzWidth]="'100px'">
