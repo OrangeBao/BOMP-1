@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { DashboardService } from './common/services/dashboard/dashboard.service';
@@ -20,10 +21,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TabComponent } from './common/directives/tab/tab.component';
 
-import { TemplateModule } from './template/template.module';
 import { TransformMenuPipe } from './common/pipes/transform-menu.pipe';
 
-import { ShareModule, NotificationsService} from './common/share.module';
+import { ShareModule } from './common/share.module';
 
 import { ModalModule } from 'zu-modal';
 
@@ -44,7 +44,6 @@ export function configFactory(config: UserService, config2: GrafanaService) {
   imports: [
     BrowserModule,
     HttpClientModule,
-    TemplateModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ModalModule.forRoot(),
@@ -67,7 +66,6 @@ export function configFactory(config: UserService, config2: GrafanaService) {
     UserService,
     AuthGuardService,
     DataSourceService,
-    NotificationsService,
     DicService,
     GrafanaService
   ],

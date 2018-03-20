@@ -29,6 +29,8 @@ import { ObjectEditorModalComponent } from './indexes/components/object-editor-m
 import { ObjectDeleteModalComponent } from './indexes/components/object-delete-modal/object-delete-modal.component';
 
 import { TemplateListComponent } from './template/template-list/template-list.component';
+import { TemplateCreateComponent } from './template/template-create/template-create.component';
+import { TemplateEditComponent } from './template/template-edit/template-edit.component';
 
 @NgModule({
   imports: [
@@ -59,7 +61,9 @@ import { TemplateListComponent } from './template/template-list/template-list.co
     ObjectAddComponent,
     ObjectEditorModalComponent,
     ObjectDeleteModalComponent,
-    TemplateListComponent
+    TemplateListComponent,
+    TemplateCreateComponent,
+    TemplateEditComponent
   ],
   entryComponents: [IndexEditorModalComponent, ObjectEditorModalComponent, ObjectDeleteModalComponent],
   providers: [

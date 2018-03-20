@@ -42,7 +42,7 @@ export class TagBarComponent implements OnInit {
   }
 
   selectNone() {
-    this.isNone = !this.isNone;
+    this.isNone = true;
     this.selectTag = [];
     this.emitChange();
   }

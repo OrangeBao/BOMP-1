@@ -35,7 +35,7 @@ export class DashboardListComponent extends PageComponent implements OnInit  {
     super();
     this.modifyForm = this.fb.group({
       name              : [ '', [ Validators.required ] ],
-      tags              : [ '', [ Validators.required ] ],
+      tags              : [ '', [ validateCounterRange ] ],
       remark            : [ '' ],
     });
   }
@@ -83,7 +83,6 @@ export class DashboardListComponent extends PageComponent implements OnInit  {
 
   fetchData(endLoad, showNoMore) {
     this.dashboardService.getDashboardList().subscribe(response => {
-      debugger;
       if (response.last === true) {
         showNoMore();
       } else {

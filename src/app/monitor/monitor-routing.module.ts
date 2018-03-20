@@ -15,6 +15,9 @@ import { MonitorIndexesComponent } from "./indexes/components/monitor-indexes/mo
 import { ObjectAddComponent} from './indexes/components/object-add/object-add.component';
 
 import { TemplateComponent } from './template/template.component';
+import { TemplateListComponent } from './template/template-list/template-list.component';
+import { TemplateCreateComponent } from './template/template-create/template-create.component';
+import { TemplateEditComponent } from './template/template-edit/template-edit.component';
 
 const monitorRoutes: Routes = [
   {
@@ -26,8 +29,7 @@ const monitorRoutes: Routes = [
         path: '',
         redirectTo: 'indexes',
         pathMatch: 'full'
-      },
-      {
+      }, {
         path: 'dashboard',
         children: [
           {
@@ -45,19 +47,23 @@ const monitorRoutes: Routes = [
             component: DashboardCreateComponent,
           }
         ]
-      // }, {
-      //   path: 'target',
-      //   component: TargetComponent,
-      //   children: [
-      //     {
-      //       path: 'item',
-      //       component: ItemComponent,
-      //     },
-      //     {
-      //       path: 'object',
-      //       component: ObjectComponent,
-      //     },
-      //   ]
+      }, {
+        path: 'template',
+        children: [
+          {
+            path: '',
+            redirectTo: 'list',
+            pathMatch: 'full'
+          },
+          {
+            path: 'list',
+            component: TemplateListComponent,
+          },
+          {
+            path: 'create',
+            component: TemplateCreateComponent,
+          }
+        ]
       }, {
         path: 'indexes',
         component: IndexesComponent,
@@ -80,9 +86,6 @@ const monitorRoutes: Routes = [
             component: ObjectAddComponent
           }
         ]
-      }, {
-        path: 'template',
-        component: TemplateComponent
       }
     ]
   }

@@ -7,5 +7,6 @@ export const environment = {
   production: false,
   host: '/',
   grafanaHost: 'http://10.139.12.21:3000/',
-  notLogin: true
+  notLogin: true,
+  uploadUrl: 'api/monitor/files/upload',
 };
