@@ -98,6 +98,7 @@ app-tag-bar {
         width: calc(100% - 140px);
         .title-w {
           display: flex;
+          justify-content: space-between;
         }
         .title {
           overflow:hidden;
@@ -133,6 +134,7 @@ app-tag-bar {
           justify-content: flex-end;
           align-items: center;
           visibility: hidden;
+          color: #cccccc !important;
           i {
             margin-left: 10px;
             &.isAtive {
@@ -196,6 +198,7 @@ app-tag-bar {
 
 .iconfont {
   cursor: pointer;
+  font-size: 12px;
   &:hover {
     color: #5cb9ff;
   }

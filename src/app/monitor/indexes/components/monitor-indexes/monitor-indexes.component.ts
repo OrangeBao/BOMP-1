@@ -9,8 +9,8 @@ import { IndexEditorModalComponent } from '../index-editor-modal/index-editor-mo
   styleUrls: ["./monitor-indexes.component.scss"]
 })
 export class MonitorIndexesComponent implements OnInit {
-  @ViewChild('tpl')
-  tpl: TemplateRef<any>;
+  // @ViewChild('tpl')
+  // tpl: TemplateRef<any>;
 
   _allChecked = false;
   _indeterminate = false;
@@ -71,7 +71,7 @@ export class MonitorIndexesComponent implements OnInit {
     console.log(data);
 
     this.modalService.open({
-      title          : this.tpl,
+      title          : '编辑指标',
       content        : IndexEditorModalComponent,
       footer         : false,
       closable: true,

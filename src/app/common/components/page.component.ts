@@ -1,5 +1,4 @@
 import { HostListener } from '@angular/core';
-import { ModalService } from 'zu-modal';
 
 export abstract class PageComponent {
 
@@ -16,14 +15,16 @@ export abstract class PageComponent {
     // 监控 window 滚动事件
     @HostListener('window:scroll', ['$event.target.documentElement'])
     onScroll(docEle) {
+        
         if (!this.noMore && !this.isDeleteModel && !this.needLoad && docEle.scrollTop + docEle.clientHeight === docEle.scrollHeight) {
+            console.log('trigger');
             this.needLoad = true;
             setTimeout(() => this.fetchData(() => this.needLoad = false, () => {
                 this.noMore = true;
                 setTimeout(() => {
                     this.noMore = false;
                     this.needLoad = false;
-                }, 4000);
+                }, 2000);
             }), 2000);
         }
     }

@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../user/user.service';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class TemplateService {
 
-  private templateUrl = "api/manager/relations/templates";
+  private templateUrl = "api/monitor/templates";
 
   constructor(private http: HttpClient, private userService: UserService) { }
 
-  getAll(): Promise<any> {
-    return this.http.get(`${this.templateUrl}?renterType=USER&renterId=${this.userService.getUserInfo().userId}`)
-        .toPromise()
-        .catch(this.handleError);
+  getTemplateList(): Observable<any> {
+    return this.http.get(`${this.templateUrl}`);
   }
 
   private handleError(error: any): Promise<any> {

@@ -1,4 +1,4 @@
 export class File {
-    id: number;
+    hash: string;
     name: string;
 }

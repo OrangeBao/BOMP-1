@@ -80,9 +80,7 @@
             <div nz-form-label nz-col [nzSpan]="4">
               <label nz-form-item-required>标签</label>
             </div>
-            <div nz-col [nzSpan]="15" nz-form-control nzHasFeedback>
-              <!-- <nz-input formControlName="tags" [nzType]="'text'" [nzPlaceHolder]="'请输入'" [nzSize]="'large'">
-              </nz-input> -->
+            <div nz-col [nzSpan]="15" nz-form-control>
               <app-tag-input formControlName="tags" ></app-tag-input>
               <div nz-form-explain *ngIf="getFormControl('tags').dirty&&getFormControl('tags').hasError('required')">请输入tags!</div>
             </div>
