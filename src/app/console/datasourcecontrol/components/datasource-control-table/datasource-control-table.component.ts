@@ -41,7 +41,7 @@ export class DatasourceControlTableComponent implements OnInit {
           .subscribe(result => {
             this.spinnerService.hide();
 
-            // this.refreshMonitorObjects();
+            this.refreshData();
           });
       }
     });
