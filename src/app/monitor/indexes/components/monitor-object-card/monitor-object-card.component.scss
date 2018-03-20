@@ -13,7 +13,7 @@
 }
 
 .selected {
-    border: 1px solid #4593FD;
+  border: 1px solid #4593fd;
 }
 
 .title {
@@ -22,12 +22,13 @@
   align-items: center;
   font-size: 14px;
   margin-bottom: 10px;
-  font-family: 'PingFangSC-Medium', 'PingFang SC Medium', 'PingFang SC';
+  font-family: "PingFangSC-Medium", "PingFang SC Medium", "PingFang SC";
+  color: #3c3e4a;
 }
 
 .more > i {
   cursor: pointer;
-  font-size:12px;
+  font-size: 12px;
 }
 
 .index {
@@ -38,6 +39,7 @@
 }
 
 .description {
+  font-size: 14px;
   color: #b5b5b5;
   overflow: hidden;
   text-overflow: ellipsis;

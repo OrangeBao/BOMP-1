@@ -49,10 +49,10 @@ export class DatasourceControlAddComponent implements OnInit {
     this.accessList = ["代理"];
     this.typeList = ["OpenTSDB", "InfluxDB", "AMS", "Prometheus"];
     this.authenticationList = [
-      { label: "基础认证", value: "Apple" },
-      { label: "启用证书", value: "Pear" },
-      { label: "TLS客户端认证", value: "Orange" },
-      { label: "启用CA认证", value: "Purple" }
+      { label: "基础认证", value: "basicAuth" }
+      // { label: "启用证书", value: "启用证书" },
+      // { label: "TLS客户端认证", value: "TLS客户端认证" },
+      // { label: "启用CA认证", value: "启用CA认证" }
     ];
   }
 
@@ -65,6 +65,8 @@ export class DatasourceControlAddComponent implements OnInit {
       permission: ["只读", [Validators.required]],
       authentication: [this.authenticationList, [Validators.required]],
       description: [null]
+      // basicAuthUser: [null, [Validators.required]],
+      // basicAuthPassword: [null, [Validators.required]]
     });
   }
 
@@ -76,6 +78,32 @@ export class DatasourceControlAddComponent implements OnInit {
     this.timer && clearInterval(this.timer);
   }
 
+  showAuthDialog() {
+    // TODO: rxjs
+    const flag: boolean =
+      this.getFormControl("authentication").value.filter(
+        r => r.value === "basicAuth" && r.checked
+      ).length > 0;
+
+    if (flag) {
+      const basicAuthUser: FormControl = new FormControl(
+        null,
+        Validators.required
+      );
+      this.validateForm.addControl("basicAuthUser", basicAuthUser);
+      const basicAuthPassword: FormControl = new FormControl(
+        null,
+        Validators.required
+      );
+      this.validateForm.addControl("basicAuthPassword", basicAuthPassword);
+    } else {
+      this.validateForm.removeControl("basicAuthUser");
+      this.validateForm.removeControl("basicAuthPassword");
+    }
+
+    return flag;
+  }
+
   getFormControl(name) {
     return this.validateForm.controls[name];
   }
@@ -84,6 +112,7 @@ export class DatasourceControlAddComponent implements OnInit {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
     }
+
     if (this.validateForm.valid) {
       let dataSource: DataSource = new DataSource();
       Object.assign(dataSource, {
@@ -93,23 +122,29 @@ export class DatasourceControlAddComponent implements OnInit {
         permission: this.permissionSpan.nativeElement.innerHTML,
         // TODO: 怎么只返回checked的list
         // authentication: this.getFormControl("authentication").value,
-        authentication: this.getFormControl("authentication").value.filter(r=> r.checked).map(r=>r.value),
+        // authentication: this.getFormControl("authentication")
+        //   .value.filter(r => r.checked)
+        //   .map(r => r.value),
+        basicAuth:
+          this.getFormControl("authentication").value.filter(
+            r => r.value === "basicAuth" && r.checked
+          ).length > 0,
+        basicAuthUser: this.getFormControl("basicAuthUser").value,
+        basicAuthPassword: this.getFormControl("basicAuthPassword").value,
         desc: this.getFormControl("description").value
       });
 
-      console.log(dataSource);
+      this.dataSourceService.addDataSource(dataSource).subscribe(()=>{
+        this.isFinished = true;
 
-      // this.dataSourceService.addDataSource(dataSource).subscribe(()=>{
-      //   this.isFinished = true;
-
-      //   this.count = 5;
-      //   this.timer = setInterval( () => {
-      //     this.count -= 1;
-      //     if (this.count === 0) {
-      //       this.router.navigate(['/console/datasourcecontrol/table']);
-      //     }
-      //   }, 1000);
-      // });
+        this.count = 5;
+        this.timer = setInterval( () => {
+          this.count -= 1;
+          if (this.count === 0) {
+            this.router.navigate(['/console/datasourcecontrol/table']);
+          }
+        }, 1000);
+      });
     }
   }
 }

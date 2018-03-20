@@ -17,8 +17,12 @@ export class DataSourceService {
   //       .catch(this.handleError);
   // }
   //new getAll
-  getAll(): Observable<any> {
-    return this.http.get(DATA_SOURCE_URL);
+  getAll(number: number, size?: number): Observable<any> {
+    let url = `api/monitor/datasources?number=${number}`;
+    if(size) {
+      url += `&size=${size}`;
+    }
+    return this.http.get(url);
   }
 
   private handleError(error: any): Promise<any> {

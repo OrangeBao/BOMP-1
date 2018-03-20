@@ -12,9 +12,9 @@ import { DataSourceService } from "../../../../common/services/data-source/data-
   styleUrls: ["./datasource-control-table.component.scss"]
 })
 export class DatasourceControlTableComponent implements OnInit {
-  // temp
-  displayData = [];
-  // end temp
+  _current = 1;
+  _pageSize = 10;
+  _total = 1;
 
   dataSources: Array<DataSource> = [];
   searchText: string;
@@ -27,12 +27,7 @@ export class DatasourceControlTableComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.datasourceService.getAll().subscribe(data => {
-    //   this.dataSources = data;
-
-    //   this.dataSources.push(...this.dataSources);
-    //   this.dataSources.push(...this.dataSources);
-    // });
+    this.refreshData();
   }
 
   onConfirmDelete(dataSource: DataSource) {
@@ -46,12 +41,18 @@ export class DatasourceControlTableComponent implements OnInit {
           .subscribe(result => {
             this.spinnerService.hide();
 
-            // this.refreshMonitorObjects();
+            this.refreshData();
           });
       }
     });
   }
   
+  refreshData() {
+    this.datasourceService.getAll(this._current, this._pageSize).subscribe(data => {
+      this.dataSources = data.content || [];
+      this._total = data.totalElements;
+    });
+  };
 
   addDatasource() {
     this.router.navigateByUrl("/console/datasourcecontrol/add");
