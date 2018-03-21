@@ -1,8 +1,16 @@
 
+.row {
+    display: flex;
+}
 
+.column-left {
+    width: 204px;
+    padding-right: 10px;
+}
 
-
-
+.column-right {
+    width: 400px;
+}
 
 .form-w {
     display: flex;

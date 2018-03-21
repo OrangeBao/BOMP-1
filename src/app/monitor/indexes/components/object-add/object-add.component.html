@@ -1,38 +1,28 @@
 <div *ngIf="!isFinished">
-  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-    <div nz-row [nzGutter]="0" class="row">
-      <div nz-col [nzSpan]="24">
-        <div nz-form-item nz-row class="row">
-          <div nz-form-label nz-col [nzSpan]="4">
-            <label [attr.for]="'name'" nz-form-item-required>名称</label>
-          </div>
-          <div nz-form-control nz-col [nzSpan]="20">
-            <nz-input [nzPlaceHolder]="'请输入...'" [formControlName]="'name'" [nzId]="'name'"></nz-input>
-            <div nz-form-explain *ngIf="getFormControl('name').dirty && getFormControl('name').hasError('required')">请输入名称</div>
-          </div>
-        </div>
+  <form nz-form [formGroup]="validateForm">
+    <div nz-form-item class="row">
+      <div nz-form-label class="column-left">
+        <label [attr.for]="'name'" nz-form-item-required>名称</label>
+      </div>
+      <div nz-form-control class="column-right">
+        <nz-input [nzPlaceHolder]="'请输入...'" [formControlName]="'name'" [nzId]="'name'"></nz-input>
+        <div nz-form-explain *ngIf="getFormControl('name').dirty && getFormControl('name').hasError('required')">请输入名称</div>
       </div>
     </div>
-    <div nz-row [nzGutter]="0" class="row">
-      <div nz-col [nzSpan]="24">
-        <div nz-form-item nz-row class="row">
-          <div nz-form-label nz-col [nzSpan]="4">
-            <label [attr.for]="'description'" nz-form-item-required>描述</label>
-          </div>
-          <div nz-form-control nz-col [nzSpan]="20">
-            <nz-input [nzPlaceHolder]="'请输入...'" [formControlName]="'description'" [nzId]="'description'"></nz-input>
-            <div nz-form-explain *ngIf="getFormControl('description').dirty && getFormControl('description').hasError('required')">请输入描述信息</div>
-          </div>
-        </div>
+    <div nz-form-item class="row">
+      <div nz-form-label class="column-left">
+        <label [attr.for]="'description'" nz-form-item-required>描述</label>
+      </div>
+      <div nz-form-control class="column-right">
+        <nz-input [nzPlaceHolder]="'请输入...'" [formControlName]="'description'" [nzId]="'description'"></nz-input>
+        <div nz-form-explain *ngIf="getFormControl('description').dirty && getFormControl('description').hasError('required')">请输入描述信息</div>
       </div>
     </div>
-    <div nz-row [nzGutter]="0" class="row">
-      <div nz-col [nzSpan]="24">
-        <div nz-form-item nz-row class="row">
-          <div nz-form-label nz-col [nzSpan]="4">
-            <label [attr.for]="'tags'">标签</label>
-          </div>
-          <!-- <div nz-form-control nz-col [nzSpan]="20">
+    <div nz-form-item class="row">
+      <div nz-form-label class="column-left">
+        <label [attr.for]="'tags'" nz-form-item-required>标签</label>
+      </div>
+      <!-- <div nz-form-control class="column-right">
             <ng-container *ngFor="let tag of tempTags">
               <nz-tag [nzClosable]="true" (nzClose)="deleteTag(tag)">{{tag}}</nz-tag>
             </ng-container>
@@ -43,26 +33,20 @@
             <input nz-input #input *ngIf="isAddingTag" type="text" [(ngModel)]="newTagValue" [ngModelOptions]="{standalone: true}" style="width: 100px;"
               (blur)="confirmAddTag()" (keydown.enter)="confirmAddTag()">
           </div> -->
-          <div nz-form-control nz-col [nzSpan]="20">
-              <app-tag-input formControlName="tags"></app-tag-input>
-              <div nz-form-explain *ngIf="getFormControl('tags').dirty && getFormControl('tags').hasError('required')">请输入tags!</div>
-          </div>
-        </div>
+      <div nz-form-control class="column-right">
+        <app-tag-input formControlName="tags"></app-tag-input>
+        <div nz-form-explain *ngIf="getFormControl('tags').dirty && getFormControl('tags').hasError('required')">请输入tags!</div>
       </div>
     </div>
-    <div nz-row [nzGutter]="0" class="row">
-      <div nz-col [nzSpan]="24">
-        <div nz-form-item nz-row class="row">
-          <div nz-form-label nz-col [nzSpan]="4">
-            <label [attr.for]="'datasource'" nz-form-item-required>读数据源</label>
-          </div>
-          <div nz-form-control nz-col [nzSpan]="20">
-            <nz-select [formControlName]="'datasource'" [nzPlaceHolder]="'请选择'">
-              <nz-option *ngFor="let option of dataSourceList" [nzLabel]="option.name" [nzValue]="option">
-              </nz-option>
-            </nz-select>
-          </div>
-        </div>
+    <div nz-form-item class="row">
+      <div nz-form-label class="column-left">
+        <label [attr.for]="'datasource'" nz-form-item-required>读数据源</label>
+      </div>
+      <div nz-form-control class="column-right">
+        <nz-select [formControlName]="'datasource'" [nzPlaceHolder]="'请选择'">
+          <nz-option *ngFor="let option of dataSourceList" [nzLabel]="option.name" [nzValue]="option">
+          </nz-option>
+        </nz-select>
       </div>
     </div>
     <!-- <div nz-form-item nz-row>
@@ -73,19 +57,26 @@
       </div>
     </div> -->
   </form>
-  <button nz-button [nzType]="'primary'" (click)="submitForm()">
+  <hr style="color: #ccc; margin-top: 30px; margin-bottom: 15px;" />
+  <div class='row' style="display: flex; justify-content: flex-end; width: 700px;">
+    <button nz-button [nzType]="'primary'" style="margin-right: 20px;" (click)="submitForm()">
       <span>确定</span>
     </button>
+    <button nz-button>
+      <span>取消</span>
+    </button>
+  </div>
 </div>
 
 <div *ngIf="isFinished">
-    <div class="form-w">
-        <div class="dark-wrapper">
-            <img src="assets/u4513.png"/>
-            <div class="jump-info-w">
-                <span class="count-w">新建监控对象成功，页面即将跳转 <span>{{count}}</span> s.{{count % 2 === 0 ? '..' : ''}}</span>
-                <a routerLink="../table">返回控制对象</a>
-            </div>
-        </div>
+  <div class="form-w">
+    <div class="dark-wrapper">
+      <img src="assets/u4513.png" />
+      <div class="jump-info-w">
+        <span class="count-w">新建监控对象成功，页面即将跳转
+          <span>{{count}}</span> s.{{count % 2 === 0 ? '..' : ''}}</span>
+        <a routerLink="../table">返回控制对象</a>
+      </div>
     </div>
+  </div>
 </div>
