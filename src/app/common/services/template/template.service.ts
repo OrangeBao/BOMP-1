@@ -10,21 +10,21 @@ export class TemplateService {
 
   constructor(private http: HttpClient, private userService: UserService) { }
 
-  getTemplateList(): Observable<any> {
-    return this.http.get(`${this.templateUrl}`);
-  }
-
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
+  }
+
+  getTemplateList(): Observable<any> {
+    return this.http.get(`${this.templateUrl}`);
   }
 
   create(params) {
     return this.http.post('api/manager/relations', params);
   }
 
-  createByFile(params) {
-    return this.http.post('api/manager/templates/files', params);
+  createByFile(params): Observable<any> {
+    return this.http.post('api/monitor/templates/import', params);
   }
 
   deleteTemplate(id): Promise<any> {
