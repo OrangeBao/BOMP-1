@@ -1,6 +1,6 @@
 function getError(option, xhr) {
   const msg = "cannot post" + option.action + xhr.status;
-  const err = new Error(msg);
+  const err = new Error(msg) as any;
   err.status = xhr.status;
   err.method = 'post';
   err.url = option.action;
@@ -34,7 +34,7 @@ function getBody(xhr) {
 export default function upload(option) {
   const xhr = new XMLHttpRequest();
   if (xhr.upload) {
-    xhr.upload.onprogress = function progress(e) {
+    xhr.upload.onprogress = function progress(e: any) {
       if (e.total > 0) {
         e.percent = e.loaded / e.total * 100;
       }
