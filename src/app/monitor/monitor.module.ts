@@ -31,6 +31,7 @@ import { ObjectDeleteModalComponent } from './indexes/components/object-delete-m
 import { TemplateListComponent } from './template/template-list/template-list.component';
 import { TemplateCreateComponent } from './template/template-create/template-create.component';
 import { TemplateEditComponent } from './template/template-edit/template-edit.component';
+import { TemplateScanComponent } from './template/template-scan/template-scan.component';
 
 @NgModule({
   imports: [
@@ -63,7 +64,8 @@ import { TemplateEditComponent } from './template/template-edit/template-edit.co
     ObjectDeleteModalComponent,
     TemplateListComponent,
     TemplateCreateComponent,
-    TemplateEditComponent
+    TemplateEditComponent,
+    TemplateScanComponent
   ],
   entryComponents: [IndexEditorModalComponent, ObjectEditorModalComponent, ObjectDeleteModalComponent],
   providers: [

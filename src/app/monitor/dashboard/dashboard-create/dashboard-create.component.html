@@ -59,9 +59,12 @@
         <div class="list-w">
             <div class="scroll-w">
                 <div class="checkbox-group">
-                    <label *ngFor="let item of monitorObjsOption" (mouseenter)="modifyHoverObj(item, true)" (mouseleave)="modifyHoverObj(item)" nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="updateSelectMonitorObjs($event, item.value)">
-                        <span>{{item.label}}</span>
-                    </label>
+                    <ng-container *ngFor="let item of monitorObjsOption">
+                        <label (mouseenter)="modifyHoverObj(item)" nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="updateSelectMonitorObjs($event, item.value)">
+                            <span>{{item.label}}</span>
+                        </label>
+                    </ng-container>
+                   
                 </div>
             </div>
             <div class="display-w">
