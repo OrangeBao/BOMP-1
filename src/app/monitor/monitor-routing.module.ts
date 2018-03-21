@@ -4,6 +4,8 @@ import { MonitorComponent } from './monitor.component';
 import { AuthGuardService } from '../common/services/auth-guard/auth-guard.service';
 import { DashboardListComponent } from './dashboard/dashboard-list/dashboard-list.component';
 import { DashboardCreateComponent } from './dashboard/dashboard-create/dashboard-create.component';
+import { DashboardEditComponent } from './dashboard/dashboard-edit/dashboard-edit.component';
+import { DashboardScanComponent } from './dashboard/dashboard-scan/dashboard-scan.component';
 
 // import { TargetComponent } from './target/target.component';
 import { ItemComponent } from './target/item/item.component';
@@ -18,6 +20,7 @@ import { TemplateComponent } from './template/template.component';
 import { TemplateListComponent } from './template/template-list/template-list.component';
 import { TemplateCreateComponent } from './template/template-create/template-create.component';
 import { TemplateEditComponent } from './template/template-edit/template-edit.component';
+import { TemplateScanComponent } from './template/template-scan/template-scan.component';
 
 const monitorRoutes: Routes = [
   {
@@ -27,7 +30,7 @@ const monitorRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'indexes',
+        redirectTo: 'dashboard',
         pathMatch: 'full'
       }, {
         path: 'dashboard',
@@ -43,8 +46,15 @@ const monitorRoutes: Routes = [
           },
           {
             path: 'create',
-            data: { showTitle: 'true' },
             component: DashboardCreateComponent,
+          },
+          {
+            path: 'edit',
+            component: DashboardEditComponent,
+          },
+          {
+            path: 'scan',
+            component: DashboardScanComponent,
           }
         ]
       }, {
@@ -62,6 +72,10 @@ const monitorRoutes: Routes = [
           {
             path: 'create',
             component: TemplateCreateComponent,
+          },
+          {
+            path: 'scan',
+            component: TemplateScanComponent
           }
         ]
       }, {

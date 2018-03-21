@@ -43,10 +43,9 @@ export class DashboardCreateComponent implements OnInit {
     return this.monitorList.find(item => selectItems === item.id);
   }
 
-  modifyHoverObj(item , flag) {
-    if (!flag) {
-      this.hoverMonitorObj = null;
-    } else {
+  modifyHoverObj(item) {
+    debugger;
+    if (!this.hoverMonitorObj || item.value !== this.hoverMonitorObj.value) {
       this.hoverMonitorObj = item;
     }
   }
@@ -78,10 +77,10 @@ export class DashboardCreateComponent implements OnInit {
       this.dashboard.getDashboardList(),
       this.monitorService.getMonitorObjs()
     ).subscribe(([templates, monitorObjs])=> {
-      if (templates && templates.length > 0) {
-        this.selectTemplateId = templates[0].id;
-      }
       this.dashboardList = templates.content;
+      if (this.dashboardList && this.dashboardList.length > 0) {
+        this.selectTemplateId = this.dashboardList[0].id;
+      }
       this.monitorList = monitorObjs.content;
       this.monitorObjsOption = this.monitorList.map(item => ({label: item.name, value: item.id, checked: false}));
     }, () => {}, () => {

@@ -5,11 +5,11 @@ import { Observable }         from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @Component({
-  selector: 'app-template-edit',
-  templateUrl: './template-edit.component.html',
-  styleUrls: ['./template-edit.component.scss']
+  selector: 'app-template-scan',
+  templateUrl: './template-scan.component.html',
+  styleUrls: ['./template-scan.component.scss']
 })
-export class TemplateEditComponent implements OnInit {
+export class TemplateScanComponent implements OnInit {
 
   url: string;
   constructor(
@@ -22,7 +22,7 @@ export class TemplateEditComponent implements OnInit {
   ngOnInit() {
     this.title.sendMsg({
       showTitle: true,
-      text: '编辑模板',
+      text: '查看模板',
     });
     this.route
     .fragment
@@ -37,4 +37,5 @@ export class TemplateEditComponent implements OnInit {
       text: '',
     });
   }
+
 }

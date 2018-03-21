@@ -31,7 +31,7 @@ export class TemplateListComponent extends PageComponent implements OnInit {
       private userService: UserService,
       private spinnerService: LoadingService,
       private notification: NzNotificationService,
-      private modalService: ModalService,
+      private modal: ModalService,
       private fb: FormBuilder
   ) {
     super();
@@ -98,7 +98,7 @@ export class TemplateListComponent extends PageComponent implements OnInit {
   }
 
   deleteDashbaordConfirm(id) {
-    this.modalService.warn({
+    this.modal.warn({
       title: '删除',
       content: `确定删除模板${id}吗？`,
       onOk: () => this.deleteDashbaord(id),
@@ -129,7 +129,7 @@ export class TemplateListComponent extends PageComponent implements OnInit {
     this.modifyForm.controls['name'].setValue(this.baseInfo.title);
     this.modifyForm.controls['tags'].setValue(this.baseInfo.tags);
     this.modifyForm.controls['remark'].setValue(this.baseInfo.desc);
-    this.modalService.open({
+    this.modal.open({
       title: '修改仪表盘基本信息',
       content: this.modifyFormUrl,
       cancelText: 'cancel',
@@ -149,7 +149,7 @@ export class TemplateListComponent extends PageComponent implements OnInit {
   confirmDelete() {
     const choiceList = this.choiceList;
     if (choiceList.length === 0) return;
-    this.modalService.warn({
+    this.modal.warn({
       title: '删除',
       content: `已选择${choiceList.length}个仪表盘，确定删除？`,
       remark: choiceList.join(','),
@@ -173,6 +173,13 @@ export class TemplateListComponent extends PageComponent implements OnInit {
 
   getFormControl(name) {
     return this.modifyForm.controls[ name ];
+  }
+
+  waitTips() {
+    this.modal.info({
+      title: '提示',
+      content: '抱歉！该功能正在开发中...'
+    });
   }
 
   
