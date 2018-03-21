@@ -2,7 +2,7 @@
   (mouseleave)="showMoreMenu(false)">
   <div class="title">
     <span>{{monitorObject.name}}</span>
-    <div class="more" *ngIf="!isSelectable && isMouseOvered">
+    <div class="more">
       <i class="iconfont icon-bianji" title="编辑" (click)="edit()"></i>
       <i class="iconfont icon-shanchu" title="删除" (click)="confirmDelete()"></i>
     </div>
@@ -16,8 +16,10 @@
   </div>
   <div class="tags">
     <span>#</span>
-    <ng-container *ngFor="let tag of monitorObject.tags">
-      <nz-tag>{{tag}}</nz-tag>
+    <ng-container>
+      <span *ngFor="let tag of monitorObject.tags" class="tag">
+        {{tag}}
+      </span>
     </ng-container>
   </div>
 </div>
@@ -80,15 +82,3 @@
         </div> -->
   </form>
 </ng-template>
-
-<!-- <ng-template #tplEdit>
-  <div>
-    <span>编辑指标基本信息</span>
-  </div>
-</ng-template>
-
-<ng-template #tplDelete>
-  <div>
-    <span>删除</span>
-  </div>
-</ng-template> -->

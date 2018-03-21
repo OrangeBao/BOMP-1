@@ -15,11 +15,11 @@
   <div>
     <!-- <nz-table #nzTable [nzDataSource]="dataSources" [nzSize]="'small'" [nzBordered]="'false'" 
       [nzPageSize]="10" [nzShowTotal]="true" nzShowSizeChanger [nzShowQuickJumper]="true"> -->
-    <nz-table #nzTable [nzAjaxData]="dataSources" [nzSize]="'small'" [nzBordered]="'false'" [nzShowSizeChanger]="true" [nzShowQuickJumper]="true" [nzShowTotal]="true" [nzTotal]="_total" 
+    <nz-table #nzTable [nzAjaxData]="dataSources" [nzBordered]="'true'" [nzShowSizeChanger]="true" [nzShowQuickJumper]="true" [nzShowTotal]="true" [nzTotal]="_total" 
       (nzPageIndexChange)="refreshData()" [(nzPageIndex)]="_current" [(nzPageSize)]="_pageSize" (nzPageSizeChange)="refreshData(true)">
       <thead nz-thead>
         <tr style="height: 44px;">
-          <th nz-th [nzWidth]="'100px'">
+          <th nz-th [nzWidth]="'120px'">
             <span>名称</span>
           </th>
           <th nz-th [nzWidth]="'180px'">
@@ -52,12 +52,13 @@
           <td nz-td>{{data.permission}}</td>
           <td nz-td>{{data.type}}</td>
           <td nz-td>{{data.basicAuthUser}}</td>
-          <td nz-td>{{data.basicAuthPassword}}</td>
+          <!-- <td nz-td>{{data.basicAuthPassword}}</td> -->
+          <td nz-td>*********</td>
           <td nz-td>{{data.desc}}</td>
           <td nz-td>
             <i class="iconfont icon-ceshilianjie iconfont-group" (click)="onTestConnect()"></i>
             <i class="iconfont icon-bianji iconfont-group" (click)="onEdit()"></i>
-            <i class="iconfont icon-shanchu iconfont-group" (click)="onConfirmDelete(data)"></i>
+            <i class="iconfont icon-table_shanchu iconfont-group" (click)="onConfirmDelete(data)"></i>
           </td>
         </tr>
       </tbody>
