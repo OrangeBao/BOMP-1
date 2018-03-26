@@ -1,28 +1,4 @@
-@import "../../../../theme.scss";
-
-.head-bar {
-  display: flex;
-  .op-bar {
-    .default {
-      margin-left: 10px;
-    }
-    .checkbox-inline {
-      margin-left: 10px;
-    }
-    flex: 1;
-  }
-  .search-w ::ng-deep nz-input {
-    & input {
-      height: 32px;
-      border-color: rgba(221, 221, 221, 1);
-    }
-  }
-}
-
-
-app-tag-bar {
-  margin-top: 20px;
-}
+@import "../../../../feedlist.scss";
 
 .list-w {
   width: calc(100% + 20px);
@@ -184,10 +160,6 @@ app-tag-bar {
       }
     }
   }
-}
-
-.hidden {
-  display: none;
 }
 
 .null-tips {

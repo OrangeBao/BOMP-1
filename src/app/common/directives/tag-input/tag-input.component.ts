@@ -9,8 +9,7 @@ export const EXE_COUNTER_VALUE_ACCESSOR: any = {
   multi: true
 };
 
-export const validateCounterRange: ValidatorFn = (control: AbstractControl): 
-  ValidationErrors => {
+export const validateCounterRange: ValidatorFn = (control: AbstractControl): ValidationErrors => {
     return (control.value && control.value.length > 0) ?
          null : { 'required': true};
 };
@@ -33,7 +32,7 @@ export class TagInputComponent implements ControlValueAccessor {
 
   @ViewChild('tagInput') inputTemp: any;
 
-  flag: boolean = false;
+  flag = false;
   inValue: string = '';
 
   change(event) {

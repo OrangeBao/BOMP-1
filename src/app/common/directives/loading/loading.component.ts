@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { LoadingService } from '../../services/loading/loading.service';
 @Component({
   selector: 'app-loading',
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss'],
-  host: {
-    '[style.display]': "showSpinner ? '' : 'none'"
-  }
 })
 export class LoadingComponent implements OnInit {
 
-  showSpinner:boolean = false;
+  @HostBinding('style.display') displayType = 'none';
+
   constructor(
     private spinnerService: LoadingService
   ) { }
 
   ngOnInit() {
     this.spinnerService.getMessage().subscribe((flag: boolean) => {
-      this.showSpinner = flag
+      if (flag) {
+        this.displayType = '';
+      } else {
+        this.displayType = 'none';
+      }
     });
   }
 

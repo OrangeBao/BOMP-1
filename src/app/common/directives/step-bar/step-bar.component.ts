@@ -32,7 +32,7 @@ export class StepBarComponent implements OnInit {
       return step + 1;
     } else {
       return '✓';
-    } 
+    }
   }
 
 }

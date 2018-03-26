@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TitleService, TemplateService, DashboardService, LoadingService, MonitorService } from '../../../common/share.module';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,18 +7,17 @@ import { Dashboard } from '../../../common/models/dashboard';
 import { MonitorObject } from '../../../common/models/monitor/monitor-object';
 import 'rxjs/add/observable/forkJoin';
 
-
 @Component({
   selector: 'app-dashboard-create',
   templateUrl: './dashboard-create.component.html',
   styleUrls: ['./dashboard-create.component.scss']
 })
-export class DashboardCreateComponent implements OnInit {
+export class DashboardCreateComponent implements OnInit, OnDestroy {
 
-  currentStep: number = 0;
+  currentStep = 0;
   templateList: Dashboard[];
   monitorList: MonitorObject[];
-  isSelectAll: boolean = false;
+  isSelectAll = false;
   steps: string[] = [
     '选择模板',
     '选择监控对象',
@@ -44,8 +43,7 @@ export class DashboardCreateComponent implements OnInit {
     if (this.currentStep === 1) {
       return !this.monitorObjsOption.some(item => item.checked);
     }
-    return false;
-    
+    return false;    
   }
 
   get displayMonitorObjs() {
@@ -54,14 +52,7 @@ export class DashboardCreateComponent implements OnInit {
     return this.monitorList.find(item => selectItems === item.id);
   }
 
-  modifyHoverObj(item) {
-    if (!this.hoverMonitorObj || item.value !== this.hoverMonitorObj.value) {
-      this.hoverMonitorObj = item;
-    }
-  }
-
   modifyForm: FormGroup;
-
 
   constructor(
     private monitorService: MonitorService,
@@ -80,6 +71,12 @@ export class DashboardCreateComponent implements OnInit {
       tags              : [ '', [ Validators.required ] ],
       remark            : [ '' ],
     });
+  }
+
+  modifyHoverObj(item) {
+    if (!this.hoverMonitorObj || item.value !== this.hoverMonitorObj.value) {
+      this.hoverMonitorObj = item;
+    }
   }
 
   ngOnInit() {

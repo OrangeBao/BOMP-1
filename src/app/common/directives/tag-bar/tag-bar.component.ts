@@ -1,19 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'app-tag-bar',
   templateUrl: './tag-bar.component.html',
   styleUrls: ['./tag-bar.component.scss'],
-  host: {
-    '[class.all]': 'isShowAll'
-  }
 })
 export class TagBarComponent implements OnInit {
+
   @Input() tags: string[];
   @Output() change = new EventEmitter();
   selectTag: string[] = [];
-  isNone: boolean = true;
-  isShowAll: boolean = false;
+  isNone = true;
+  @HostBinding('class.all') isShowAll = false;
   constructor() { }
 
   isSelect(tag) {

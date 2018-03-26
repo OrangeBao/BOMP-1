@@ -13,8 +13,7 @@ export const EXE_COUNTER_VALUE_ACCESSOR: any = {
   multi: true
 };
 
-export const validateUpload: ValidatorFn = (control: AbstractControl): 
-  ValidationErrors => {
+export const validateUpload: ValidatorFn = (control: AbstractControl): ValidationErrors => {
     return (control.value && control.value.length > 0) ?
           null : { 'required': true};
 };
