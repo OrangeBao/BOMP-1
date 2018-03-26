@@ -4,10 +4,15 @@ import {
   Output,
   EventEmitter,
   ViewChild,
+  ViewChildren,
   TemplateRef,
   OnInit,
   SimpleChanges,
-  OnChanges
+  OnChanges,
+  AfterViewInit,
+  QueryList,
+  ChangeDetectorRef,
+  AfterViewChecked,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -27,7 +32,8 @@ import { MonitorService } from '../../../../common/services/monitor/monitor.serv
   templateUrl: './monitor-object-card.component.html',
   styleUrls: ['./monitor-object-card.component.scss']
 })
-export class MonitorObjectCardComponent implements OnInit, OnChanges {
+export class MonitorObjectCardComponent
+  implements OnInit, AfterViewInit, OnChanges, AfterViewChecked {
   @Input('isSelectable') public isSelectable: boolean;
   @Input('isSelected') public isSelected: boolean;
   @Input('monitorObject') public monitorObject: any;
@@ -36,14 +42,18 @@ export class MonitorObjectCardComponent implements OnInit, OnChanges {
   @Output() public deleteChanged: EventEmitter<any> = new EventEmitter<any>();
 
   @ViewChild('tplEditForm') tplEditForm: TemplateRef<any>;
+  @ViewChild('cardChild') cardChild: any;
+  @ViewChildren('tagChildren') tagChildren: QueryList<any>;
 
   validateForm: FormGroup;
 
   isMouseOvered = false;
+  ellipsisTags: Array<any> = new Array<any>();
+  showEllipsisTags: boolean;
 
   constructor(
     private fb: FormBuilder,
-    // private _modalService: NzModalService,
+    private cdr: ChangeDetectorRef,
     private _monitorService: MonitorService,
     private spinnerService: LoadingService,
     private modalService: ModalService
@@ -58,6 +68,14 @@ export class MonitorObjectCardComponent implements OnInit, OnChanges {
     });
   }
 
+  ngAfterViewInit() {
+    this.adjustTagsShow();
+  }
+
+  ngAfterViewChecked() {
+    this.cdr.detectChanges();
+  }
+
   // isSelectable 变化后，是否需清空选中的card的样式
   ngOnChanges(changes: SimpleChanges) {
     if (changes.isSelected && !changes.isSelected.firstChange) {
@@ -66,6 +84,46 @@ export class MonitorObjectCardComponent implements OnInit, OnChanges {
         selected: changes.isSelected.currentValue
       });
     }
+  }
+
+  adjustTagsShow() {
+    this.tagChildren.toArray().forEach(item => {
+      // console.log(item.nativeElement.offsetWidth);
+    });
+
+    const tagsTotalWidth: number = this.tagChildren
+      .toArray()
+      .map(item => {
+        return item.nativeElement.offsetWidth;
+      })
+      .reduce((previous, current) => {
+        return previous + current + 6 + 3.3; // tag marin-left=6; span之间有#text=3.3?
+      }, 7); // #的宽度
+
+    if (tagsTotalWidth > this.cardChild.nativeElement.offsetWidth - 30) {
+      // card padding = 15*2
+
+      let tempWidth = 7; // #的宽度
+      let tempIndex = 0;
+      for (const item of this.tagChildren.toArray()) {
+        if (
+          tempWidth + item.nativeElement.offsetWidth <
+          this.cardChild.nativeElement.offsetWidth - 30 - 32 // 省略号tag的宽度+margin=32
+        ) {
+          tempWidth += item.nativeElement.offsetWidth + 6 + 3.3;
+          tempIndex++;
+        } else {
+          break;
+        }
+      }
+
+      this.ellipsisTags = this.monitorObject.tags.slice(0, tempIndex);
+      this.showEllipsisTags = true;
+    }
+  }
+
+  showAllTags() {
+    this.showEllipsisTags = false;
   }
 
   select() {

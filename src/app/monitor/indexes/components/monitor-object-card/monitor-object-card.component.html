@@ -1,5 +1,5 @@
-<div class="card" [ngClass]="{'selected': isSelectable && isSelected, 'point-cursor': isSelectable}" (click)="select()" (mouseover)="showMoreMenu(true)"
-  (mouseleave)="showMoreMenu(false)">
+<div #cardChild class="card" [ngClass]="{'selected': isSelectable && isSelected, 'point-cursor': isSelectable}" (click)="select()"
+  (mouseover)="showMoreMenu(true)" (mouseleave)="showMoreMenu(false)">
   <div class="title">
     <span>{{monitorObject.name}}</span>
     <div class="more">
@@ -14,13 +14,24 @@
     <span style="width: 185px;">监控指标项数量：{{monitorObject.indexNum}}</span>
     <span>读数据源：{{monitorObject.datasource.name}}</span>
   </div>
-  <div class="tags">
+  <div class="tags" *ngIf="!showEllipsisTags">
     <span>#</span>
-    <ng-container>
-      <span *ngFor="let tag of monitorObject.tags" class="tag">
+    <ng-container *ngFor="let tag of monitorObject.tags">
+      <span class="tag" #tagChildren>
         {{tag}}
       </span>
     </ng-container>
+  </div>
+  <div class="tags" *ngIf="showEllipsisTags">
+    <span>#</span>
+    <ng-container *ngFor="let tag of ellipsisTags">
+      <span class="tag">
+        {{tag}}
+      </span>
+    </ng-container>
+    <span class="tag" title="更多" (click)="showAllTags()">
+      ...
+    </span>
   </div>
 </div>
 
