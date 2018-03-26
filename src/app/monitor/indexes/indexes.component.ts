@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { TitleService } from '../../common/share.module';
 
 @Component({
-  selector: 'bomp-indexes',
+  selector: 'app-indexes',
   templateUrl: './indexes.component.html',
   styleUrls: ['./indexes.component.scss']
 })
-export class IndexesComponent implements OnInit {
+export class IndexesComponent implements OnInit, OnDestroy {
   eventHandle: Subscription;
   titleData: {
     showTitle: boolean;
@@ -18,21 +18,23 @@ export class IndexesComponent implements OnInit {
     showTitle: false,
     text: ''
   };
-  
-  constructor(private _router: Router, private title: TitleService) { }
+
+  constructor(private _router: Router, private title: TitleService) {}
 
   ngOnInit() {
     this.eventHandle = this.title.getMessage().subscribe(msg => {
       this.titleData.showTitle = msg.showTitle;
       this.titleData.text = msg.text;
-    })
+    });
   }
 
   ngOnDestroy() {
-    this.eventHandle && this.eventHandle.unsubscribe();
+    if (this.eventHandle) {
+      this.eventHandle.unsubscribe();
+    }
   }
 
-  tabSelectChange(path){
-    this._router.navigateByUrl("/monitor/indexes/" + path);
+  tabSelectChange(path) {
+    this._router.navigateByUrl('/monitor/indexes/' + path);
   }
 }

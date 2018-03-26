@@ -4,23 +4,21 @@ import {
   FormGroup,
   Validators,
   FormControl
-} from "@angular/forms";
+} from '@angular/forms';
 
 @Component({
-  selector: 'bomp-index-editor-modal',
+  selector: 'app-index-editor-modal',
   templateUrl: './index-editor-modal.component.html',
   styleUrls: ['./index-editor-modal.component.scss']
 })
 export class IndexEditorModalComponent implements OnInit {
   validateForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-      name: ['aaa', [Validators.required]],
-
+      name: ['aaa', [Validators.required]]
     });
   }
-
 }

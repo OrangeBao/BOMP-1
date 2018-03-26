@@ -6,43 +6,44 @@ import {
   ViewChild,
   TemplateRef,
   OnInit,
-  SimpleChanges
-} from "@angular/core";
+  SimpleChanges,
+  OnChanges
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   Validators,
   FormControl
-} from "@angular/forms";
+} from '@angular/forms';
 // import { NzModalService } from "ng-zorro-antd";
-import { ModalService } from "zu-modal";
+import { ModalService } from 'zu-modal';
 
-import { LoadingService } from "../../../../common/share.module";
+import { LoadingService } from '../../../../common/share.module';
 
-import { ObjectEditorModalComponent } from "../object-editor-modal/object-editor-modal.component";
-import { ObjectDeleteModalComponent } from "../object-delete-modal/object-delete-modal.component";
-import { MonitorService } from "../../../../common/services/monitor/monitor.service";
+import { ObjectEditorModalComponent } from '../object-editor-modal/object-editor-modal.component';
+import { ObjectDeleteModalComponent } from '../object-delete-modal/object-delete-modal.component';
+import { MonitorService } from '../../../../common/services/monitor/monitor.service';
 
 @Component({
-  selector: "bomp-monitor-object-card",
-  templateUrl: "./monitor-object-card.component.html",
-  styleUrls: ["./monitor-object-card.component.scss"]
+  selector: 'app-monitor-object-card',
+  templateUrl: './monitor-object-card.component.html',
+  styleUrls: ['./monitor-object-card.component.scss']
 })
-export class MonitorObjectCardComponent implements OnInit {
-  @Input("isSelectable") public isSelectable: boolean;
-  @Input("isSelected") public isSelected: boolean;
-  @Input("monitorObject") public monitorObject: any;
+export class MonitorObjectCardComponent implements OnInit, OnChanges {
+  @Input('isSelectable') public isSelectable: boolean;
+  @Input('isSelected') public isSelected: boolean;
+  @Input('monitorObject') public monitorObject: any;
 
   @Output() public selectChanged: EventEmitter<any> = new EventEmitter<any>();
   @Output() public deleteChanged: EventEmitter<any> = new EventEmitter<any>();
 
   // @ViewChild("tplEdit") tplEdit: TemplateRef<any>;
   // @ViewChild("tplDelete") tplDelete: TemplateRef<any>;
-  @ViewChild("tplEditForm") tplEditForm: TemplateRef<any>;
+  @ViewChild('tplEditForm') tplEditForm: TemplateRef<any>;
 
   validateForm: FormGroup;
 
-  isMouseOvered: boolean = false;
+  isMouseOvered = false;
 
   constructor(
     private fb: FormBuilder,
@@ -50,14 +51,13 @@ export class MonitorObjectCardComponent implements OnInit {
     private _monitorService: MonitorService,
     private spinnerService: LoadingService,
     private modalService: ModalService
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-      name: [this.monitorObject["name"], [Validators.required]],
-      description: [this.monitorObject["desc"], [Validators.required]],
-      tags: [this.monitorObject["tags"], [Validators.required]]
+      name: [this.monitorObject['name'], [Validators.required]],
+      description: [this.monitorObject['desc'], [Validators.required]],
+      tags: [this.monitorObject['tags'], [Validators.required]]
       // datasource: [null, [Validators.required]]
     });
   }
@@ -128,12 +128,12 @@ export class MonitorObjectCardComponent implements OnInit {
 
   edit() {
     this.modalService.open({
-      title: "编辑指标基本信息",
+      title: '编辑指标基本信息',
       content: this.tplEditForm,
-      cancelText: "cancel",
+      cancelText: 'cancel',
       onOk: () => {
-        for (const i in this.validateForm.controls) {
-          this.validateForm.controls[i].markAsDirty();
+        for (const field of Object.keys(this.validateForm.controls)) {
+          this.validateForm.controls[field].markAsDirty();
         }
 
         return new Promise((resolve, reject) => {
@@ -163,7 +163,7 @@ export class MonitorObjectCardComponent implements OnInit {
 
   confirmDelete() {
     this.modalService.warn({
-      title: "删除",
+      title: '删除',
       content: `确定删除监控对象${this.monitorObject.name}吗？`,
       onOk: () => {
         this.deleteChanged.emit({

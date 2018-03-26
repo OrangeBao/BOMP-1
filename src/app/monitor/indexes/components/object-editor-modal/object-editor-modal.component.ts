@@ -1,19 +1,19 @@
-import { Component, Input, ViewChild, OnInit } from "@angular/core";
+import { Component, Input, ViewChild, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   Validators,
   FormControl
-} from "@angular/forms";
-import { NzInputDirectiveComponent } from "ng-zorro-antd";
+} from '@angular/forms';
+import { NzInputDirectiveComponent } from 'ng-zorro-antd';
 import { NzModalSubject } from 'ng-zorro-antd';
 
 import { MonitorService } from '../../../../common/services/monitor/monitor.service';
 
 @Component({
-  selector: "bomp-object-editor-modal",
-  templateUrl: "./object-editor-modal.component.html",
-  styleUrls: ["./object-editor-modal.component.scss"]
+  selector: 'app-object-editor-modal',
+  templateUrl: './object-editor-modal.component.html',
+  styleUrls: ['./object-editor-modal.component.scss']
 })
 export class ObjectEditorModalComponent implements OnInit {
   _monitorObject: any;
@@ -26,20 +26,24 @@ export class ObjectEditorModalComponent implements OnInit {
     return this._monitorObject;
   }
 
-  @ViewChild("input") input: NzInputDirectiveComponent;
+  @ViewChild('input') input: NzInputDirectiveComponent;
 
   validateForm: FormGroup;
   tempTags: Array<any> = [];
-  isAddingTag: boolean = false;
+  isAddingTag = false;
   newTagValue: string;
 
-  constructor(private fb: FormBuilder, private subject: NzModalSubject, private _monitorService: MonitorService) {}
+  constructor(
+    private fb: FormBuilder,
+    private subject: NzModalSubject,
+    private _monitorService: MonitorService
+  ) {}
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-      name: [this.monitorObject["name"], [Validators.required]],
-      description: [this.monitorObject["desc"], [Validators.required]],
-      tags: [this.monitorObject["tags"], [ Validators.required ] ],
+      name: [this.monitorObject['name'], [Validators.required]],
+      description: [this.monitorObject['desc'], [Validators.required]],
+      tags: [this.monitorObject['tags'], [Validators.required]]
       // datasource: [null, [Validators.required]]
     });
   }
@@ -64,7 +68,7 @@ export class ObjectEditorModalComponent implements OnInit {
       this.tempTags.push(this.newTagValue);
     }
     this.isAddingTag = false;
-    this.newTagValue = "";
+    this.newTagValue = '';
   }
 
   getFormControl(name) {
@@ -74,20 +78,21 @@ export class ObjectEditorModalComponent implements OnInit {
   submitForm(event) {
     console.log(event);
 
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
+    for (const field of Object.keys(this.validateForm.controls)) {
+      this.validateForm.controls[field].markAsDirty();
     }
-    
-    if(this.validateForm.valid) {
-      this._monitorService.editMonitorObject(this.monitorObject).subscribe((result)=>{
-        console.log(result);
-  
-        this.subject.destroy();
-      });
+
+
+    if (this.validateForm.valid) {
+      this._monitorService
+        .editMonitorObject(this.monitorObject)
+        .subscribe(result => {
+          console.log(result);
+
+          this.subject.destroy();
+        });
     } else {
       alert('');
     }
-    
   }
-
 }

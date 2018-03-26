@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NzModalSubject } from 'ng-zorro-antd';
 
 @Component({
-  selector: 'bomp-object-delete-modal',
+  selector: 'app-object-delete-modal',
   templateUrl: './object-delete-modal.component.html',
   styleUrls: ['./object-delete-modal.component.scss']
 })
@@ -13,7 +13,7 @@ export class ObjectDeleteModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
   confirm(e) {
