@@ -21,7 +21,7 @@
             <div class="list-w">
                 <div class="scroll-w">
                     <nz-radio-group [(ngModel)]="selectTemplateId">
-                        <label nz-radio [nzValue]="temp.id" *ngFor="let temp of dashboardList;let i = index ">
+                        <label nz-radio [nzValue]="temp.id" *ngFor="let temp of templateList;let i = index ">
                             <span>{{temp.title}}</span>
                         </label>
                     </nz-radio-group>
@@ -49,7 +49,7 @@
     <div class="monitor-display">
         <div class="title">
             <div>
-               <span>引用模板</span>
+               <span>引用监控源</span>
                <label nz-checkbox [(ngModel)]="isSelectAll" (ngModelChange)="selectAll($event)">
                     <span>全选</span>
                 </label>

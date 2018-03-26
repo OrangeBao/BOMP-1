@@ -101,20 +101,19 @@ export class TemplateListComponent extends PageComponent implements OnInit {
     this.modal.warn({
       title: '删除',
       content: `确定删除模板${id}吗？`,
-      onOk: () => this.deleteDashbaord(id),
+      onOk: () => this.deleteDashbaord([id]),
     });
   }
 
-  deleteDashbaord(id) {
-    const param = id.split('b/')[1];
+  deleteDashbaord(id: string[]) {
     this.spinnerService.show();
-    this.templateService.deleteTemplate(param).then(() => {
+    this.templateService.deleteTemplate(id).subscribe(() => {
+       this.spinnerService.hide();
+       this.requestData(true, false);
+       this.notification.create('success', '提示', '模板删除成功！');
+    }, err => {
       this.spinnerService.hide();
-      this.templates = this.templates.filter(item => item.id !== id);
-    }).catch(err => {
-      this.spinnerService.hide();
-      this.notification.create('error', '异常', '模板删除异常，请联系管理员！');
-      console.error(err);
+      this.notification.create('error', '异常', '模板删除失败，请联系管理员！');
     });
   }
 
@@ -147,14 +146,16 @@ export class TemplateListComponent extends PageComponent implements OnInit {
   }
  
   confirmDelete() {
+    const self = this;
     const choiceList = this.choiceList;
     if (choiceList.length === 0) return;
     this.modal.warn({
       title: '删除',
       content: `已选择${choiceList.length}个仪表盘，确定删除？`,
-      remark: choiceList.join(','),
+      remark: this.templates.filter(item => this.choiceList.includes(item.id)).map(item => item.title).join(','),
       onOk: () => {
-        console.log('XXXXX');
+        self.deleteDashbaord(choiceList);
+        self.deleteModel();
       },
     });
   }

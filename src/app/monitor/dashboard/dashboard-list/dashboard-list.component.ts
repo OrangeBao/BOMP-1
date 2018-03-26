@@ -9,6 +9,7 @@ import { validateCounterRange } from '../../../common/directives/tag-input/tag-i
 import { NzNotificationService } from 'ng-zorro-antd';
 
 import { PageComponent } from '../../../common/components/page.component';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-dashboard-list',
@@ -107,20 +108,19 @@ export class DashboardListComponent extends PageComponent implements OnInit  {
     this.modalService.warn({
       title: '删除',
       content: `确定删除仪表${id}吗？`,
-      onOk: () => this.deleteDashbaord(id),
+      onOk: () => this.deleteDashbaord([id]),
     });
   }
 
-  deleteDashbaord(id) {
-    const param = id.split('b/')[1];
+  deleteDashbaord(id : string[]) {
     this.spinnerService.show();
-    this.dashboardService.deleteDashboard(param).then(() => {
+    this.dashboardService.deleteDashboard(id).subscribe(() => {
       this.spinnerService.hide();
-      this.dashboards = this.dashboards.filter(item => item.uri !== id);
-    }).catch(err => {
+      this.notification.create('success', '提示', '删除仪表盘成功！');
+      this.requestData(true, false);
+    }, err => {
       this.spinnerService.hide();
-      this.notification.create('error', '异常', '仪表盘初始化异常，请联系管理员！');
-      console.error(err);
+      this.notification.create('error', '异常', '仪表盘初删除异常，请联系管理员！');
     });
   }
 
@@ -131,7 +131,8 @@ export class DashboardListComponent extends PageComponent implements OnInit  {
   }
 
   editDashboard(id) {
-    this.baseInfo = {...this.dashboards.find(i => i.uri === id)};
+    const self = this;
+    this.baseInfo = {...this.dashboards.find(i => i.id === id)};
     this.modifyForm.controls['name'].setValue(this.baseInfo.title);
     this.modifyForm.controls['tags'].setValue(this.baseInfo.tags);
     this.modifyForm.controls['remark'].setValue(this.baseInfo.desc);
@@ -143,7 +144,15 @@ export class DashboardListComponent extends PageComponent implements OnInit  {
         this.checkModifyForm();
         return new Promise((resolve, reject) => {
           if (this.modifyForm.valid) {
-            resolve();
+            self.dashboardService.updateDashboard(id, {
+              title: this.modifyForm.value['name'],
+              tags: this.modifyForm.value['tags'],
+              desc: this.modifyForm.value['remark'],
+            }).subscribe(data => {
+              this.notification.create('success', '提示', '修改仪表盘成功！');
+              self.requestData(true, false);
+              resolve();
+            }, err =>  this.notification.create('error', '异常', '修改仪表盘异常，请联系管理员！'));
           } else {
             reject();
           }
@@ -155,12 +164,14 @@ export class DashboardListComponent extends PageComponent implements OnInit  {
   confirmDelete() {
     const choiceList = this.choiceList;
     if (choiceList.length === 0) return;
+    const self = this;
     this.modalService.warn({
       title: '删除',
       content: `已选择${choiceList.length}个仪表盘，确定删除？`,
-      remark: choiceList.join(','),
+      remark: this.dashboards.filter(item => this.choiceList.includes(item.id)).map(item => item.title).join(','),
       onOk: () => {
-        console.log('XXXXX');
+        self.deleteDashbaord(choiceList);
+        self.deleteModel();
       },
     });
   }
@@ -169,7 +180,7 @@ export class DashboardListComponent extends PageComponent implements OnInit  {
     if (this.isAll) {
       this.choiceList = [];
     } else {
-      this.choiceList = (this.dashboards || []).map(item => item.uri);
+      this.choiceList = (this.dashboards || []).map(item => item.url);
     }
   }
 

@@ -27,8 +27,8 @@ export class TemplateService {
     return this.http.post('api/monitor/templates/import', params);
   }
 
-  deleteTemplate(id): Promise<any> {
-    return this.http.delete(`api/manager/templates/${id}`).toPromise().catch(this.handleError);
+  deleteTemplate(ids: string[]): Observable<any> {
+    return this.http.delete(`api/monitor/templates?${ids.map(id => 'id=' + id).join('&')}`);
   }
 
 }

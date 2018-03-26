@@ -2,7 +2,7 @@
     <div class="op-bar">
       <div class="btn primary" [class.hidden]="isDeleteModel" routerLink="../create">+新建</div>
       <div class="btn default" [class.hidden]="isDeleteModel" (click)="deleteModel()">批量删除</div>
-      <div class="btn default" [class.hidden]="isDeleteModel" (click)="waitTips()">批量导出</div>
+      <!-- <div class="btn default" [class.hidden]="isDeleteModel" (click)="waitTips()">批量导出</div> -->
       <div class="btn primary" [class.hidden]="!isDeleteModel" (click)="confirmDelete()">删除</div>
       <div class="btn default" [class.hidden]="!isDeleteModel" (click)="deleteModel()">取消</div>
       <label class="checkbox-inline" [class.hidden]="!isDeleteModel">
@@ -32,7 +32,7 @@
               <div class="title" routerLink="../scan" [fragment]="data.url">{{data.title}}</div>
               <div class="icon-list">
                   <i class="iconfont icon-bianji" alt="编辑" title="编辑" routerLink="../edit" [fragment]="data.url"></i>
-                  <i class="iconfont icon-shangchuan" alt="导出" title="导出" (click)="waitTips()"></i>
+                  <!-- <i class="iconfont icon-shangchuan" alt="导出" title="导出" (click)="waitTips()"></i> -->
                   <i class="iconfont icon-shanchu" alt="删除" title="删除" on-click="deleteDashbaordConfirm(data.id)"></i>
               </div>
             </div>

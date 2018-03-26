@@ -20,15 +20,16 @@ export class DashboardService {
     return Promise.reject(error.message || error);
   }
 
-  create(params): Promise<any> {
-    return this.http.post('api/manager/dashboards', params).toPromise().catch(this.handleError);
-  }
-  
-  deleteDashboard(slug): Promise<any> {
-    return this.http.delete(`api/manager/dashboards/${slug}`).toPromise().catch(this.handleError);
+  createDashboard(params): Observable<any> {
+    return this.http.post('api/monitor/dashboards', params);
   }
 
-  deleteDashboardList(slugs: string[]) {
-    return this.http.delete(`api/manager/dashboards`)
+  updateDashboard(dashboardId, params): Observable<any> {
+    return this.http.put(`api/monitor/dashboards/${dashboardId}`, params);
   }
+  
+  deleteDashboard(ids: string[]): Observable<any> {
+    return this.http.delete(`api/monitor/dashboards?${ids.map(id => 'id=' + id).join('&')}`);
+  }
+
 }
