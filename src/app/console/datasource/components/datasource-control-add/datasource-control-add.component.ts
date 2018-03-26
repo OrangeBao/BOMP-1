@@ -27,7 +27,6 @@ export class DatasourceControlAddComponent implements OnInit, OnDestroy {
   ];
 
   validateForm: FormGroup;
-
   isFinished: boolean;
   count: number;
   timer: any;
@@ -81,7 +80,6 @@ export class DatasourceControlAddComponent implements OnInit, OnDestroy {
   }
 
   showAuthDialog() {
-    // TODO: rxjs
     const flag: boolean =
       this.getFormControl('authentication').value.filter(
         r => r.value === 'basicAuth' && r.checked
@@ -122,7 +120,6 @@ export class DatasourceControlAddComponent implements OnInit, OnDestroy {
         type: this.getFormControl('type').value,
         url: this.getFormControl('url').value,
         permission: this.permissionSpan.nativeElement.innerHTML,
-        // TODO: 怎么只返回checked的list
         // authentication: this.getFormControl("authentication").value,
         // authentication: this.getFormControl("authentication")
         //   .value.filter(r => r.checked)

@@ -25,8 +25,6 @@ import { MonitorObjectsComponent } from './indexes/components/monitor-objects/mo
 import { IndexEditorModalComponent } from './indexes/components/index-editor-modal/index-editor-modal.component';
 import { MonitorObjectCardComponent } from './indexes/components/monitor-object-card/monitor-object-card.component';
 import { ObjectAddComponent } from './indexes/components/object-add/object-add.component';
-import { ObjectEditorModalComponent } from './indexes/components/object-editor-modal/object-editor-modal.component';
-import { ObjectDeleteModalComponent } from './indexes/components/object-delete-modal/object-delete-modal.component';
 
 import { TemplateListComponent } from './template/template-list/template-list.component';
 import { TemplateCreateComponent } from './template/template-create/template-create.component';
@@ -60,8 +58,6 @@ import { TemplateScanComponent } from './template/template-scan/template-scan.co
     IndexEditorModalComponent,
     MonitorObjectCardComponent,
     ObjectAddComponent,
-    ObjectEditorModalComponent,
-    ObjectDeleteModalComponent,
     TemplateListComponent,
     TemplateCreateComponent,
     TemplateEditComponent,
@@ -69,8 +65,6 @@ import { TemplateScanComponent } from './template/template-scan/template-scan.co
   ],
   entryComponents: [
     IndexEditorModalComponent,
-    ObjectEditorModalComponent,
-    ObjectDeleteModalComponent
   ],
   providers: [NzNotificationService]
 })

@@ -6,8 +6,6 @@ import { LoadingService } from '../../../../common/share.module';
 import { MonitorService } from '../../../../common/services/monitor/monitor.service';
 import { MonitorObject } from '../../../../common/models/monitor/monitor-object';
 
-import { ObjectDeleteModalComponent } from '../object-delete-modal/object-delete-modal.component';
-
 @Component({
   selector: 'app-monitor-objects',
   templateUrl: './monitor-objects.component.html',
@@ -41,10 +39,6 @@ export class MonitorObjectsComponent implements OnInit {
       next: (data: any) => {
         this.monitorObjects = data.content || [];
 
-        // TODO: only for test
-        // this.monitorObjects.push(...this.monitorObjects);
-        // this.monitorObjects.push(...this.monitorObjects);
-
         this.monitorFiltedObjects = this.monitorObjects;
       }
     });
@@ -52,10 +46,6 @@ export class MonitorObjectsComponent implements OnInit {
     this.monitorService.getMonitorTags().subscribe({
       next: (data: any) => {
         this.monitorTags = data || [];
-
-        // TODO: only for test
-        // this.monitorTags.push(...this.monitorObjects[0].tags);
-        // this.monitorTags.push(...this.monitorObjects[1].tags);
       }
     });
   }

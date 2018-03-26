@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, forwardRef } from "@angular/core";
+import { Component, Input, OnInit, forwardRef } from '@angular/core';
 import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
@@ -6,32 +6,32 @@ import {
   AbstractControl,
   ValidationErrors,
   NG_VALIDATORS
-} from "@angular/forms";
+} from '@angular/forms';
 
-export const EXE_COUNTER_VALUE_ACCESSOR: any = {
+export const EXE_CHECKBOX_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => FormCheckboxInputComponent),
   multi: true
 };
 
-export const validateCounterRange: ValidatorFn = (
+export const validateCheckInputs: ValidatorFn = (
   control: AbstractControl
 ): ValidationErrors => {
-  const checkedItems = control.value.filter(r=> r.checked);
+  const checkedItems = control.value.filter(r => r.checked);
   return control.value && checkedItems.length > 0 ? null : { required: true };
 };
 
-export const EXE_COUNTER_VALIDATOR = {
+export const EXE_CHECKBOX_VALIDATOR = {
   provide: NG_VALIDATORS,
-  useValue: validateCounterRange,
+  useValue: validateCheckInputs,
   multi: true
 };
 
 @Component({
-  selector: "app-form-checkbox-input",
-  templateUrl: "./form-checkbox-input.component.html",
-  styleUrls: ["./form-checkbox-input.component.scss"],
-  providers: [EXE_COUNTER_VALUE_ACCESSOR, EXE_COUNTER_VALIDATOR]
+  selector: 'app-form-checkbox-input',
+  templateUrl: './form-checkbox-input.component.html',
+  styleUrls: ['./form-checkbox-input.component.scss'],
+  providers: [EXE_CHECKBOX_VALUE_ACCESSOR, EXE_CHECKBOX_VALIDATOR]
 })
 export class FormCheckboxInputComponent implements ControlValueAccessor {
   _items: Array<any>;
@@ -44,27 +44,16 @@ export class FormCheckboxInputComponent implements ControlValueAccessor {
     this.propagateChange(this._items);
   }
 
-  // checkedList: Array<any>;
+  constructor() {}
 
-  constructor() {
-    // this.checkedList = [];
+  propagateChange = (_: any) => {
+    
   }
-
-  ngOnInit() {}
-
-  propagateChange = (_: any) => {};
 
   writeValue(value: any) {
     if (value) {
       this.items = value;
     }
-
-    // for(let item of this.items){
-    //   console.log(item.value);
-    // }
-
-    // let a = this.items.filter(r=> r.value == 'Apple');
-    // console.log(this.items.filter(r=> r.value == 'Apple'));
   }
 
   registerOnChange(fn: any) {
@@ -86,7 +75,6 @@ export class FormCheckboxInputComponent implements ControlValueAccessor {
   }
 
   isCheck(item) {
-    // return this.checkedList.includes(item);
     return item.checked;
   }
 }

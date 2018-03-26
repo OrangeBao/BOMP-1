@@ -20,8 +20,6 @@ import { ModalService } from 'zu-modal';
 
 import { LoadingService } from '../../../../common/share.module';
 
-import { ObjectEditorModalComponent } from '../object-editor-modal/object-editor-modal.component';
-import { ObjectDeleteModalComponent } from '../object-delete-modal/object-delete-modal.component';
 import { MonitorService } from '../../../../common/services/monitor/monitor.service';
 
 @Component({
@@ -37,8 +35,6 @@ export class MonitorObjectCardComponent implements OnInit, OnChanges {
   @Output() public selectChanged: EventEmitter<any> = new EventEmitter<any>();
   @Output() public deleteChanged: EventEmitter<any> = new EventEmitter<any>();
 
-  // @ViewChild("tplEdit") tplEdit: TemplateRef<any>;
-  // @ViewChild("tplDelete") tplDelete: TemplateRef<any>;
   @ViewChild('tplEditForm') tplEditForm: TemplateRef<any>;
 
   validateForm: FormGroup;
@@ -87,45 +83,6 @@ export class MonitorObjectCardComponent implements OnInit, OnChanges {
     this.isMouseOvered = flag;
   }
 
-  /** ng-zorro */
-  // edit() {
-  //   this._modalService.open({
-  //     title: this.tplEdit,
-  //     content: ObjectEditorModalComponent,
-  //     footer: false,
-  //     closable: true,
-  //     maskClosable: false,
-  //     componentParams: {
-  //       monitorObject: this.monitorObject
-  //     }
-  //   });
-  // }
-
-  // confirmDelete() {
-  //   const subscription = this._modalService.open({
-  //     title: this.tplDelete,
-  //     content: ObjectDeleteModalComponent,
-  //     footer: false,
-  //     closable: true,
-  //     maskClosable: false,
-  //     componentParams: {
-  //       monitorObjects: [this.monitorObject]
-  //     }
-  //   });
-  //   subscription.subscribe(result => {
-  //     if (result["deletedArray"]) {
-  //       const deletedArray = result.deletedArray;
-  //       this._monitorService
-  //         .deleteMonitorObjects(deletedArray)
-  //         .subscribe(result => {
-  //           console.log(111);
-  //         });
-  //       subscription.destroy();
-  //     }
-  //   });
-  // }
-  /** ng-zorro */
-
   edit() {
     this.modalService.open({
       title: '编辑指标基本信息',
@@ -149,14 +106,6 @@ export class MonitorObjectCardComponent implements OnInit, OnChanges {
               console.log(result);
             });
         });
-
-        // if(this.validateForm.valid) {
-        //   this._monitorService.editMonitorObject(this.monitorObject).subscribe((result)=>{
-        //     console.log(result);
-        //   });
-        // } else {
-
-        // }
       }
     });
   }
@@ -172,19 +121,6 @@ export class MonitorObjectCardComponent implements OnInit, OnChanges {
       }
     });
   }
-
-  // delete(id) {
-  // const deletedArray = [id];
-  // this.spinnerService.show();
-  // this._monitorService
-  //   .deleteMonitorObjects(deletedArray)
-  //   .subscribe(result => {
-  //     this.spinnerService.hide();
-  //     this.deleteChanged.emit({
-  //       monitorObject: this.monitorObject
-  //     });
-  //   });
-  // }
 
   getFormControl(name) {
     return this.validateForm.controls[name];

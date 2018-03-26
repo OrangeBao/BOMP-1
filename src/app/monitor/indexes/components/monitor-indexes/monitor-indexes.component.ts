@@ -66,8 +66,6 @@ export class MonitorIndexesComponent implements OnInit {
   ngOnInit() {}
 
   editIndex(data: any) {
-    console.log(data);
-
     this.modalService.open({
       title: '编辑指标',
       content: IndexEditorModalComponent,

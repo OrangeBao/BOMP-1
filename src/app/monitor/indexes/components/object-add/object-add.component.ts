@@ -7,7 +7,6 @@ import {
   FormControl
 } from '@angular/forms';
 import { NzInputDirectiveComponent } from 'ng-zorro-antd';
-import { NzModalSubject } from 'ng-zorro-antd';
 
 import { TitleService } from '../../../../common/share.module';
 import { DataSource } from '../../../../common/models/data-source';
@@ -36,7 +35,6 @@ export class ObjectAddComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    // private subject: NzModalSubject,
     private title: TitleService,
     private dataSourceService: DataSourceService,
     private monitorService: MonitorService
@@ -75,7 +73,7 @@ export class ObjectAddComponent implements OnInit, OnDestroy {
   // addTag() {
   //   this.isAddingTag = true;
 
-  //   // TODO: 没有setTimeout就是undefined
+  //   // 没有setTimeout就是undefined
   //   // console.log(this.input);
   //   setTimeout(() => {
   //     // console.log(this.input.nativeElement);
