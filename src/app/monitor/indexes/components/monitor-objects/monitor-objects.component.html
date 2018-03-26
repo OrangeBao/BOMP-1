@@ -34,7 +34,7 @@
     <div nz-row [nzGutter]="16">
       <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let monitorObject of monitorFiltedObjects">
         <div class="gutter-box">
-          <bomp-monitor-object-card [isSelectable]="isBatchDeleteable" [isSelected]="allChecked" [monitorObject]="monitorObject" (selectChanged)="cardSelectChanged($event)" (deleteChanged)="cardDeleteChanged($event)"></bomp-monitor-object-card>
+          <app-monitor-object-card [isSelectable]="isBatchDeleteable" [isSelected]="allChecked" [monitorObject]="monitorObject" (selectChanged)="cardSelectChanged($event)" (deleteChanged)="cardDeleteChanged($event)"></app-monitor-object-card>
         </div>
       </div>
     </div>

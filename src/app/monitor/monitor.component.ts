@@ -17,16 +17,22 @@ export class MonitorComponent implements OnInit, OnDestroy {
     showTitle: false,
     text: ''
   };
-  constructor(private router: Router, private route:ActivatedRoute, private title: TitleService) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private title: TitleService
+  ) {}
 
   ngOnInit() {
     this.eventHandle = this.title.getMessage().subscribe(msg => {
       this.titleData.showTitle = msg.showTitle;
       this.titleData.text = msg.text;
-    })
+    });
   }
 
   ngOnDestroy() {
-    this.eventHandle && this.eventHandle.unsubscribe();
+    if (this.eventHandle) {
+      this.eventHandle.unsubscribe();
+    }
   }
 }

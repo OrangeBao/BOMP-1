@@ -1,12 +1,12 @@
-import { Component, ViewChild, TemplateRef, OnInit } from "@angular/core";
+import { Component, ViewChild, TemplateRef, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd';
 
 import { IndexEditorModalComponent } from '../index-editor-modal/index-editor-modal.component';
 
 @Component({
-  selector: "bomp-monitor-indexes",
-  templateUrl: "./monitor-indexes.component.html",
-  styleUrls: ["./monitor-indexes.component.scss"]
+  selector: 'app-monitor-indexes',
+  templateUrl: './monitor-indexes.component.html',
+  styleUrls: ['./monitor-indexes.component.scss']
 })
 export class MonitorIndexesComponent implements OnInit {
   // @ViewChild('tpl')
@@ -17,22 +17,22 @@ export class MonitorIndexesComponent implements OnInit {
   _displayData = [];
   data = [
     {
-      key: "1",
-      name: "John Brown",
+      key: '1',
+      name: 'John Brown',
       age: 32,
-      address: "New York No. 1 Lake Park"
+      address: 'New York No. 1 Lake Park'
     },
     {
-      key: "2",
-      name: "Jim Green",
+      key: '2',
+      name: 'Jim Green',
       age: 42,
-      address: "London No. 1 Lake Park"
+      address: 'London No. 1 Lake Park'
     },
     {
-      key: "3",
-      name: "Joe Black",
+      key: '3',
+      name: 'Joe Black',
       age: 32,
-      address: "Sidney No. 1 Lake Park"
+      address: 'Sidney No. 1 Lake Park'
     }
   ];
 
@@ -65,15 +65,11 @@ export class MonitorIndexesComponent implements OnInit {
 
   ngOnInit() {}
 
-
-
   editIndex(data: any) {
-    console.log(data);
-
     this.modalService.open({
-      title          : '编辑指标',
-      content        : IndexEditorModalComponent,
-      footer         : false,
+      title: '编辑指标',
+      content: IndexEditorModalComponent,
+      footer: false,
       closable: true,
       maskClosable: false,
       componentParams: {

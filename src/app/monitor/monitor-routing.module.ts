@@ -12,9 +12,9 @@ import { ItemComponent } from './target/item/item.component';
 import { ObjectComponent } from './target/object/object.component';
 
 import { IndexesComponent } from './indexes/indexes.component';
-import { MonitorObjectsComponent } from "./indexes/components/monitor-objects/monitor-objects.component";
-import { MonitorIndexesComponent } from "./indexes/components/monitor-indexes/monitor-indexes.component";
-import { ObjectAddComponent} from './indexes/components/object-add/object-add.component';
+import { MonitorObjectsComponent } from './indexes/components/monitor-objects/monitor-objects.component';
+import { MonitorIndexesComponent } from './indexes/components/monitor-indexes/monitor-indexes.component';
+import { ObjectAddComponent } from './indexes/components/object-add/object-add.component';
 
 import { TemplateComponent } from './template/template.component';
 import { TemplateListComponent } from './template/template-list/template-list.component';
@@ -32,7 +32,8 @@ const monitorRoutes: Routes = [
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full'
-      }, {
+      },
+      {
         path: 'dashboard',
         children: [
           {
@@ -42,22 +43,23 @@ const monitorRoutes: Routes = [
           },
           {
             path: 'list',
-            component: DashboardListComponent,
+            component: DashboardListComponent
           },
           {
             path: 'create',
-            component: DashboardCreateComponent,
+            component: DashboardCreateComponent
           },
           {
             path: 'edit',
-            component: DashboardEditComponent,
+            component: DashboardEditComponent
           },
           {
             path: 'scan',
-            component: DashboardScanComponent,
+            component: DashboardScanComponent
           }
         ]
-      }, {
+      },
+      {
         path: 'template',
         children: [
           {
@@ -67,18 +69,19 @@ const monitorRoutes: Routes = [
           },
           {
             path: 'list',
-            component: TemplateListComponent,
+            component: TemplateListComponent
           },
           {
             path: 'create',
-            component: TemplateCreateComponent,
+            component: TemplateCreateComponent
           },
           {
             path: 'scan',
             component: TemplateScanComponent
           }
         ]
-      }, {
+      },
+      {
         path: 'indexes',
         component: IndexesComponent,
         children: [
@@ -106,12 +109,8 @@ const monitorRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(monitorRoutes)
-  ],
-  exports: [
-    RouterModule
-  ],
-  providers: [ ]
+  imports: [RouterModule.forChild(monitorRoutes)],
+  exports: [RouterModule],
+  providers: []
 })
-export class MonitorRoutingModule { }
+export class MonitorRoutingModule {}

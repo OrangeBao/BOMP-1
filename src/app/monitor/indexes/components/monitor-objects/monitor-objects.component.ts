@@ -1,22 +1,20 @@
-import { Component, ViewChild, TemplateRef, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { ModalService } from "zu-modal";
+import { Component, ViewChild, TemplateRef, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ModalService } from 'zu-modal';
 
-import { LoadingService } from "../../../../common/share.module";
-import { MonitorService } from "../../../../common/services/monitor/monitor.service";
-import { MonitorObject } from "../../../../common/models/monitor/monitor-object";
-
-import { ObjectDeleteModalComponent } from "../object-delete-modal/object-delete-modal.component";
+import { LoadingService } from '../../../../common/share.module';
+import { MonitorService } from '../../../../common/services/monitor/monitor.service';
+import { MonitorObject } from '../../../../common/models/monitor/monitor-object';
 
 @Component({
-  selector: "bomp-monitor-objects",
-  templateUrl: "./monitor-objects.component.html",
-  styleUrls: ["./monitor-objects.component.scss"]
+  selector: 'app-monitor-objects',
+  templateUrl: './monitor-objects.component.html',
+  styleUrls: ['./monitor-objects.component.scss']
 })
 export class MonitorObjectsComponent implements OnInit {
-  @ViewChild("tplDelete") tplDelete: TemplateRef<any>;
+  @ViewChild('tplDelete') tplDelete: TemplateRef<any>;
 
-  searchText: string = "";
+  searchText: string;
   monitorTags: Array<string>;
   monitorObjects: Array<MonitorObject>;
   monitorFiltedObjects: Array<MonitorObject>;
@@ -24,23 +22,22 @@ export class MonitorObjectsComponent implements OnInit {
 
   selectedTags: Array<string> = [];
   allChecked = false;
-  isBatchDeleteable: boolean = false;
+  isBatchDeleteable: boolean;
 
   constructor(
     private router: Router,
     private monitorService: MonitorService,
     private spinnerService: LoadingService,
     private modalService: ModalService
-  ) {}
+  ) {
+    this.searchText = '';
+    this.isBatchDeleteable = false;
+  }
 
   ngOnInit() {
     this.monitorService.getMonitorObjs().subscribe({
       next: (data: any) => {
         this.monitorObjects = data.content || [];
-
-        // TODO: only for test
-        // this.monitorObjects.push(...this.monitorObjects);
-        // this.monitorObjects.push(...this.monitorObjects);
 
         this.monitorFiltedObjects = this.monitorObjects;
       }
@@ -49,17 +46,13 @@ export class MonitorObjectsComponent implements OnInit {
     this.monitorService.getMonitorTags().subscribe({
       next: (data: any) => {
         this.monitorTags = data || [];
-
-        // TODO: only for test
-        // this.monitorTags.push(...this.monitorObjects[0].tags);
-        // this.monitorTags.push(...this.monitorObjects[1].tags);
       }
     });
   }
 
   onSearch(): void {
     this.monitorFiltedObjects = this.monitorObjects.filter(item => {
-      return this.searchText == ""
+      return this.searchText === ''
         ? true
         : item.name.includes(this.searchText) ||
             item.tags.includes(this.searchText);
@@ -72,7 +65,7 @@ export class MonitorObjectsComponent implements OnInit {
     // console.log(this.selectedTags);
 
     this.monitorFiltedObjects = this.monitorObjects.filter(item => {
-      return (this.selectedTags.includes("all") || this.selectedTags.length === 0)
+      return this.selectedTags.includes('all') || this.selectedTags.length === 0
         ? true
         : item.tags.some(r => this.selectedTags.includes(r));
     });
@@ -98,7 +91,7 @@ export class MonitorObjectsComponent implements OnInit {
   // }
 
   newObject() {
-    this.router.navigateByUrl("/monitor/indexes/add");
+    this.router.navigateByUrl('/monitor/indexes/add');
   }
 
   batchDeleteObjects() {
@@ -136,9 +129,9 @@ export class MonitorObjectsComponent implements OnInit {
 
   confirmBatchDelete() {
     this.modalService.warn({
-      title: "批量删除",
+      title: '批量删除',
       content: `已选择${this.monitorDeleteList.length}个仪表盘，确定删除？`,
-      remark: this.monitorDeleteList.map(item => item.name).join(","),
+      remark: this.monitorDeleteList.map(item => item.name).join(','),
       onOk: () => this.deleteMonitors()
     });
   }
@@ -173,7 +166,7 @@ export class MonitorObjectsComponent implements OnInit {
       // 如果原来已存则不重复存
       if (
         !this.monitorDeleteList.some(r => {
-          return r.id == event.monitorObject.id;
+          return r.id === event.monitorObject.id;
         })
       ) {
         this.monitorDeleteList.push(event.monitorObject);
