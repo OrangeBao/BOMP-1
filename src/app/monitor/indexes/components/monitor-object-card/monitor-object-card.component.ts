@@ -102,9 +102,7 @@ export class MonitorObjectCardComponent implements OnInit, OnChanges {
         }).then(() => {
           this._monitorService
             .editMonitorObject(this.monitorObject)
-            .subscribe(result => {
-              console.log(result);
-            });
+            .subscribe(result => {});
         });
       }
     });

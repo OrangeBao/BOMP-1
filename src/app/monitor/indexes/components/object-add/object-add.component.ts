@@ -28,9 +28,6 @@ export class ObjectAddComponent implements OnInit, OnDestroy {
 
   validateForm: FormGroup;
   dataSourceList: Array<DataSource>;
-  // tempTags: Array<any> = [];
-  // isAddingTag: boolean = false;
-  // newTagValue: string;
 
   constructor(
     private fb: FormBuilder,
@@ -65,29 +62,6 @@ export class ObjectAddComponent implements OnInit, OnDestroy {
       text: ''
     });
   }
-
-  // deleteTag(removedTag: any): void {
-  //   this.tempTags = this.tempTags.filter(tag => tag !== removedTag);
-  // }
-
-  // addTag() {
-  //   this.isAddingTag = true;
-
-  //   // 没有setTimeout就是undefined
-  //   // console.log(this.input);
-  //   setTimeout(() => {
-  //     // console.log(this.input.nativeElement);
-  //     this.input.nativeElement.focus();
-  //   }, 0);
-  // }
-
-  // confirmAddTag() {
-  //   if (this.newTagValue) {
-  //     this.tempTags.push(this.newTagValue);
-  //   }
-  //   this.isAddingTag = false;
-  //   this.newTagValue = "";
-  // }
 
   getFormControl(name) {
     return this.validateForm.controls[name];

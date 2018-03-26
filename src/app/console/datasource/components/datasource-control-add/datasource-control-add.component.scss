@@ -2,6 +2,14 @@
     height: 32px;
 }
 
+:host ::ng-deep .ant-select-selection--single {
+    height: 32px;
+}
+
+:host ::ng-deep textarea.ant-input {
+    height: auto;
+}
+
 .row {
     display: flex;
 }
