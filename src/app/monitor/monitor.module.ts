@@ -19,11 +19,11 @@ import { DashboardEditComponent } from './dashboard/dashboard-edit/dashboard-edi
 import { TemplateComponent } from './template/template.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IndexesComponent } from './indexes/indexes.component';
-import { MonitorIndexesComponent } from './indexes/components/monitor-indexes/monitor-indexes.component';
-import { MonitorObjectsComponent } from './indexes/components/monitor-objects/monitor-objects.component';
-import { IndexEditorModalComponent } from './indexes/components/index-editor-modal/index-editor-modal.component';
-import { MonitorObjectCardComponent } from './indexes/components/monitor-object-card/monitor-object-card.component';
-import { ObjectAddComponent } from './indexes/components/object-add/object-add.component';
+import { MonitorIndexesComponent } from './indexes/index/monitor-indexes/monitor-indexes.component';
+import { IndexEditorModalComponent } from './indexes/index/index-editor-modal/index-editor-modal.component';
+import { MonitorObjectsComponent } from './indexes/object/monitor-objects/monitor-objects.component';
+import { MonitorObjectCardComponent } from './indexes/object/monitor-object-card/monitor-object-card.component';
+import { MonitorObjectAddComponent } from './indexes/object/monitor-object-add/monitor-object-add.component';
 
 import { TemplateListComponent } from './template/template-list/template-list.component';
 import { TemplateCreateComponent } from './template/template-create/template-create.component';
@@ -56,7 +56,7 @@ import { TemplateScanComponent } from './template/template-scan/template-scan.co
     MonitorObjectsComponent,
     IndexEditorModalComponent,
     MonitorObjectCardComponent,
-    ObjectAddComponent,
+    MonitorObjectAddComponent,
     TemplateListComponent,
     TemplateCreateComponent,
     TemplateEditComponent,

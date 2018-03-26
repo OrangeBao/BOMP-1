@@ -71,25 +71,6 @@ export class MonitorObjectsComponent implements OnInit {
     });
   }
 
-  // changeCheckTag(tag) {
-  //   if (this.selectedTags.includes(tag)) {
-  //     this.selectedTags = this.selectedTags.filter(item => item !== tag);
-  //   } else {
-  //     if (tag === "all") {
-  //       this.selectedTags = [];
-  //     } else {
-  //       this.selectedTags = this.selectedTags.filter(item => item !== "all");
-  //     }
-  //     this.selectedTags.push(tag);
-  //   }
-
-  //   this.monitorFiltedObjects = this.monitorObjects.filter(item => {
-  //     return this.selectedTags.includes("all")
-  //       ? true
-  //       : item.tags.some(r => this.selectedTags.includes(r));
-  //   });
-  // }
-
   newObject() {
     this.router.navigateByUrl('/monitor/indexes/add');
   }
