@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TitleService, DashboardService, LoadingService } from '../../../common/share.module';
-import { ActivatedRoute }     from '@angular/router';
-import { Observable }         from 'rxjs/Observable';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
   templateUrl: './dashboard-edit.component.html',
   styleUrls: ['./dashboard-edit.component.scss']
 })
-export class DashboardEditComponent implements OnInit {
+export class DashboardEditComponent implements OnInit, OnDestroy {
 
   dashboardUrl: string;
   constructor(

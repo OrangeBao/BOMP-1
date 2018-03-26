@@ -33,6 +33,7 @@
         border-radius: 3px;
         padding: 0 10px;
         margin-left: 10px;
+        margin-top: 5px;
         &.f {
             background-color: transparent;
             color: #8391a6;
@@ -51,7 +52,8 @@
             padding: 10px;
             border-bottom: 1px solid #e8e8e8;
             cursor: pointer;
-        } 
+            margin-left: 0px;
+        }
     } 
     .list-w {
         display: flex;

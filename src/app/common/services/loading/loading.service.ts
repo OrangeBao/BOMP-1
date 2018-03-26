@@ -11,11 +11,11 @@ export class LoadingService {
     return this.spinnerSubject.asObservable();
   }
 
-  show():void {
+  show(): void {
     this.spinnerSubject.next(true);
   }
 
-  hide():void {
+  hide(): void {
     this.spinnerSubject.next(false);
   }
 }

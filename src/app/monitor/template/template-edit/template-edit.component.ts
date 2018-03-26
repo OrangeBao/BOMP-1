@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TitleService, DashboardService, LoadingService } from '../../../common/share.module';
-import { ActivatedRoute }     from '@angular/router';
-import { Observable }         from 'rxjs/Observable';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @Component({

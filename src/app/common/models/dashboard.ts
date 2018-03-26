@@ -1,11 +1,21 @@
 export class Dashboard {
     id: number;
+    createTime: Date;
+    createUser: string;
+    file: {
+        hash: string;
+        name: string;
+    };
+    dashboardId: number;
     title: string;
-    uri: string;
-    type: string;
     tags: string[];
-    isStarred: boolean;
-    orgId: number;
+    slug: string;
+    url: string;
+    panelNum: number;
+    variables: {
+        name: string;
+        query: string;
+        value: string;
+    }[];
     desc: string;
-    monitorObj: string;
 }

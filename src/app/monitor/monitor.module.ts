@@ -9,7 +9,6 @@ import { MonitorComponent } from './monitor.component';
 import { DashboardListComponent } from './dashboard/dashboard-list/dashboard-list.component';
 import { DashboardSummaryComponent } from './dashboard/dashboard-summary/dashboard-summary.component';
 import { DashboardCreateComponent } from './dashboard/dashboard-create/dashboard-create.component';
-// import { DashboardEditComponent } from './dashboard/dashboard-edit/dashboard-edit.component';
 
 import { ShareModule } from '../common/share.module';
 import { DashboardScanComponent } from './dashboard/dashboard-scan/dashboard-scan.component';

@@ -1,28 +1,4 @@
-@import "../../../../theme.scss";
-
-.head-bar {
-  display: flex;
-  .op-bar {
-    .default {
-      margin-left: 10px;
-    }
-    .checkbox-inline {
-      margin-left: 10px;
-    }
-    flex: 1;
-  }
-  .search-w ::ng-deep nz-input {
-    & input {
-      height: 32px;
-      border-color: rgba(221, 221, 221, 1);
-    }
-  }
-}
-
-
-app-tag-bar {
-  margin-top: 20px;
-}
+@import "../../../../feedlist.scss";
 
 .list-w {
   width: calc(100% + 20px);
@@ -163,27 +139,4 @@ app-tag-bar {
       }
     }
   }
-}
-
-.hidden {
-  display: none;
-}
-
-.null-tips {
-  padding-top: 40px;
-  display: flex;
-  justify-content: center;
-}
-
-.iconfont {
-  cursor: pointer;
-  font-size: 12px;
-  &:hover {
-    color: #5cb9ff;
-  }
-}
-
-.form {
-  padding: 20px 100px 20px 40px;
-  max-width: 600px;
 }

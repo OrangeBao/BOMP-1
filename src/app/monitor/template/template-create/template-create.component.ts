@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class TemplateCreateComponent implements OnInit, OnDestroy {
 
   modifyForm: FormGroup;
-  createType: number = 1;
+  createType = 1;
 
   constructor(
     private notification: NzNotificationService,
