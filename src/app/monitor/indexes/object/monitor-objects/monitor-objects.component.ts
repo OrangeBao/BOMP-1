@@ -38,7 +38,7 @@ export class MonitorObjectsComponent extends PageComponent<MonitorObject> implem
   ) {
     super();
 
-    this.searchText = '';
+    // this.searchText = '';
     // this.isBatchDeleteable = false;
     // this.monitorDeleteList = new Array<MonitorObject>();
   }
