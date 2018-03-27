@@ -19,15 +19,15 @@ import { PageComponent } from '../../../../common/components/page.component';
 export class MonitorObjectsComponent extends PageComponent<MonitorObject> implements OnInit {
   @ViewChild('tplDelete') tplDelete: TemplateRef<any>;
 
-  searchText: string;
+  // searchText: string;
   monitorTags: Array<string>;
   monitorObjects: Array<MonitorObject>;
   monitorFiltedObjects: Array<MonitorObject>;
-  monitorDeleteList: Array<MonitorObject>;
+  // monitorDeleteList: Array<MonitorObject>;
 
   selectedTags: Array<string> = [];
-  allChecked = false;
-  isBatchDeleteable: boolean;
+  // allChecked = false;
+  // isBatchDeleteable: boolean;
 
   constructor(
     private router: Router,
@@ -39,8 +39,8 @@ export class MonitorObjectsComponent extends PageComponent<MonitorObject> implem
     super();
 
     this.searchText = '';
-    this.isBatchDeleteable = false;
-    this.monitorDeleteList = new Array<MonitorObject>();
+    // this.isBatchDeleteable = false;
+    // this.monitorDeleteList = new Array<MonitorObject>();
   }
 
   ngOnInit() {
@@ -53,6 +53,7 @@ export class MonitorObjectsComponent extends PageComponent<MonitorObject> implem
     // });
     this.requestData(true);
 
+    // TODO: 获取所有tag的服务
     this.monitorService.getMonitorTags().subscribe({
       next: (data: any) => {
         this.monitorTags = data || [];
@@ -72,12 +73,12 @@ export class MonitorObjectsComponent extends PageComponent<MonitorObject> implem
     );
   }
 
-  deleteDataSource(monitorObject) {
+  deleteDataSource(record: MonitorObject) {
     this.modalService.warn({
       title: '删除',
-      content: `确定删除监控对象${monitorObject.name}吗？`,
+      content: `确定删除监控对象${record.name}吗？`,
       // content: `确定删除监控对象${id}吗？`,
-      onOk: () => this.deleteRequest([monitorObject.id])
+      onOk: () => this.deleteRequest([record])
     });
   }
 
@@ -100,7 +101,7 @@ export class MonitorObjectsComponent extends PageComponent<MonitorObject> implem
   deleteRequest(records: Array<MonitorObject>) {
     this.spinnerService.show();
     this.monitorService
-      .deleteMonitorObjects(this.monitorDeleteList)
+      .deleteMonitorObjects(records.map(item => item.id))
       .subscribe(result => {
         this.spinnerService.hide();
 
@@ -112,68 +113,67 @@ export class MonitorObjectsComponent extends PageComponent<MonitorObject> implem
       });
   }
   /** end PageComponent implements */
-
+  // TODO: 集成到pageComp中
   onSearch(): void {
-    this.monitorFiltedObjects = this.monitorObjects.filter(item => {
-      return this.searchText === ''
-        ? true
-        : item.name.includes(this.searchText) ||
-        item.tags.includes(this.searchText);
-    });
+    // this.monitorFiltedObjects = this.monitorObjects.filter(item => {
+    //   return this.searchText === ''
+    //     ? true
+    //     : item.name.includes(this.searchText) ||
+    //     item.tags.includes(this.searchText);
+    // });
   }
 
+  // TODO: 集成到pageComp中
   tagChange($event) {
-    this.selectedTags = $event;
+    // this.selectedTags = $event;
 
-    // console.log(this.selectedTags);
-
-    this.monitorFiltedObjects = this.monitorObjects.filter(item => {
-      return this.selectedTags.includes('all') || this.selectedTags.length === 0
-        ? true
-        : item.tags.some(r => this.selectedTags.includes(r));
-    });
+    // this.monitorFiltedObjects = this.monitorObjects.filter(item => {
+    //   return this.selectedTags.includes('all') || this.selectedTags.length === 0
+    //     ? true
+    //     : item.tags.some(r => this.selectedTags.includes(r));
+    // });
   }
 
   newObject() {
     this.router.navigateByUrl('/monitor/indexes/add');
   }
 
-  batchDeleteObjects() {
-    this.isBatchDeleteable = true;
-  }
+  // batchDeleteObjects() {
+  //   this.isBatchDeleteable = true;
+  // }
 
-  confirmBatchDelete() {
-    this.modalService.warn({
-      title: '批量删除',
-      content: `已选择${this.monitorDeleteList.length}个监控对象，确定删除？`,
-      remark: this.monitorDeleteList.map(item => item.name).join(','),
-      onOk: () => this.deleteMonitors()
-    });
-  }
+  // confirmBatchDelete() {
+  //   this.modalService.warn({
+  //     title: '批量删除',
+  //     content: `已选择${this.monitorDeleteList.length}个监控对象，确定删除？`,
+  //     remark: this.monitorDeleteList.map(item => item.name).join(','),
+  //     onOk: () => this.deleteMonitors()
+  //   });
+  // }
 
-  deleteMonitors() {
-    this.spinnerService.show();
-    this.monitorService
-      .deleteMonitorObjects(this.monitorDeleteList)
-      .subscribe(result => {
-        this.spinnerService.hide();
+  // deleteMonitors() {
+  //   this.spinnerService.show();
+  //   this.monitorService
+  //     .deleteMonitorObjects(this.monitorDeleteList)
+  //     .subscribe(result => {
+  //       this.spinnerService.hide();
 
-        this.refreshMonitorObjects();
-        this.monitorDeleteList = [];
-      });
-  }
+  //       this.refreshMonitorObjects();
+  //       this.monitorDeleteList = [];
+  //     });
+  // }
 
-  cancelBatchDelete() {
-    this.isBatchDeleteable = false;
-  }
+  // cancelBatchDelete() {
+  //   this.isBatchDeleteable = false;
+  // }
 
-  refreshMonitorObjects() {
-    // 前端删除 or 后端重新获取数据???
-    this.monitorObjects = this.monitorObjects.filter(item => {
-      return !this.monitorDeleteList.includes(item);
-    });
-    this.monitorFiltedObjects = this.monitorObjects;
-  }
+  // refreshMonitorObjects() {
+  //   // 前端删除 or 后端重新获取数据???
+  //   this.monitorObjects = this.monitorObjects.filter(item => {
+  //     return !this.monitorDeleteList.includes(item);
+  //   });
+  //   this.monitorFiltedObjects = this.monitorObjects;
+  // }
 
   // // output event
   // cardSelectChanged(event: any) {
