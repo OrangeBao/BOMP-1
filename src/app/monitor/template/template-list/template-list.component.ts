@@ -20,14 +20,14 @@ export class TemplateListComponent extends PageComponent<Template> implements On
 
   @ViewChild('modifyFormUrl') modifyFormUrl: TemplateRef<any>;
 
-  baseInfo: any = {};  
-  
+  baseInfo: any = {};
+
   constructor(
-      private templateService: TemplateService,
-      private userService: UserService,
-      private spinnerService: LoadingService,
-      private notification: NzNotificationService,
-      private modalService: ModalService,
+    private templateService: TemplateService,
+    private userService: UserService,
+    private spinnerService: LoadingService,
+    private notification: NzNotificationService,
+    private modalService: ModalService,
   ) {
     super();
   }
@@ -44,7 +44,6 @@ export class TemplateListComponent extends PageComponent<Template> implements On
   }
 
   ngOnInit() {
-    debugger;
     this.requestData(true);
   }
 
@@ -58,7 +57,7 @@ export class TemplateListComponent extends PageComponent<Template> implements On
 
   batchDeleteDataSource() {
     const choiceList = this.choiceList;
-    if (choiceList.length === 0) return;
+    if (choiceList.length === 0) { return; }
     const self = this;
     this.modalService.warn({
       title: '删除',
@@ -71,7 +70,7 @@ export class TemplateListComponent extends PageComponent<Template> implements On
     });
   }
 
-  deleteRequest(id : string[]) {
+  deleteRequest(id: string[]) {
     this.spinnerService.show();
     this.templateService.deleteTemplate(id).subscribe(() => {
       this.spinnerService.hide();

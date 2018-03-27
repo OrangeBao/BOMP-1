@@ -15,11 +15,11 @@ import { MonitorService } from '../../../../common/services/monitor/monitor.serv
 import { MonitorObject } from '../../../../common/models/monitor/monitor-object';
 
 @Component({
-  selector: 'app-object-add',
-  templateUrl: './object-add.component.html',
-  styleUrls: ['./object-add.component.scss']
+  selector: 'app-monitor-object-add',
+  templateUrl: './monitor-object-add.component.html',
+  styleUrls: ['./monitor-object-add.component.scss']
 })
-export class ObjectAddComponent implements OnInit, OnDestroy {
+export class MonitorObjectAddComponent implements OnInit, OnDestroy {
   @ViewChild('input') input: NzInputDirectiveComponent;
 
   isFinished: boolean;

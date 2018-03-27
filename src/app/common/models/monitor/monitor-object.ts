@@ -5,6 +5,6 @@ export class MonitorObject {
     name: string;
     desc: string;
     tags: string[];
-    datasource: DataSource
+    datasource: DataSource;
 }
 

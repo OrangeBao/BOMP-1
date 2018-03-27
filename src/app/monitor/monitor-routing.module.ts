@@ -12,9 +12,9 @@ import { ItemComponent } from './target/item/item.component';
 import { ObjectComponent } from './target/object/object.component';
 
 import { IndexesComponent } from './indexes/indexes.component';
-import { MonitorObjectsComponent } from './indexes/components/monitor-objects/monitor-objects.component';
-import { MonitorIndexesComponent } from './indexes/components/monitor-indexes/monitor-indexes.component';
-import { ObjectAddComponent } from './indexes/components/object-add/object-add.component';
+import { MonitorObjectsComponent } from './indexes/object/monitor-objects/monitor-objects.component';
+import { MonitorObjectAddComponent } from './indexes/object/monitor-object-add/monitor-object-add.component';
+import { MonitorIndexesComponent } from './indexes/index/monitor-indexes/monitor-indexes.component';
 
 import { TemplateComponent } from './template/template.component';
 import { TemplateListComponent } from './template/template-list/template-list.component';
@@ -100,7 +100,7 @@ const monitorRoutes: Routes = [
           },
           {
             path: 'add',
-            component: ObjectAddComponent
+            component: MonitorObjectAddComponent
           }
         ]
       }

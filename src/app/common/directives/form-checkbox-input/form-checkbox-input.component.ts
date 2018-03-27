@@ -44,10 +44,10 @@ export class FormCheckboxInputComponent implements ControlValueAccessor {
     this.propagateChange(this._items);
   }
 
-  constructor() {}
+  constructor() { }
 
   propagateChange = (_: any) => {
-    
+
   }
 
   writeValue(value: any) {
@@ -60,7 +60,7 @@ export class FormCheckboxInputComponent implements ControlValueAccessor {
     this.propagateChange = fn;
   }
 
-  registerOnTouched(fn: any) {}
+  registerOnTouched(fn: any) { }
 
   clickItem(e, item) {
     const checkbox = e.target;

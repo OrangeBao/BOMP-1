@@ -22,17 +22,6 @@
       <div nz-form-label class="column-left">
         <label [attr.for]="'tags'" nz-form-item-required>标签</label>
       </div>
-      <!-- <div nz-form-control class="column-right">
-            <ng-container *ngFor="let tag of tempTags">
-              <nz-tag [nzClosable]="true" (nzClose)="deleteTag(tag)">{{tag}}</nz-tag>
-            </ng-container>
-            <button nz-button [nzSize]="'small'" *ngIf="!isAddingTag" (click)="addTag()">
-              <i class="fa fa-plus"></i>
-              <span>添加</span>
-            </button>
-            <input nz-input #input *ngIf="isAddingTag" type="text" [(ngModel)]="newTagValue" [ngModelOptions]="{standalone: true}" style="width: 100px;"
-              (blur)="confirmAddTag()" (keydown.enter)="confirmAddTag()">
-          </div> -->
       <div nz-form-control class="column-right">
         <app-tag-input formControlName="tags"></app-tag-input>
         <div nz-form-explain *ngIf="getFormControl('tags').dirty && getFormControl('tags').hasError('required')">请输入tags</div>
