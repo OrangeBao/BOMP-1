@@ -27,7 +27,7 @@ export class TemplateService {
     return this.http.post('api/monitor/templates/import', params);
   }
 
-  deleteTemplate(ids: string[]): Observable<any> {
+  deleteTemplate(ids: number[]): Observable<any> {
     return this.http.delete(`api/monitor/templates?${ids.map(id => 'id=' + id).join('&')}`);
   }
 

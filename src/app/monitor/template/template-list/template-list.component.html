@@ -20,7 +20,7 @@
 </div>
 <app-tag-bar [tags]="allTags" (change)="tagChange($event)"></app-tag-bar>
 <div class="list-w" [class.isDelete]="isBatchModel">
-  <div *ngFor="let data of displayDataSource" class="d-w" (click)="addChoice(data.id)" [class.choice]="isChoice(data.id)">
+  <div *ngFor="let data of displayDataSource" class="d-w" (click)="addChoice(data)" [class.choice]="isChoice(data)">
     <div class="d-detail">
       <div class="img-w">
         <div class="img"></div>
@@ -33,7 +33,7 @@
             <div class="icon-list">
                 <i class="iconfont icon-bianji" alt="编辑" title="编辑" routerLink="../edit" [fragment]="data.url"></i>
                 <!-- <i class="iconfont icon-shangchuan" alt="导出" title="导出" (click)="waitTips()"></i> -->
-                <i class="iconfont icon-shanchu" alt="删除" title="删除" on-click="deleteDataSource(data.id)"></i>
+                <i class="iconfont icon-shanchu" alt="删除" title="删除" on-click="deleteDataSource(data)"></i>
             </div>
           </div>
           <div class="monitor-t">

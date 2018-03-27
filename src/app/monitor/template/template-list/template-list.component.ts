@@ -47,11 +47,11 @@ export class TemplateListComponent extends PageComponent<Template> implements On
     this.requestData(true);
   }
 
-  deleteDataSource(id) {
+  deleteDataSource(record: Template) {
     this.modalService.warn({
       title: '删除',
-      content: `确定删除模板${id}吗？`,
-      onOk: () => this.deleteRequest([id]),
+      content: `确定删除模板${record.id}吗？`,
+      onOk: () => this.deleteRequest([record]),
     });
   }
 
@@ -62,7 +62,7 @@ export class TemplateListComponent extends PageComponent<Template> implements On
     this.modalService.warn({
       title: '删除',
       content: `已选择${choiceList.length}个模板，确定删除？`,
-      remark: this.dataSource.filter(item => this.choiceList.includes(item.id)).map(item => item.title).join(','),
+      remark: choiceList.map(item => item.id).join(','),
       onOk: () => {
         self.deleteRequest(choiceList);
         self.batchModel();
@@ -70,9 +70,9 @@ export class TemplateListComponent extends PageComponent<Template> implements On
     });
   }
 
-  deleteRequest(id: string[]) {
+  deleteRequest(records: Array<Template>) {
     this.spinnerService.show();
-    this.templateService.deleteTemplate(id).subscribe(() => {
+    this.templateService.deleteTemplate(records.map(item => item.id)).subscribe(() => {
       this.spinnerService.hide();
       this.notification.create('success', '提示', '模板删除成功！');
       this.requestData(true);
