@@ -32,16 +32,16 @@ export class MonitorService {
     return this.http.put(MONITOR_OBJS_URL + '/' + id, monitorObj);
   }
 
-  deleteMonitorObjects(monitorDeleteList: Array<any>): Observable<any> {
-    let params = '';
-    monitorDeleteList.forEach((value, index) => {
-      if (index === 0) {
-        params += '?id=' + value;
-      } else {
-        params += '&id=' + value;
-      }
-    });
+  deleteMonitorObjects(params: Array<any>): Observable<any> {
+    // let params = '';
+    // monitorDeleteList.forEach((value, index) => {
+    //   if (index === 0) {
+    //     params += '?id=' + value;
+    //   } else {
+    //     params += '&id=' + value;
+    //   }
+    // });
 
-    return this.http.delete(MONITOR_OBJS_URL + params);
+    return this.http.delete(`${MONITOR_OBJS_URL}?${params.map(item => 'id=' + item).join('&')}`);
   }
 }

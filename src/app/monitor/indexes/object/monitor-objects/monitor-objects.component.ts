@@ -88,7 +88,7 @@ export class MonitorObjectsComponent extends PageComponent<MonitorObject> implem
       this.modalService.warn({
         title: '删除',
         content: `已选择${choiceList.length}个监控对象，确定删除？`,
-        remark: this.dataSource.filter(item => this.choiceList.includes(item.id)).map(item => item.name).join(','),
+        remark: choiceList.map(item => item.name).join(','),
         onOk: () => {
           self.deleteRequest(choiceList);
           self.batchModel();
@@ -97,7 +97,7 @@ export class MonitorObjectsComponent extends PageComponent<MonitorObject> implem
     }
   }
 
-  deleteRequest(id: string[]) {
+  deleteRequest(records: Array<MonitorObject>) {
     this.spinnerService.show();
     this.monitorService
       .deleteMonitorObjects(this.monitorDeleteList)

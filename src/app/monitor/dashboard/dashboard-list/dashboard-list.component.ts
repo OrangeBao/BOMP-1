@@ -64,11 +64,11 @@ export class DashboardListComponent extends PageComponent<Dashboard> implements 
     this.userService.setHomePage(uri).then(() => this.spinnerService.hide());
   }
 
-  deleteDataSource(id) {
+  deleteDataSource(record: Dashboard) {
     this.modalService.warn({
       title: '删除',
-      content: `确定删除仪表${id}吗？`,
-      onOk: () => this.deleteRequest([id]),
+      content: `确定删除仪表${record.title}吗？`,
+      onOk: () => this.deleteRequest([record]),
     });
   }
 
@@ -79,7 +79,7 @@ export class DashboardListComponent extends PageComponent<Dashboard> implements 
     this.modalService.warn({
       title: '删除',
       content: `已选择${choiceList.length}个仪表盘，确定删除？`,
-      remark: this.dataSource.filter(item => this.choiceList.includes(item.id)).map(item => item.title).join(','),
+      remark: choiceList.map(item => item.title).join(','),
       onOk: () => {
         self.deleteRequest(choiceList);
         self.batchModel();
@@ -87,9 +87,9 @@ export class DashboardListComponent extends PageComponent<Dashboard> implements 
     });
   }
 
-  deleteRequest(id: string[]) {
+  deleteRequest(records: Array<Dashboard>) {
     this.spinnerService.show();
-    this.dashboardService.deleteDashboard(id).subscribe(() => {
+    this.dashboardService.deleteDashboard(records.map(r => r.id)).subscribe(() => {
       this.spinnerService.hide();
       this.notification.create('success', '提示', '删除仪表盘成功！');
       this.requestData(true);

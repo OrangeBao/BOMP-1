@@ -28,7 +28,7 @@ export class DashboardService {
     return this.http.put(`api/monitor/dashboards/${dashboardId}`, params);
   }
   
-  deleteDashboard(ids: string[]): Observable<any> {
+  deleteDashboard(ids: number[]): Observable<any> {
     return this.http.delete(`api/monitor/dashboards?${ids.map(id => 'id=' + id).join('&')}`);
   }
 

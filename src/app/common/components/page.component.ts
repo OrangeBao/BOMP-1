@@ -31,20 +31,20 @@ export abstract class PageComponent<T> {
     protected noMore = false;
 
     // 批量模式下 选中的id数组
-    choiceList: Array<any> = [];
+    choiceList: Array<T> = [];
 
 
     // 获取追加的数据 返回Observable
     abstract appendData(queryParams: QueryParams);
 
     // 删除纪录  不一定是删除
-    abstract deleteDataSource(id: any);
+    abstract deleteDataSource(record: T);
 
     // 批量删除纪录  不一定是删除
     abstract batchDeleteDataSource();
 
-    //
-    abstract deleteRequest(ids: any);
+    // 删除的请求
+    abstract deleteRequest(records: Array<T>);
 
     // 获取数据中的标签数组 可能被重写
     getTagsFromRecord(item: T | any): string[] {
@@ -91,19 +91,19 @@ export abstract class PageComponent<T> {
     }
 
     // 移入或移出选择列表
-    addChoice(id) {
+    addChoice(record: T) {
         if (this.isBatchModel) {
-            if (this.choiceList.includes(id)) {
-                this.choiceList = this.choiceList.filter(i => i !== id);
+            if (this.isChoice(record)) {
+                this.choiceList = this.choiceList.filter(item => this.getRecordId(item) !== this.getRecordId(record));
             } else {
-                this.choiceList.push(id);
+                this.choiceList.push(record);
             }
         }
     }
 
     // 是否选中
-    isChoice(id) {
-        return this.choiceList.includes(id);
+    isChoice(record: T) {
+        return this.choiceList.find(item => this.getRecordId(item) === this.getRecordId(record));
     }
 
     // 是否全选
