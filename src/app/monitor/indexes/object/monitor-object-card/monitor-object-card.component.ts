@@ -38,7 +38,7 @@ export class MonitorObjectCardComponent
   @Input('isSelected') public isSelected: boolean;
   @Input('monitorObject') public monitorObject: any;
 
-  @Output() public selectChanged: EventEmitter<any> = new EventEmitter<any>();
+  // @Output() public selectChanged: EventEmitter<any> = new EventEmitter<any>();
   @Output() public deleteChanged: EventEmitter<any> = new EventEmitter<any>();
 
   @ViewChild('tplEditForm') tplEditForm: TemplateRef<any>;
@@ -57,7 +57,7 @@ export class MonitorObjectCardComponent
     private _monitorService: MonitorService,
     private spinnerService: LoadingService,
     private modalService: ModalService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.validateForm = this.fb.group({
@@ -78,12 +78,12 @@ export class MonitorObjectCardComponent
 
   // isSelectable 变化后，是否需清空选中的card的样式
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.isSelected && !changes.isSelected.firstChange) {
-      this.selectChanged.emit({
-        monitorObject: this.monitorObject,
-        selected: changes.isSelected.currentValue
-      });
-    }
+    // if (changes.isSelected && !changes.isSelected.firstChange) {
+    //   this.selectChanged.emit({
+    //     monitorObject: this.monitorObject,
+    //     selected: changes.isSelected.currentValue
+    //   });
+    // }
   }
 
   adjustTagsShow() {
@@ -127,14 +127,14 @@ export class MonitorObjectCardComponent
   }
 
   select() {
-    if (this.isSelectable) {
-      this.isSelected = !this.isSelected;
+    // if (this.isSelectable) {
+    //   this.isSelected = !this.isSelected;
 
-      this.selectChanged.emit({
-        monitorObject: this.monitorObject,
-        selected: this.isSelected
-      });
-    }
+    //   this.selectChanged.emit({
+    //     monitorObject: this.monitorObject,
+    //     selected: this.isSelected
+    //   });
+    // }
   }
 
   showMoreMenu(flag: boolean) {
@@ -160,22 +160,24 @@ export class MonitorObjectCardComponent
         }).then(() => {
           this._monitorService
             .editMonitorObject(this.monitorObject)
-            .subscribe(result => {});
+            .subscribe(result => { });
         });
       }
     });
   }
 
   confirmDelete() {
-    this.modalService.warn({
-      title: '删除',
-      content: `确定删除监控对象${this.monitorObject.name}吗？`,
-      onOk: () => {
-        this.deleteChanged.emit({
-          monitorObject: this.monitorObject
-        });
-      }
-    });
+    // this.modalService.warn({
+    //   title: '删除',
+    //   content: `确定删除监控对象${this.monitorObject.name}吗？`,
+    //   onOk: () => {
+    //     this.deleteChanged.emit({
+    //       monitorObject: this.monitorObject
+    //     });
+    //   }
+    // });
+
+    this.deleteChanged.emit(this.monitorObject);
   }
 
   getFormControl(name) {
