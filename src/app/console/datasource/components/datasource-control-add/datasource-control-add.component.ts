@@ -119,7 +119,8 @@ export class DatasourceControlAddComponent implements OnInit, OnDestroy {
         name: this.getFormControl('name').value,
         type: this.getFormControl('type').value,
         url: this.getFormControl('url').value,
-        permission: this.permissionSpan.nativeElement.innerHTML,
+        // permission: this.permissionSpan.nativeElement.innerHTML,
+        permission: 'READ',
         // authentication: this.getFormControl("authentication").value,
         // authentication: this.getFormControl("authentication")
         //   .value.filter(r => r.checked)
@@ -145,5 +146,9 @@ export class DatasourceControlAddComponent implements OnInit, OnDestroy {
         }, 1000);
       });
     }
+  }
+
+  cancelSubmit() {
+    this.router.navigate(['/console/datasourcecontrol/table']);
   }
 }

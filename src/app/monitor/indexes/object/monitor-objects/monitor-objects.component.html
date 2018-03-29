@@ -30,8 +30,8 @@
         <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let monitorObject of displayDataSource">
         <div class="gutter-box">
           <!-- <app-monitor-object-card [isSelectable]="isBatchDeleteable" [isSelected]="allChecked" [monitorObject]="monitorObject" (selectChanged)="cardSelectChanged($event)" (deleteChanged)="cardDeleteChanged($event)"></app-monitor-object-card> -->
-          <app-monitor-object-card (click)="addChoice(monitorObject.id)" [isSelectable]="isBatchModel" [isSelected]="isChoice(monitorObject.id)"
-            [monitorObject]="monitorObject" (deleteChanged)="deleteDataSource($event)"></app-monitor-object-card>
+          <app-monitor-object-card (click)="addChoice(monitorObject)" [isSelectable]="isBatchModel" [isSelected]="isChoice(monitorObject)"
+            [monitorObject]="monitorObject" (editChanged)="refreshDataSource($event)" (deleteChanged)="deleteDataSource($event)"></app-monitor-object-card>
         </div>
       </div>
     </div>
@@ -43,5 +43,5 @@
 </div>
 
 <div *ngIf="!needLoad && displayDataSource && displayDataSource.length === 0" class="null-tips">
-  <span>暂无模板！</span>
+  <span>暂无监控对象！</span>
 </div>

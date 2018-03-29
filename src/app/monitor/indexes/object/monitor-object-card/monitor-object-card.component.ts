@@ -12,7 +12,7 @@ import {
   AfterViewInit,
   QueryList,
   ChangeDetectorRef,
-  AfterViewChecked,
+  AfterViewChecked
 } from '@angular/core';
 import {
   FormBuilder,
@@ -20,12 +20,13 @@ import {
   Validators,
   FormControl
 } from '@angular/forms';
-// import { NzModalService } from "ng-zorro-antd";
+import { NzNotificationService } from 'ng-zorro-antd';
 import { ModalService } from 'zu-modal';
 
 import { LoadingService } from '../../../../common/share.module';
 
 import { MonitorService } from '../../../../common/services/monitor/monitor.service';
+import { MonitorObject } from '../../../../common/models/monitor/monitor-object';
 
 @Component({
   selector: 'app-monitor-object-card',
@@ -36,9 +37,9 @@ export class MonitorObjectCardComponent
   implements OnInit, AfterViewInit, OnChanges, AfterViewChecked {
   @Input('isSelectable') public isSelectable: boolean;
   @Input('isSelected') public isSelected: boolean;
-  @Input('monitorObject') public monitorObject: any;
+  @Input('monitorObject') public monitorObject: MonitorObject;
 
-  // @Output() public selectChanged: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public editChanged: EventEmitter<any> = new EventEmitter<any>();
   @Output() public deleteChanged: EventEmitter<any> = new EventEmitter<any>();
 
   @ViewChild('tplEditForm') tplEditForm: TemplateRef<any>;
@@ -54,10 +55,11 @@ export class MonitorObjectCardComponent
   constructor(
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
+    private notification: NzNotificationService,
     private _monitorService: MonitorService,
     private spinnerService: LoadingService,
     private modalService: ModalService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.validateForm = this.fb.group({
@@ -129,7 +131,6 @@ export class MonitorObjectCardComponent
   select() {
     // if (this.isSelectable) {
     //   this.isSelected = !this.isSelected;
-
     //   this.selectChanged.emit({
     //     monitorObject: this.monitorObject,
     //     selected: this.isSelected
@@ -158,25 +159,27 @@ export class MonitorObjectCardComponent
             reject();
           }
         }).then(() => {
-          this._monitorService
-            .editMonitorObject(this.monitorObject)
-            .subscribe(result => { });
+          const updatedMonitor = Object.assign(this.monitorObject, {
+            name: this.getFormControl('name').value,
+            desc: this.getFormControl('description').value,
+            tags: this.getFormControl('tags').value
+          });
+
+          this._monitorService.editMonitorObject(updatedMonitor).subscribe({
+            next: result => {
+              this.notification.create('success', '提示', '监控对象修改成功！');
+              this.editChanged.emit();
+            },
+            error: error => {
+              this.notification.create('warning', '提示', error.error.message);
+            }
+          });
         });
       }
     });
   }
 
   confirmDelete() {
-    // this.modalService.warn({
-    //   title: '删除',
-    //   content: `确定删除监控对象${this.monitorObject.name}吗？`,
-    //   onOk: () => {
-    //     this.deleteChanged.emit({
-    //       monitorObject: this.monitorObject
-    //     });
-    //   }
-    // });
-
     this.deleteChanged.emit(this.monitorObject);
   }
 

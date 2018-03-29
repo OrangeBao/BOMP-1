@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NzNotificationService } from 'ng-zorro-antd';
 
 import { ShareModule } from '../common/share.module';
 
@@ -28,6 +28,7 @@ import { CollectionControlAddComponent } from './collection/components/collectio
     DatasourceControlAddComponent,
     CollectionControlCardsComponent,
     CollectionControlAddComponent
-  ]
+  ],
+  providers: [NzNotificationService]
 })
 export class ConsoleModule {}

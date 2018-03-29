@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../user/user.service';
-import {Observable} from 'rxjs/Observable';
-import { DataSource} from '../../models/data-source';
+import { Observable } from 'rxjs/Observable';
+import { DataSource } from '../../models/data-source';
 
 const DATA_SOURCE_URL = 'api/monitor/datasources';
 
 @Injectable()
 export class DataSourceService {
-
-  constructor(private http: HttpClient, private userService: UserService) { }
+  constructor(private http: HttpClient, private userService: UserService) {}
 
   // getAll(): Promise<any> {
   //   return this.http.get(`api/manager/relations/datasources?renterType=USER&renterId=${this.userService.getUserInfo().userId}`)
   //       .toPromise()
   //       .catch(this.handleError);
   // }
-  //new getAll
+  // new getAll
   getAll(number: number, size?: number): Observable<any> {
     let url = `api/monitor/datasources?number=${number}`;
-    if(size) {
+    if (size) {
       url += `&size=${size}`;
     }
     return this.http.get(url);
@@ -31,15 +30,16 @@ export class DataSourceService {
   }
 
   checkUrl(uri: string) {
-    return this.http.get(`api/manager/datasources/checkConn?url=${uri}`)
-        .toPromise()
-        .catch(this.handleError);
+    return this.http
+      .get(`api/manager/datasources/checkConn?url=${uri}`)
+      .toPromise()
+      .catch(this.handleError);
   }
 
   checkUrlFile(fileId: Array<number>): Observable<any> {
     return this.http.put(`api/manager/datasources/checkConn`, fileId);
-        // .toPromise()
-        // .catch(this.handleError);
+    // .toPromise()
+    // .catch(this.handleError);
   }
 
   addDataSource(dataSource: DataSource): Observable<any> {
@@ -47,11 +47,16 @@ export class DataSourceService {
   }
   // TODO: 还有用吗
   create(params): Promise<any> {
-    return this.http.post('api/manager/datasources', params).toPromise().catch(this.handleError);
+    return this.http
+      .post('api/manager/datasources', params)
+      .toPromise()
+      .catch(this.handleError);
   }
 
   update(params): Promise<any> {
-    return this.http.put(`api/manager/datasources/${params.id}`, params).toPromise();
+    return this.http
+      .put(`api/manager/datasources/${params.id}`, params)
+      .toPromise();
   }
 
   createByFiles(fileIds: Array<number>): Observable<any> {
@@ -64,7 +69,7 @@ export class DataSourceService {
   deleteDataSource(idArray: Array<number>): Observable<any> {
     let params = '';
     idArray.forEach((value, index) => {
-      if(index === 0) {
+      if (index === 0) {
         params += '?id=' + value;
       } else {
         params += '&id=' + value;

@@ -81,7 +81,7 @@ export class MonitorObjectAddComponent implements OnInit, OnDestroy {
         datasource: this.getFormControl('datasource').value
       });
 
-      this.monitorService.editMonitorObject(monitorObject).subscribe(result => {
+      this.monitorService.addMonitorObject(monitorObject).subscribe(result => {
         this.isFinished = true;
 
         this.count = 5;
@@ -93,5 +93,9 @@ export class MonitorObjectAddComponent implements OnInit, OnDestroy {
         }, 1000);
       });
     }
+  }
+
+  cancelSubmit() {
+    this.router.navigate(['/monitor/indexes/object']);
   }
 }

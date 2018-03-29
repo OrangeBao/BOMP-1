@@ -52,7 +52,7 @@ export abstract class PageComponent<T> {
 
     // 获取数据中的标签数组 可能被重写
     getTagsFromRecord(item: T | any): string[] {
-        return (<{tags: string[]}>item).tags;
+        return (<{ tags: string[] }>item).tags;
     }
 
     // 获取数据唯一身份标志   可能被重写
@@ -77,7 +77,7 @@ export abstract class PageComponent<T> {
             } else {
                 this.dataSource = [...this.dataSource, ...response.content];
             }
-          });
+        });
     }
 
     // 监控 window 滚动事件
@@ -123,7 +123,7 @@ export abstract class PageComponent<T> {
     // 获取现有数据的所有标签  数据模型中要包含tags字段 否则报错
     get allTags() {
         return (this.dataSource || []).reduce((ret, item: any) => {
-            const temp = new Set([...ret, ...( this.getTagsFromRecord(item) || [])]);
+            const temp = new Set([...ret, ...(this.getTagsFromRecord(item) || [])]);
             return Array.from(temp);
         }, []);
     }
@@ -137,9 +137,9 @@ export abstract class PageComponent<T> {
     // 全选
     allSelectChange() {
         if (this.isAll) {
-          this.choiceList = [];
+            this.choiceList = [];
         } else {
-          this.choiceList = (this.dataSource || []).map(item => this.getRecordId(item));
+            this.choiceList = (this.dataSource || []).map((item: any) => ({ ...item }));
         }
     }
 
