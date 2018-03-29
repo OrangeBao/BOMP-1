@@ -16,7 +16,8 @@ import { PageComponent } from '../../../../common/components/page.component';
   templateUrl: './monitor-objects.component.html',
   styleUrls: ['./monitor-objects.component.scss']
 })
-export class MonitorObjectsComponent extends PageComponent<MonitorObject> implements OnInit {
+export class MonitorObjectsComponent extends PageComponent<MonitorObject>
+  implements OnInit {
   @ViewChild('tplDelete') tplDelete: TemplateRef<any>;
 
   // searchText: string;
@@ -65,7 +66,11 @@ export class MonitorObjectsComponent extends PageComponent<MonitorObject> implem
   appendData(queryParams) {
     return this.monitorService.getMonitorObjs().pipe(
       catchError(err => {
-        this.notification.create('error', '异常', '监控对象始化异常，请联系管理员！');
+        this.notification.create(
+          'error',
+          '异常',
+          '监控对象始化异常，请联系管理员！'
+        );
         return Observable.of({
           content: []
         });
@@ -93,7 +98,7 @@ export class MonitorObjectsComponent extends PageComponent<MonitorObject> implem
         onOk: () => {
           self.deleteRequest(choiceList);
           self.batchModel();
-        },
+        }
       });
     }
   }
@@ -102,15 +107,22 @@ export class MonitorObjectsComponent extends PageComponent<MonitorObject> implem
     this.spinnerService.show();
     this.monitorService
       .deleteMonitorObjects(records.map(item => item.id))
-      .subscribe(result => {
-        this.spinnerService.hide();
+      .subscribe(
+        result => {
+          this.spinnerService.hide();
 
-        this.notification.create('success', '提示', '监控对象删除成功！');
-        this.requestData(true);
-      }, err => {
-        this.spinnerService.hide();
-        this.notification.create('error', '异常', '监控对象删除失败，请联系管理员！');
-      });
+          this.notification.create('success', '提示', '监控对象删除成功！');
+          this.requestData(true);
+        },
+        err => {
+          this.spinnerService.hide();
+          this.notification.create(
+            'error',
+            '异常',
+            '监控对象删除失败，请联系管理员！'
+          );
+        }
+      );
   }
   /** end PageComponent implements */
   // TODO: 集成到pageComp中
@@ -124,14 +136,17 @@ export class MonitorObjectsComponent extends PageComponent<MonitorObject> implem
   }
 
   // TODO: 集成到pageComp中
-  tagChange($event) {
+  tagChange(event) {
     // this.selectedTags = $event;
-
     // this.monitorFiltedObjects = this.monitorObjects.filter(item => {
     //   return this.selectedTags.includes('all') || this.selectedTags.length === 0
     //     ? true
     //     : item.tags.some(r => this.selectedTags.includes(r));
     // });
+  }
+
+  refreshDataSource(event) {
+    this.requestData(true);
   }
 
   newObject() {
