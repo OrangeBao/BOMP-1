@@ -67,9 +67,9 @@ export class DashboardCreateComponent implements OnInit, OnDestroy {
       text: '新建仪表盘',
     });
     this.modifyForm = this.fb.group({
-      name              : [ '', [ Validators.required ] ],
-      tags              : [ '', [ Validators.required ] ],
-      remark            : [ '' ],
+      name: [ '', [ Validators.required ] ],
+      tags: [ '', [ Validators.required ] ],
+      remark: [ '' ],
     });
   }
 

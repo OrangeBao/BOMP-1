@@ -42,6 +42,6 @@
   </div>
 </div>
 
-<div *ngIf="displayDataSource && displayDataSource.length === 0" class="null-tips">
+<div *ngIf="!needLoad && displayDataSource && displayDataSource.length === 0" class="null-tips">
   <span>暂无模板！</span>
 </div>
