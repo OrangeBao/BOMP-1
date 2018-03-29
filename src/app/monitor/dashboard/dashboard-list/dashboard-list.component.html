@@ -28,16 +28,16 @@
       <div class="text-w">
         <div class="up-w">
           <div class="title-w">
-            <div class="title" routerLink="../scan" [fragment]="dash.uri">{{dash.title}}</div>
+            <div class="title">{{dash.title}}</div>
             <div class="icon-list">
                 <i [class.isAtive]="dash.uri === homePage" class="iconfont icon-zhuyexianshi" alt="设为主页显示" title="设为主页显示"  on-click="dash.uri !== homePage && setHomePage(dash.uri)"></i>
-                <i class="iconfont icon-bianji" alt="编辑" title="编辑" on-click="editDashboard(dash.id)"></i>
-                <i class="iconfont icon-shezhi" alt="配置" title="配置" routerLink="../edit" [fragment]="dash.url"></i>
-                <i class="iconfont icon-shanchu" alt="删除" title="删除" on-click="deleteDataSource(dash)"></i>
+                <i class="iconfont icon-bianji" alt="编辑" title="编辑" (click)="editDashboard(dash.id)"></i>
+                <i class="iconfont icon-shezhi" alt="配置" title="配置" (click)="jumpToEdit(dash)"></i>
+                <i class="iconfont icon-shanchu" alt="删除" title="删除" (click)="deleteDataSource(dash)"></i>
             </div>
           </div>
           <div class="monitor-t">
-            <span>监控对象：{{dash.monitorObj}}</span>
+            <span>监控对象：{{transformMname(dash)}}</span>
           </div>
           <div *ngIf="dash.uri === homePage" class="home-t">
             <span>已在主页显示</span>

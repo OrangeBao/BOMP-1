@@ -33,7 +33,7 @@ export class TemplateListComponent extends PageComponent<Template> implements On
   }
 
   appendData(queryParams) {
-    return this.templateService.getTemplateList().pipe(
+    return this.templateService.getTemplateList(queryParams).pipe(
       catchError(err => {
         this.notification.create('error', '异常', '模板始化异常，请联系管理员！');
         return Observable.of({

@@ -15,8 +15,8 @@ export class TemplateService {
     return Promise.reject(error.message || error);
   }
 
-  getTemplateList(): Observable<any> {
-    return this.http.get(`${this.templateUrl}`);
+  getTemplateList(params?: any): Observable<any> {
+    return this.http.get(`${this.templateUrl}`, {params});
   }
 
   create(params) {

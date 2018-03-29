@@ -7,12 +7,10 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class DashboardService {
 
-  // private dashboardUrl = "api/monitor/dashboards";
-
   constructor(private http: HttpClient, private userService: UserService) { }
 
-  getDashboardList(): Observable<any> {
-    return this.http.get(`api/monitor/dashboards`);
+  getDashboardList(params?: any): Observable<any> {
+    return this.http.get(`api/monitor/dashboards`, {params});
   }
 
   private handleError(error: any): Promise<any> {

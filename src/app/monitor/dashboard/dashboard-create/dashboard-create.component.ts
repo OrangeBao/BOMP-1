@@ -3,6 +3,7 @@ import { TitleService, TemplateService, DashboardService, LoadingService, Monito
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { NzNotificationService } from 'ng-zorro-antd';
 import { Dashboard } from '../../../common/models/dashboard';
 import { MonitorObject } from '../../../common/models/monitor/monitor-object';
 import 'rxjs/add/observable/forkJoin';
@@ -28,6 +29,8 @@ export class DashboardCreateComponent implements OnInit, OnDestroy {
   selectTemplateId: number;
   count: number;
   timer: any;
+  // 当前被选中的标签
+  activeV: string;
 
   get displayTemplate(): Dashboard {
     if (!this.templateList || this.templateList.length === 0) {
@@ -36,12 +39,14 @@ export class DashboardCreateComponent implements OnInit, OnDestroy {
     return this.templateList.find(item => item.id === this.selectTemplateId);
   }
 
+  variables: Array<{name: string; query: string; mid?: Array<number>}>;
+
   monitorObjsOption: any[];
   hoverMonitorObj: any;
 
   get noNext() {
     if (this.currentStep === 1) {
-      return !this.monitorObjsOption.some(item => item.checked);
+      return this.variables.some(item => !item.mid.length);
     }
     return false;    
   }
@@ -61,6 +66,7 @@ export class DashboardCreateComponent implements OnInit, OnDestroy {
     private dashboard: DashboardService,
     private spinnerService: LoadingService,
     private fb: FormBuilder,
+    private notification: NzNotificationService,
     private router: Router) {
     this.title.sendMsg({
       showTitle: true,
@@ -77,6 +83,14 @@ export class DashboardCreateComponent implements OnInit, OnDestroy {
     if (!this.hoverMonitorObj || item.value !== this.hoverMonitorObj.value) {
       this.hoverMonitorObj = item;
     }
+  }
+
+  // 修改数据源左边的switch标记
+  changeActiveV(v: string) {
+    this.activeV = v;
+    const currentV = this.variables.find(item => item.name === v);
+    debugger;
+    this.monitorObjsOption = this.monitorObjsOption.map(item => ({...item, checked: currentV.mid.includes(item.value)}));
   }
 
   ngOnInit() {
@@ -108,6 +122,8 @@ export class DashboardCreateComponent implements OnInit, OnDestroy {
     if (this.isSelectAll !== isAllSelect) {
       this.isSelectAll = isAllSelect;
     }
+    const currentTag = this.variables.findIndex(item => item.name === this.activeV);
+    this.variables[currentTag].mid = this.monitorObjsOption.filter(item => item.checked).map(item => item.value);
   }
 
   selectAll(event) {
@@ -137,8 +153,24 @@ export class DashboardCreateComponent implements OnInit, OnDestroy {
     this.currentStep += 1;
   }
 
+  transformV(old: any) {
+    const ret = [];
+    old.forEach(item => {
+      item.mid.forEach(id => ret.push({name: item.name, query: item.query, mid: id}));
+    });
+    return ret;
+  }
+
   next() {
-    if (this.currentStep === 2) {
+    if (this.currentStep === 0) {
+      // 构造variables
+      this.variables = [];
+      if (this.displayTemplate) {
+        this.variables = this.displayTemplate.variables.map(item => ({name: item.name, query: item.query, mid: []}));
+        this.activeV = this.variables[0].name;
+      }
+      this.goToNext();
+    } else if (this.currentStep === 2) {
       this.checkModifyForm();
       if (this.modifyForm.valid) {
         this.goToNext();
@@ -146,25 +178,32 @@ export class DashboardCreateComponent implements OnInit, OnDestroy {
     } else if (this.currentStep === 3) {
       // TODO create
       // make data 
+      this.spinnerService.show();
       this.dashboard.createDashboard({
         tid: this.displayTemplate.id,
-        // TODO refacotr monitors
         // monitors: this.monitorObjsOption.filter(item => item.checked).map(mid => ({
         //   mid,
         //   name: this.displayTemplate.variables.name,
         // })),
-        title:  this.displayTemplate.title,
-        tags: this.displayTemplate.tags,
-        desc: this.displayTemplate.desc
-      })
-      this.goToNext();
-      this.count = 5;
-      this.timer = setInterval( () => {
-        this.count -= 1;
-        if (this.count === 0) {
-          this.router.navigate(['/monitor/dashboard/list']);
-        }
-      }, 1000);
+        monitors: this.transformV(this.variables),
+        title:  this.modifyForm.value['name'],
+        tags: this.modifyForm.value['tags'],
+        desc: this.modifyForm.value['desc']
+      }).subscribe(() => {
+        this.goToNext();
+        this.count = 5;
+        this.timer = setInterval( () => {
+          this.count -= 1;
+          if (this.count === 0) {
+            this.router.navigate(['/monitor/dashboard/list']);
+          }
+        }, 1000);
+        this.spinnerService.hide();
+      }, err => {
+        this.notification.create('error', '异常', '仪表盘初始化异常，请联系管理员！');
+        this.spinnerService.hide();
+      });
+    
     } else {
       this.goToNext();
     }

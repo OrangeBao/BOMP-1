@@ -16,6 +16,7 @@ export class Dashboard {
         name: string;
         query: string;
         value: string;
+        mname: string;
     }[];
     desc: string;
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, TemplateRef, HostListener } from '@angular/core';
 import { NzNotificationService } from 'ng-zorro-antd';
+import { Router } from '@angular/router';
 import { ModalService } from 'zu-modal';
 import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators/catchError';
@@ -24,6 +25,7 @@ export class DashboardListComponent extends PageComponent<Dashboard> implements 
   modifyForm: FormGroup;
 
   constructor(
+      private router: Router,
       private dashboardService: DashboardService,
       private userService: UserService,
       private spinnerService: LoadingService,
@@ -45,7 +47,7 @@ export class DashboardListComponent extends PageComponent<Dashboard> implements 
 
 
   appendData(queryParams) {
-    return this.dashboardService.getDashboardList().pipe(
+    return this.dashboardService.getDashboardList(queryParams).pipe(
       catchError(err => {
         this.notification.create('error', '异常', '仪表盘初始化异常，请联系管理员！');
         return Observable.of({
@@ -107,6 +109,14 @@ export class DashboardListComponent extends PageComponent<Dashboard> implements 
 
   getFormControl(name) {
     return this.modifyForm.controls[ name ];
+  }
+
+  jumpToEdit(record: Dashboard) {
+    this.router.navigateByUrl('/monitor/dashboard/edit#' + record.url + record.variables.map(item => `&${item.name}=${item.value}`));
+  }
+
+  transformMname(dash: Dashboard) {
+    return dash.variables.map(item => item.mname).join(',');
   }
 
   editDashboard(id) {

@@ -41,15 +41,16 @@
 </ng-template>
 
 <ng-template #stepTwo>
-    <nz-input [nzPlaceHolder]="'按名称搜索'" #searchText  style="width:  480px;">
+    <!-- <nz-input [nzPlaceHolder]="'按名称搜索'" #searchText  style="width:  480px;">
         <ng-template #addOnAfter>
             <i class="iconfont icon-sousuo" (click)="filter(searchText.value)"></i>
         </ng-template>
-    </nz-input>
+    </nz-input> -->
     <div class="monitor-display">
         <div class="title">
+            <div>类型</div>
             <div>
-               <span>引用监控源</span>
+               <span>引用监控对象</span>
                <label nz-checkbox [(ngModel)]="isSelectAll" (ngModelChange)="selectAll($event)">
                     <span>全选</span>
                 </label>
@@ -57,14 +58,25 @@
             <div></div>
         </div>
         <div class="list-w">
+            <div class="variables-w">
+                <div (click)="changeActiveV(v.name)" class="var-item" *ngFor="let v of variables" [class.acitve]="activeV === v.name">
+                    <span>{{v.name}}</span>
+                    <i class="iconfont icon-duihao" [class.hidden]="!v.mid || !v.mid.length"></i>
+                </div>
+            </div>
             <div class="scroll-w">
-                <div class="checkbox-group">
-                    <ng-container *ngFor="let item of monitorObjsOption">
-                        <label (mouseenter)="modifyHoverObj(item)" nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="updateSelectMonitorObjs($event, item.value)">
-                            <span>{{item.label}}</span>
-                        </label>
-                    </ng-container>
-                   
+                <div class="inner-search">
+                    <i class="iconfont icon-sousuo" (click)="filter(searchText.value)"></i>
+                    <input #searchText placeholder="按表名称、描述、标签搜索"/>
+                </div>
+                <div class="checkbox-w">
+                    <div class="checkbox-group">
+                        <ng-container *ngFor="let item of monitorObjsOption">
+                            <label (mouseenter)="modifyHoverObj(item)" nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="updateSelectMonitorObjs($event, item.value)">
+                                <span>{{item.label}}</span>
+                            </label>
+                        </ng-container>
+                    </div>
                 </div>
             </div>
             <div class="display-w">
@@ -119,17 +131,18 @@
 
 <ng-template #stepFour>
     <div class="step-four-w">
-        <div class="template-title">{{displayTemplate?.title}}</div>
+        <div class="template-title">{{this.modifyForm.value.name}}</div>
         <div class="tag-w">
-            <div *ngFor="let tag of displayTemplate.tags" class="m-tag">
+            <div *ngFor="let tag of this.modifyForm.value.tags" class="m-tag">
                 <span>{{tag}}</span>
             </div>
         </div>
-        <div class="template-desc">{{displayTemplate?.desc}}</div>
-        <div class="monitor-t">读数据源:</div>
+        <div class="template-desc">{{this.modifyForm.value.desc}}</div>
+        <!-- <div class="monitor-t">读数据源:</div>
+
         <ng-container *ngFor="let mon of monitorObjsOption" >
             <div class="monitor-title" *ngIf="mon.checked">{{mon?.label}}</div>
-        </ng-container>
+        </ng-container> -->
     </div>
 </ng-template>
 

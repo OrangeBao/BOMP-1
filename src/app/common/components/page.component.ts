@@ -1,12 +1,14 @@
 import { HostListener } from '@angular/core';
 
 // 查询条件的模型
-declare class QueryParams {
+export class QueryParams {
     filter: {
         tags: string[];
         keyWord: string;
     };
     sort: any;
+    size: number;
+    number: number;
 }
 
 export abstract class PageComponent<T> {
@@ -20,7 +22,9 @@ export abstract class PageComponent<T> {
             tags: [],
             keyWord: ''
         },
-        sort: {}
+        sort: {},
+        size: 9,
+        number: 0
     };
 
     // 是否是批量模式
@@ -58,6 +62,11 @@ export abstract class PageComponent<T> {
     // 获取数据
     requestData(isRefresh: boolean) {
         this.needLoad = true;
+        if (isRefresh) {
+            this.queryParams.number = 0;
+        } else {
+            this.queryParams.number += 1;
+        }
         this.appendData(this.queryParams).subscribe(response => {
             this.needLoad = false;
             if (response.last) {

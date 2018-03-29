@@ -19,6 +19,7 @@ export class TemplateCreateComponent implements OnInit, OnDestroy {
     private notification: NzNotificationService,
     private title: TitleService,
     private fb: FormBuilder,
+    private spinnerService: LoadingService,
     private template: TemplateService,
     private router: Router
   ) {
@@ -69,10 +70,13 @@ export class TemplateCreateComponent implements OnInit, OnDestroy {
       if (this.createType === 0) {
         // TODO: add from 
       } else {
-        this.template.createByFile(this.modifyForm.value.files).subscribe(data => {
+        this.spinnerService.show();
+        this.template.createByFile(this.modifyForm.value.files.map(item => item.hash)).subscribe(data => {
+          this.spinnerService.hide();
           this.notification.create('success', '成功', '模板创建成功!');
           this.router.navigate(['/monitor/template/list']);
         }, data => {
+          this.spinnerService.hide();
           this.notification.create('error', '异常', '模板创建失败!');
         });
       }
