@@ -12,7 +12,7 @@ import { DataSourceService } from '../../../../common/services/data-source/data-
   styleUrls: ['./datasource-control-table.component.scss']
 })
 export class DatasourceControlTableComponent implements OnInit {
-  _current = 1;
+  _current = 0;
   _pageSize = 10;
   _total = 1;
 
