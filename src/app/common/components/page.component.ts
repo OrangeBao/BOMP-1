@@ -69,9 +69,7 @@ export abstract class PageComponent<T> {
         }
         this.appendData(this.queryParams).subscribe(response => {
             this.needLoad = false;
-            if (response.last) {
-                this.noMore = true;
-            }
+            this.noMore = response.last;
             if (isRefresh) {
                 this.dataSource = response.content;
             } else {
