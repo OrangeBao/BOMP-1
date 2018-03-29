@@ -94,4 +94,8 @@ export class MonitorObjectAddComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  cancelSubmit() {
+    this.router.navigate(['/monitor/indexes/object']);
+  }
 }

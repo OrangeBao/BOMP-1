@@ -147,4 +147,8 @@ export class DatasourceControlAddComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  cancelSubmit() {
+    this.router.navigate(['/console/datasourcecontrol/table']);
+  }
 }
